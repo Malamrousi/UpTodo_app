@@ -47,3 +47,16 @@ The following packages are utilized to build and enhance the functionality of th
 display a reasonable layout on different screen sizes! 
 - **smooth_page_indicator: ^1.2.0+3**: Page indicators are a crucial part of any app that involves multiple pages.
 
+## Branching Strategy
+
+The development process of the **UpTodo** app follows a structured branching strategy to ensure smooth collaboration and effective code management:
+
+- **`feature/*` Branches**: These branches are used for working on new features, UI improvements, or fixing bugs. Each feature or bug fix is developed in a separate `feature` branch, such as `feature/onboarding-screen` or `feature/bug-fix`.
+
+- **Pull Requests to `development`**: Once a feature or bug fix is completed, a pull request is created to merge the changes into the `development` branch. This allows for review and testing before integrating the changes.
+
+- **`development` Branch**: This is the main branch for ongoing development work. It is used to integrate completed features and bug fixes. Testing and adjustments are often done here before the final release.
+
+- **Pull Requests to `main`**: After completing all planned features and ensuring the stability of the `development` branch, a pull request is created to merge changes into the `main` branch. This step is done when the project reaches a stable version and is ready for release.
+
+- **`main` Branch**: The `main` branch holds the production-ready code. It is updated only through pull requests from `development` to ensure that the released code is stable and thoroughly tested.
