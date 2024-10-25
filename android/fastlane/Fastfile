@@ -1,0 +1,39 @@
+
+
+# default_platform(:android)
+
+# platform :android do
+#   desc "lane for firebase App distribution" 
+#   lane :app_distribution do
+#    sh "flutter clean"
+#    sh "flutter build apk --release --target lib/main.dart --no-tree-shake-icons "
+#    firebase_app_distribution(
+#     app:"1:695465421806:android:fd0bb6fdb23a1bcc803cff",
+#     firebase_cli_token:"1//03V5vlJWXBOEaCgYIARAAGAMSNwF-L9Ir16ldb0lV1WQnoN4CnmHBGSkjt_e3MeAAlQ_fdzZvhkki0t19UMcKMeHAVVO5qKkxcyQ",
+#     android_artifact_type:"APK",
+#     android_artifact_path:"../build/app/outputs/flutter-apk/app-debug.apk",
+#     testers: "m.alamrousi.work2@gmail.com",
+#     release_notes: "First Fastlane Firebase Distribution YouTube Video!"
+#    )
+#   end
+
+# end
+
+default_platform(:android)
+
+platform :android do
+  desc "Lane for Android Firebase App Distribution"
+  lane :firebase_distribution do
+    sh "flutter clean"
+    sh "flutter build apk --release --target lib/main.dart --no-tree-shake-icons"
+    firebase_app_distribution(
+        app: "1:695465421806:android:fd0bb6fdb23a1bcc803cff",
+        firebase_cli_token: "1//03V5vlJWXBOEaCgYIARAAGAMSNwF-L9Ir16ldb0lV1WQnoN4CnmHBGSkjt_e3MeAAlQ_fdzZvhkki0t19UMcKMeHAVVO5qKkxcyQ",
+        android_artifact_type: "APK",
+        android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk",
+        testers: "m.alamrousi.work2@gmail.com",
+        release_notes: "Luanch App on firebase app distribution"
+  )
+  end
+
+end
