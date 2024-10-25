@@ -43,3 +43,7 @@ The following packages are utilized to build and enhance the functionality of th
 - **flutter_native_splash: ^2.4.2**: To create a custom splash screen for the app.
 - **flutter_svg: ^2.0.10+1**: For rendering SVG images in the UI.
 - **get_it: ^8.0.1**: A service locator for managing dependencies 
+- **flutter_screenutil: ^5.9.3**: A flutter plugin for adapting screen and font size.Let your  UI 
+display a reasonable layout on different screen sizes! 
+- **smooth_page_indicator: ^1.2.0+3**: Page indicators are a crucial part of any app that involves multiple pages.
+
