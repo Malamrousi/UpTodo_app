@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 //core
 import '../../../../core/theming/colors_manger.dart';
 
-AppBar customAppBar() {
+AppBar buildAppBar() {
   return AppBar(
     leading: IconButton(
         onPressed: () {},
