@@ -33,4 +33,7 @@ class AppRegex {
   static bool hasMinLength(String password) {
     return RegExp(r'^(?=.{8,})').hasMatch(password);
   }
+  static bool isNameValid(String name) {
+  return RegExp(r"^[a-zA-Z\s-]{2,50}$").hasMatch(name);
+}
 }

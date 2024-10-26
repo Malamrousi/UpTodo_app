@@ -4,8 +4,8 @@ import 'package:uptodo/core/theming/app_styles.dart';
 import 'package:uptodo/core/theming/colors_manger.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CustomSocialAuthButton extends StatelessWidget {
-  const CustomSocialAuthButton(
+class CustomRegisterSocialAuthButton extends StatelessWidget {
+  const CustomRegisterSocialAuthButton(
       {super.key,
       this.borderRadius,
       this.backgroundColor,

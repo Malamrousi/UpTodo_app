@@ -27,7 +27,9 @@ class AuthNavigationButton extends StatelessWidget {
         ),
         verticalSpacing(28),
         AppTextButton(
-          onPressed: () {},
+          onPressed: () {
+            context.pushNamed(Routes.registerScreen);
+          },
           buttonText: 'Create account',
           textStyle: AppStyles.font16WhiteRegular,
         ),

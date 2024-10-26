@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uptodo/feature/register/ui/register_screen.dart';
 
 import '../../feature/login/ui/login_screen.dart';
 import '../../feature/on_boading/ui/on_boarding_screen.dart';
@@ -14,6 +15,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const StartScreen());
         case Routes.loginScreen:
         return   MaterialPageRoute(builder: (_) => const LoginScreen());
+        case Routes.registerScreen:
+        return   MaterialPageRoute(builder: (_) => const RegisterScreen());
 
       default:
         return MaterialPageRoute(

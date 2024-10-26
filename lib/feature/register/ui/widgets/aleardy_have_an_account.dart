@@ -5,8 +5,8 @@ import 'package:uptodo/core/helper/extension.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_styles.dart';
 
-class DontHaveAccountText extends StatelessWidget {
-  const DontHaveAccountText({super.key});
+class AlreadyHaveAnAccount extends StatelessWidget {
+  const AlreadyHaveAnAccount({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +14,14 @@ class DontHaveAccountText extends StatelessWidget {
         textAlign: TextAlign.center,
         text: TextSpan(children: [
           TextSpan(
-              text: 'Don\'t have an account? ',
+              text: 'Already have an account ',
               style: AppStyles.font16WhiteOpacity66Regular),
           TextSpan(
-              text: 'Register',
+              text: 'Login',
               style: AppStyles.font16WhiteRegular,
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  context.pushNamed(Routes.registerScreen);
+                  context.pushNamed(Routes.loginScreen);
                 }),
         ]));
   }

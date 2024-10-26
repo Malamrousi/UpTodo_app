@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:uptodo/core/helper/app_regx.dart';
-import 'package:uptodo/core/theming/colors_manger.dart';
-import 'package:uptodo/core/widget/app_text_button.dart';
-import 'package:uptodo/feature/login/ui/widgets/custom_login_social_auth_button.dart';
+import 'package:uptodo/core/widget/build_app_bar.dart';
+import 'package:uptodo/feature/register/ui/widgets/custom_divider.dart';
 
+import '../../../core/helper/app_regx.dart';
 import '../../../core/helper/spacing.dart';
 import '../../../core/theming/app_styles.dart';
+import '../../../core/theming/colors_manger.dart';
+import '../../../core/widget/app_text_button.dart';
 import '../../../core/widget/app_text_form_filed.dart';
-import '../../../core/widget/build_app_bar.dart';
-import 'widgets/custom_divider.dart';
-import 'widgets/dont_have_account_text.dart';
+import 'widgets/aleardy_have_an_account.dart';
+import 'widgets/custom_register_social_auth_button.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  bool obscureTextIcon = false;
-
+class _RegisterScreenState extends State<RegisterScreen> {
+  bool obscureTextIcon = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,10 +34,22 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               verticalSpacing(20),
               Text(
-                'Login',
+                'Register',
                 style: AppStyles.font32WhiteBold,
               ),
               verticalSpacing(53),
+              InputTextFormFiled(
+                keyboardType: TextInputType.emailAddress,
+                inputTextType: 'Username',
+                validator: (value) {
+                  if (value == null ||
+                      value.isEmpty ||
+                      !AppRegex.isNameValid(value)) {
+                    return 'Please enter valid Name';
+                  }
+                },
+                hintText: 'Enter your Email',
+              ),
               InputTextFormFiled(
                 keyboardType: TextInputType.emailAddress,
                 inputTextType: 'Email',
@@ -46,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (value == null ||
                       value.isEmpty ||
                       !AppRegex.isEmailValid(value)) {
-                    return 'Please enter valid email';
+                    return 'Please enter valid Email';
                   }
                 },
                 hintText: 'Enter your Email',
@@ -63,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     return 'Please enter valid Password';
                   }
                 },
-                hintText: 'Enter your Password',
+                hintText: 'Enter your Email',
                 suffixIcon: GestureDetector(
                   onTap: () {
                     setState(() {
@@ -80,23 +91,22 @@ class _LoginScreenState extends State<LoginScreen> {
               verticalSpacing(69),
               AppTextButton(
                 backgroundColor: ColorsManger.purpleColor,
-                buttonText: 'login',
+                buttonText: 'Register',
                 textStyle: AppStyles.font16WhiteRegular,
               ),
               verticalSpacing(45),
-              const CustomDivider(),
+             const CustomDivider(),
               verticalSpacing(29),
-              const CustomLoginSocialAuthButton(
-                  buttonText: ' Login with Google',
+              const CustomRegisterSocialAuthButton(
+                  buttonText: ' Register with Google',
                   socialImage: 'assets/svgs/google.svg'),
-              verticalSpacing(20),
-              const CustomLoginSocialAuthButton(
-                  buttonText: 'Login with FaceBook',
+              const CustomRegisterSocialAuthButton(
+                  buttonText: 'Register with Facebook',
                   socialImage: 'assets/svgs/facebook.svg'),
-              verticalSpacing(46),
-             const Align(
-                  alignment: Alignment.center,
-                  child:  DontHaveAccountText()),
+                         verticalSpacing(46),
+                            const Align(
+                    alignment: Alignment.center,
+                    child:  AlreadyHaveAnAccount()),
             ],
           ),
         )),
