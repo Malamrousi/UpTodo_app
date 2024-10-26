@@ -19,4 +19,8 @@ class AppStyles {
       fontSize: 16.sp,
       fontWeight: FontWeightHelper.regular,
       color: ColorsManger.whiteColorOpacity44);
+             static TextStyle font16WhiteOpacity66Regular = TextStyle(
+      fontSize: 16.sp,
+      fontWeight: FontWeightHelper.regular,
+      color: ColorsManger.whiteColorOpacity66);
 }
