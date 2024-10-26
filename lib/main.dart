@@ -8,5 +8,3 @@ void main() async{
   await ScreenUtil.ensureScreenSize();
   runApp(const UpToDo());
 }
-
-
