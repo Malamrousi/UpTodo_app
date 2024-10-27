@@ -3,13 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:uptodo/core/helper/app_regx.dart';
 import 'package:uptodo/core/theming/colors_manger.dart';
 import 'package:uptodo/core/widget/app_text_button.dart';
-import 'package:uptodo/feature/login/ui/widgets/custom_login_social_auth_button.dart';
 
-import '../../../core/helper/spacing.dart';
-import '../../../core/theming/app_styles.dart';
-import '../../../core/widget/app_text_form_filed.dart';
-import '../../../core/widget/build_app_bar.dart';
+import '../../../../../core/helper/spacing.dart';
+import '../../../../../core/theming/app_styles.dart';
+import '../../../../../core/widget/app_text_form_filed.dart';
+import '../../../../../core/widget/build_app_bar.dart';
 import 'widgets/custom_divider.dart';
+import 'widgets/custom_login_social_auth_button.dart';
 import 'widgets/dont_have_account_text.dart';
 
 class LoginScreen extends StatefulWidget {

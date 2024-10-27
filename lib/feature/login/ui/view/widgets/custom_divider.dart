@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:uptodo/core/helper/spacing.dart';
 import 'package:uptodo/core/theming/colors_manger.dart';
 
-import '../../../../core/theming/app_styles.dart';
+import '../../../../../../core/theming/app_styles.dart';
 
 class CustomDivider extends StatelessWidget {
   const CustomDivider({super.key});

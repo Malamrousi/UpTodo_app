@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:uptodo/core/widget/build_app_bar.dart';
-import 'package:uptodo/feature/register/ui/widgets/custom_divider.dart';
+import 'package:uptodo/feature/register/ui/view/widgets/custom_divider.dart';
+import 'package:uptodo/feature/register/ui/view/widgets/custom_register_social_auth_button.dart';
 
-import '../../../core/helper/app_regx.dart';
-import '../../../core/helper/spacing.dart';
-import '../../../core/theming/app_styles.dart';
-import '../../../core/theming/colors_manger.dart';
-import '../../../core/widget/app_text_button.dart';
-import '../../../core/widget/app_text_form_filed.dart';
-import 'widgets/aleardy_have_an_account.dart';
-import 'widgets/custom_register_social_auth_button.dart';
+import '../../../../../core/helper/app_regx.dart';
+import '../../../../../core/helper/spacing.dart';
+import '../../../../../core/theming/app_styles.dart';
+import '../../../../../core/theming/colors_manger.dart';
+import '../../../../../core/widget/app_text_button.dart';
+import '../../../../../core/widget/app_text_form_filed.dart';
+import '../widgets/aleardy_have_an_account.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

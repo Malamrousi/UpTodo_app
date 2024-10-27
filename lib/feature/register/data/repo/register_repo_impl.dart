@@ -2,13 +2,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
-//core
-import 'package:uptodo/core/failures/auth_failure.dart';
-//model
 import 'package:uptodo/feature/register/data/model/user_info_model.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 //repo
+import '../../../../core/failures/auth_failure.dart';
 import 'registere_repo.dart';
 
 class RegisterRepoImpl implements RegisterRepo {
