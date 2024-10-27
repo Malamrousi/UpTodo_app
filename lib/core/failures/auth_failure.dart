@@ -42,7 +42,13 @@ class EmailAlreadyExistsFailure extends AuthFailure {
       : super(
             errorMessage:
                 "The email has already been registered. Please login or reset your password.");
+                
 }
+class NoInternetFailure extends AuthFailure {
+  NoInternetFailure()
+      : super(errorMessage: "No internet connection. Please check your connection and try again.");
+}
+
 
 class UnknownFailure extends AuthFailure {
   UnknownFailure() : super(errorMessage: "An undefined error happened.");
@@ -50,21 +56,35 @@ class UnknownFailure extends AuthFailure {
 
 class AuthExceptionHandler {
   static AuthFailure handleException({errorMessage}) {
+    print(errorMessage.toString());
     switch (errorMessage.code) {
-      case "ERROR_INVALID_EMAIL":
+       case "ERROR_INVALID_EMAIL":
+       case "invalid-email":
         return InvalidEmailFailure();
+     
       case "ERROR_WRONG_PASSWORD":
+      case "wrong-password":
         return WrongPasswordFailure();
-      case "ERROR_USER_NOT_FOUND":
+          
+       case "ERROR_USER_NOT_FOUND":
+      case "user-not-found":
         return UserNotFoundFailure();
+          
       case "ERROR_USER_DISABLED":
+      case "user-disabled":
         return UserDisabledFailure();
+        
       case "ERROR_TOO_MANY_REQUESTS":
+      case "operation-not-allowed":
         return TooManyRequestsFailure();
+       
       case "ERROR_OPERATION_NOT_ALLOWED":
-        return OperationNotAllowedFailure();
       case "ERROR_EMAIL_ALREADY_IN_USE":
         return EmailAlreadyExistsFailure();
+
+         case "network-request-failed":
+        return NoInternetFailure();
+        
       default:
         return UnknownFailure();
     }
