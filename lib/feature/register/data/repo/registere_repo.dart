@@ -8,8 +8,7 @@ abstract class RegisterRepo {
     required String email,
     required String password,
     required String name,
-    });
+  });
   Future<Either<AuthFailure, UserInfoModel>> registerWithGoogle();
   Future<Either<AuthFailure, UserInfoModel>> registerWithFacebook();
-  Future<dynamic> signOut();
 }

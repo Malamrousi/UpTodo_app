@@ -108,14 +108,5 @@ class RegisterRepoImpl implements RegisterRepo {
     }
   }
 
-  @override
-  Future<dynamic> signOut() async {
-    //sign out
-    await firebaseAuth.signOut();
-    //sign out google
 
-    await GoogleSignIn().signOut();
-    //sign out facebook
-    await FacebookAuth.instance.logOut();
-  }
 }
