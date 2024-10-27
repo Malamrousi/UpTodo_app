@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:uptodo/core/helper/spacing.dart';
 import 'package:uptodo/core/theming/app_styles.dart';
 //widgets
+import '../../../core/widget/build_app_bar.dart';
 import 'widgets/auth_navigation_button.dart';
-import 'widgets/custom_app_bar.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -15,7 +15,7 @@ class StartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       //custom app bar
-      appBar: customAppBar(),
+      appBar: buildAppBar(),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),

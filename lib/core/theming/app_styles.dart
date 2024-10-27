@@ -23,4 +23,8 @@ class AppStyles {
       fontSize: 16.sp,
       fontWeight: FontWeightHelper.regular,
       color: ColorsManger.whiteColorOpacity66);
+        static TextStyle font16smokeGrayColorRegular = TextStyle(
+      fontSize: 16.sp,
+      fontWeight: FontWeightHelper.regular,
+      color: ColorsManger.smokeGrayColor);
 }
