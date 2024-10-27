@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:uptodo/feature/register/ui/register_screen.dart';
+import 'package:uptodo/feature/register/ui/view/register_screen.dart';
 
-import '../../feature/login/ui/login_screen.dart';
+import '../../feature/login/ui/view/login_screen.dart';
 import '../../feature/on_boading/ui/on_boarding_screen.dart';
 import '../../feature/start_screen/ui/start_screen.dart';
 import 'routes.dart';
