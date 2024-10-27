@@ -58,9 +58,9 @@ class UnknownFailure extends AuthFailure {
 }
 
 class AuthExceptionHandler {
-  static AuthFailure handleException(e) {
-    print(e.code);
-    switch (e.code) {
+  static AuthFailure handleException({errorMessage}) {
+
+    switch (errorMessage.code) {
       case "ERROR_INVALID_EMAIL":
         return InvalidEmailFailure();
       case "ERROR_WRONG_PASSWORD":
