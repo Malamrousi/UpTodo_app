@@ -46,6 +46,9 @@ The following packages are utilized to build and enhance the functionality of th
 - **flutter_screenutil: ^5.9.3**: A flutter plugin for adapting screen and font size.Let your  UI 
 display a reasonable layout on different screen sizes! 
 - **smooth_page_indicator: ^1.2.0+3**: Page indicators are a crucial part of any app that involves multiple pages.
+- **dartz: 0.10.1**: For functional programming utilities, particularly useful for handling success and failure cases in a clean and organized way without exceptions. This package is used to manage data flow and error handling using types like `Either` for success/failure cases and `Option` to handle nullable values safely.
+- **google_sign_in: ^6.2.1**: Flutter plugin for Google Sign-In, a secure authentication system for signing in with a Google account.
+
 
 ## Branching Strategy
 

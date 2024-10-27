@@ -1,0 +1,16 @@
+import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../../../core/failures/auth_failure.dart';
+import '../model/user_info_model.dart';
+
+abstract class RegisterRepo {
+  Future<Either<AuthFailure, UserInfoModel>> registerWithEmailAndPassword({
+    required String email,
+    required String password,
+    required String name,
+  });
+  Future<Either<AuthFailure, UserInfoModel>> registerWithGoogle();
+  Future<Either<AuthFailure, UserInfoModel>> registerWithFacebook();
+void createUser(UserInfoModel userInfoModel , User fireBaseUser);
+}
