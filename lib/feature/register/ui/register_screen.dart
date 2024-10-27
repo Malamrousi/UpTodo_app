@@ -50,6 +50,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 },
                 hintText: 'Enter your Email',
               ),
+                   verticalSpacing(15),
               InputTextFormFiled(
                 keyboardType: TextInputType.emailAddress,
                 inputTextType: 'Email',
@@ -62,7 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 },
                 hintText: 'Enter your Email',
               ),
-              verticalSpacing(25),
+              verticalSpacing(15),
               InputTextFormFiled(
                 keyboardType: TextInputType.visiblePassword,
                 obscureText: obscureTextIcon,

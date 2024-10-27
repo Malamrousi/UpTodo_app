@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 hintText: 'Enter your Email',
               ),
-              verticalSpacing(25),
+              verticalSpacing(15),
               InputTextFormFiled(
                 keyboardType: TextInputType.visiblePassword,
                 obscureText: obscureTextIcon,
