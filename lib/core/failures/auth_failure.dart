@@ -1,13 +1,4 @@
-enum AuthResultStatus {
-  invalidEmail,
-  wrongPassword,
-  userNotFound,
-  userDisabled,
-  tooManyRequests,
-  operationNotAllowed,
-  emailAlreadyExists,
-  undefined,
-}
+
 
 abstract class AuthFailure {
   final String errorMessage;
@@ -59,7 +50,6 @@ class UnknownFailure extends AuthFailure {
 
 class AuthExceptionHandler {
   static AuthFailure handleException({errorMessage}) {
-
     switch (errorMessage.code) {
       case "ERROR_INVALID_EMAIL":
         return InvalidEmailFailure();

@@ -2,6 +2,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:uptodo/feature/register/data/model/user_info_model.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -11,6 +12,7 @@ import 'registere_repo.dart';
 
 class RegisterRepoImpl implements RegisterRepo {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
   @override
   Future<Either<AuthFailure, UserInfoModel>> registerWithEmailAndPassword({
     required String email,
@@ -30,6 +32,7 @@ class RegisterRepoImpl implements RegisterRepo {
         displayName: name,
         uid: userCredential.user!.uid,
       );
+         createUser(userInfoModel, userCredential.user!);
       return right(userInfoModel);
     } on FirebaseAuthException catch (error) {
       return left(
@@ -64,7 +67,7 @@ class RegisterRepoImpl implements RegisterRepo {
         displayName:
             userCredential.user?.displayName ?? userData['name'] ?? 'No Name',
       );
-
+    createUser(userInfoModel, userCredential.user!);
       return right(userInfoModel);
     } on FirebaseAuthException catch (error) {
       return left(
@@ -99,6 +102,7 @@ class RegisterRepoImpl implements RegisterRepo {
         displayName: userCredential.user?.displayName ?? 'No Name',
         uid: userCredential.user!.uid,
       );
+      createUser(userInfoModel, userCredential.user!);
       return right(userInfoModel);
     } on FirebaseAuthException catch (error) {
       return left(
@@ -108,5 +112,8 @@ class RegisterRepoImpl implements RegisterRepo {
     }
   }
 
-
+  @override
+  void createUser(UserInfoModel userInfoModel,User fireBaseUser) async {
+    _db.collection('User').doc(fireBaseUser.uid).set(userInfoModel.toJson());
+  }
 }

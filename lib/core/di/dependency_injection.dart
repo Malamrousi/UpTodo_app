@@ -5,7 +5,7 @@ import 'package:uptodo/feature/register/ui/cubit/register_cubit/register_cubit.d
 final getIt = GetIt.instance;
 
 void setUpGetIt() {
-  getIt.registerLazySingleton<RegisterRepoImpl>(() => RegisterRepoImpl());
-  getIt.registerLazySingleton<RegisterCubit>(
+  getIt.registerFactory<RegisterRepoImpl>(() => RegisterRepoImpl());
+  getIt.registerFactory<RegisterCubit>(
       () => RegisterCubit(getIt.get<RegisterRepoImpl>()));
 }

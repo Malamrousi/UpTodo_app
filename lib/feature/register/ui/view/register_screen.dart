@@ -1,25 +1,26 @@
+//packages  
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:uptodo/core/widget/build_app_bar.dart';
-import 'package:uptodo/feature/register/ui/view/widgets/custom_divider.dart';
-import 'package:uptodo/feature/register/ui/view/widgets/custom_register_social_auth_button.dart';
 
+//cubit
+import 'package:uptodo/feature/register/ui/cubit/register_cubit/register_cubit.dart';
+//Core
 import '../../../../../core/helper/spacing.dart';
 import '../../../../../core/theming/app_styles.dart';
 import '../../../../../core/theming/colors_manger.dart';
 import '../../../../../core/widget/app_text_button.dart';
-import '../widgets/aleardy_have_an_account.dart';
+//Widgets
+import 'widgets/aleardy_have_an_account.dart';
+import 'widgets/register_bloc_listener.dart';
 import 'widgets/register_form.dart';
+import 'package:uptodo/core/widget/build_app_bar.dart';
+import 'package:uptodo/feature/register/ui/view/widgets/custom_divider.dart';
+import 'package:uptodo/feature/register/ui/view/widgets/custom_register_social_auth_button.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
-  @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
-}
-
-class _RegisterScreenState extends State<RegisterScreen> {
-  bool obscureTextIcon = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,19 +44,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 backgroundColor: ColorsManger.purpleColor,
                 buttonText: 'Register',
                 textStyle: AppStyles.font16WhiteRegular,
+                onPressed: () {
+                  registerWidthEmailAndPassword(context);
+                },
               ),
               verticalSpacing(45),
               const CustomDivider(),
               verticalSpacing(29),
-              const CustomRegisterSocialAuthButton(
+               CustomRegisterSocialAuthButton(
+                onPressed: () {
+                  context.read<RegisterCubit>().registerWithGoogle();
+                },
                   buttonText: ' Register with Google',
                   socialImage: 'assets/svgs/google.svg'),
-              const CustomRegisterSocialAuthButton(
+               CustomRegisterSocialAuthButton(
+                onPressed: () {
+                    context.read<RegisterCubit>().registerWithFacebook();
+                },
                   buttonText: 'Register with Facebook',
                   socialImage: 'assets/svgs/facebook.svg'),
               verticalSpacing(46),
               const Align(
                   alignment: Alignment.center, child: AlreadyHaveAnAccount()),
+                  const RegisterBlocListener(),
             ],
           ),
         )),
@@ -63,5 +74,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  
+  void registerWidthEmailAndPassword(BuildContext context) {
+    if (context.read<RegisterCubit>().formKey.currentState!.validate()) {
+      context.read<RegisterCubit>().registerWidthEmailAndPassword();
+    }
+  }
 }

@@ -3,6 +3,7 @@ import 'package:uptodo/core/di/dependency_injection.dart';
 import 'package:uptodo/feature/register/ui/cubit/register_cubit/register_cubit.dart';
 import 'package:uptodo/feature/register/ui/view/register_screen.dart';
 
+import '../../feature/home/ui/view/home_screen.dart';
 import '../../feature/login/ui/view/login_screen.dart';
 import '../../feature/on_boading/ui/on_boarding_screen.dart';
 import '../../feature/start_screen/ui/start_screen.dart';
@@ -25,6 +26,9 @@ class AppRoutes {
                   create: (context) => getIt.get<RegisterCubit>(),
                   child: const RegisterScreen(),
                 ));
+
+      case Routes.homeScreen:
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
 
       default:
         return MaterialPageRoute(
