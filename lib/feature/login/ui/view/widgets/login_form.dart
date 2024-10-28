@@ -1,60 +1,45 @@
-//packages
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-//core
+
 import '../../../../../core/helper/app_regx.dart';
 import '../../../../../core/helper/spacing.dart';
 import '../../../../../core/theming/colors_manger.dart';
 import '../../../../../core/widget/app_text_form_filed.dart';
-//cubit
-import '../../cubit/register_cubit/register_cubit.dart';
+import '../../cubit/login_cubit/login_cubit.dart';
 
-class RegisterForm extends StatefulWidget {
-  const RegisterForm({super.key});
+class LoginForm extends StatefulWidget {
+  const LoginForm({super.key});
 
   @override
-  State<RegisterForm> createState() => _RegisterFormState();
+  State<LoginForm> createState() => _LoginFormState();
 }
 
-class _RegisterFormState extends State<RegisterForm> {
+class _LoginFormState extends State<LoginForm> {
   bool obscureTextIcon = true;
+
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: context.read<RegisterCubit>().formKey,
+      key: context.read<LoginCubit>().formKey,
       child: Column(
         children: [
           InputTextFormFiled(
-            controller: context.read<RegisterCubit>().nameController,
-            keyboardType: TextInputType.emailAddress,
-            inputTextType: 'Username',
-            validator: (value) {
-              if (value == null ||
-                  value.isEmpty ||
-                  !AppRegex.isNameValid(value)) {
-                return 'Please enter valid Name';
-              }
-            },
-            hintText: 'Enter your Name',
-          ),
-          verticalSpacing(15),
-          InputTextFormFiled(
-            controller: context.read<RegisterCubit>().emailController,
+            controller: context.read<LoginCubit>().emailController,
             keyboardType: TextInputType.emailAddress,
             inputTextType: 'Email',
             validator: (value) {
               if (value == null ||
                   value.isEmpty ||
                   !AppRegex.isEmailValid(value)) {
-                return 'Please enter valid Email';
+                return 'Please enter valid email';
               }
             },
             hintText: 'Enter your Email',
           ),
           verticalSpacing(15),
           InputTextFormFiled(
-            controller: context.read<RegisterCubit>().passwordController,
+            controller: context.read<LoginCubit>().passwordController,
             keyboardType: TextInputType.visiblePassword,
             obscureText: obscureTextIcon,
             inputTextType: 'Password',
