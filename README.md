@@ -56,7 +56,11 @@ The development process of the **UpTodo** app follows a structured branching str
 
 - **`feature/*` Branches**: These branches are used for working on new features, UI improvements, or fixing bugs. Each feature or bug fix is developed in a separate `feature` branch, such as `feature/onboarding-screen` or `feature/bug-fix`.
 
+- **`hotfix/*` Branches**: `hotfix` branches are used to quickly address critical bugs or issues that need to be fixed immediately on the production code. These are minor fixes that require immediate attention. Once a hotfix is completed, it is merged to the `development` branch to ensure the fix is applied across the project.
+
+
 - **Pull Requests to `development`**: Once a feature or bug fix is completed, a pull request is created to merge the changes into the `development` branch. This allows for review and testing before integrating the changes.
+
 
 - **`development` Branch**: This is the main branch for ongoing development work. It is used to integrate completed features and bug fixes. Testing and adjustments are often done here before the final release.
 

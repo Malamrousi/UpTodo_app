@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uptodo/core/helper/extension.dart';
-import 'package:uptodo/core/routing/app_routes.dart';
 import 'package:uptodo/core/routing/routes.dart';
 import 'package:uptodo/feature/login/ui/cubit/login_cubit/login_cubit.dart';
 

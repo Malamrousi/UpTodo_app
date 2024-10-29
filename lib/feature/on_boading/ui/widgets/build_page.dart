@@ -1,11 +1,16 @@
+//packages
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+//core
 import '../../../../core/helper/spacing.dart';
 import '../../../../core/theming/app_styles.dart';
 
 class BuildPage extends StatelessWidget {
-  const BuildPage({super.key, required this.image, required this.title, required this.subTitle});
+  const BuildPage(
+      {super.key,
+      required this.image,
+      required this.title,
+      required this.subTitle});
 
   final String image;
   final String title;
@@ -24,12 +29,12 @@ class BuildPage extends StatelessWidget {
         ),
         verticalSpacing(80),
         Text(
-         title,
-          style: AppStyles.font32WhiteBold,
+          title,
+          style: AppStyles.font28WhiteBold,
         ),
-        verticalSpacing(42),
+        verticalSpacing(30),
         Text(
-         subTitle,
+          subTitle,
           textAlign: TextAlign.center,
           style: AppStyles.font16WhiteRegular,
         ),
