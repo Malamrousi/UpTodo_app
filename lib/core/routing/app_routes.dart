@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uptodo/core/di/dependency_injection.dart';
+
 import 'package:uptodo/feature/register/ui/cubit/register_cubit/register_cubit.dart';
 import 'package:uptodo/feature/register/ui/view/register_screen.dart';
 
@@ -19,7 +20,8 @@ class AppRoutes {
       case Routes.startScreen:
         return MaterialPageRoute(builder: (_) => const StartScreen());
       case Routes.loginScreen:
-        return MaterialPageRoute(builder: (_) => const LoginScreen());
+        return MaterialPageRoute(
+            builder: (_) => const LoginScreen());
       case Routes.registerScreen:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(

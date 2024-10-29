@@ -12,7 +12,7 @@ import 'registere_repo.dart';
 
 class RegisterRepoImpl implements RegisterRepo {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  final FirebaseFirestore db = FirebaseFirestore.instance;
   @override
   Future<Either<AuthFailure, UserInfoModel>> registerWithEmailAndPassword({
     required String email,
@@ -35,8 +35,7 @@ class RegisterRepoImpl implements RegisterRepo {
          createUser(userInfoModel, userCredential.user!);
       return right(userInfoModel);
     } on FirebaseAuthException catch (error) {
-      return left(
-          AuthExceptionHandler.handleException(errorMessage: error.toString()));
+       return left(AuthExceptionHandler.handleException(error: error));
     } catch (e) {
       return Left(UnknownFailure());
     }
@@ -70,8 +69,7 @@ class RegisterRepoImpl implements RegisterRepo {
     createUser(userInfoModel, userCredential.user!);
       return right(userInfoModel);
     } on FirebaseAuthException catch (error) {
-      return left(
-          AuthExceptionHandler.handleException(errorMessage: error.toString()));
+      return left(AuthExceptionHandler.handleException(error: error));
     } catch (e) {
       return Left(UnknownFailure());
     }
@@ -105,8 +103,7 @@ class RegisterRepoImpl implements RegisterRepo {
       createUser(userInfoModel, userCredential.user!);
       return right(userInfoModel);
     } on FirebaseAuthException catch (error) {
-      return left(
-          AuthExceptionHandler.handleException(errorMessage: error.toString()));
+     return left(AuthExceptionHandler.handleException(error: error));
     } catch (e) {
       return Left(UnknownFailure());
     }
@@ -114,6 +111,6 @@ class RegisterRepoImpl implements RegisterRepo {
 
   @override
   void createUser(UserInfoModel userInfoModel,User fireBaseUser) async {
-    _db.collection('User').doc(fireBaseUser.uid).set(userInfoModel.toJson());
+    db.collection('User').doc(fireBaseUser.uid).set(userInfoModel.toJson());
   }
 }

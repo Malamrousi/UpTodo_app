@@ -1,12 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 
-
+// Base Abstract Class - لا تغيير
 abstract class AuthFailure {
-  final String errorMessage;
+  final dynamic errorMessage;
   AuthFailure({
     required this.errorMessage,
   });
 }
 
+// Authentication Failures
 class InvalidEmailFailure extends AuthFailure {
   InvalidEmailFailure()
       : super(errorMessage: "Your email address appears to be malformed.");
@@ -42,50 +44,69 @@ class EmailAlreadyExistsFailure extends AuthFailure {
       : super(
             errorMessage:
                 "The email has already been registered. Please login or reset your password.");
-                
-}
-class NoInternetFailure extends AuthFailure {
-  NoInternetFailure()
-      : super(errorMessage: "No internet connection. Please check your connection and try again.");
 }
 
+class NoInternetFailure extends AuthFailure {
+  NoInternetFailure()
+      : super(
+            errorMessage:
+                "No internet connection. Please check your connection and try again.");
+}
+
+class WeakPasswordFailure extends AuthFailure {
+  WeakPasswordFailure()
+      : super(errorMessage: "The password provided is too weak.");
+}
+
+class InvalidCredentialFailure extends AuthFailure {
+  InvalidCredentialFailure()
+      : super(
+            errorMessage:
+                "Invalid credentials. Please check your email and password.");
+}
 
 class UnknownFailure extends AuthFailure {
   UnknownFailure() : super(errorMessage: "An undefined error happened.");
 }
 
 class AuthExceptionHandler {
-  static AuthFailure handleException({errorMessage}) {
-    print(errorMessage.toString());
-    switch (errorMessage.code) {
-       case "ERROR_INVALID_EMAIL":
-       case "invalid-email":
+  static AuthFailure handleException({required FirebaseAuthException error}) {
+    print('Firebase Error Code: ${error.code}'); 
+    print('Firebase Error Message: ${error.message}');
+
+    switch (error.code) {
+      case "invalid-email":
         return InvalidEmailFailure();
-     
-      case "ERROR_WRONG_PASSWORD":
+
       case "wrong-password":
         return WrongPasswordFailure();
-          
-       case "ERROR_USER_NOT_FOUND":
+
       case "user-not-found":
         return UserNotFoundFailure();
-          
-      case "ERROR_USER_DISABLED":
+
       case "user-disabled":
         return UserDisabledFailure();
-        
-      case "ERROR_TOO_MANY_REQUESTS":
-      case "operation-not-allowed":
+
+      case "too-many-requests":
         return TooManyRequestsFailure();
-       
-      case "ERROR_OPERATION_NOT_ALLOWED":
-      case "ERROR_EMAIL_ALREADY_IN_USE":
+
+      case "operation-not-allowed":
+        return OperationNotAllowedFailure();
+
+      case "email-already-in-use":
         return EmailAlreadyExistsFailure();
 
-         case "network-request-failed":
+      case "network-request-failed":
         return NoInternetFailure();
-        
+
+      case "weak-password":
+        return WeakPasswordFailure();
+
+      case "invalid-credential":
+        return InvalidCredentialFailure();
+
       default:
+        print('***************UnknownFailure*****${error.message}');
         return UnknownFailure();
     }
   }

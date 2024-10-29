@@ -1,29 +1,54 @@
 {
   "project_info": {
-    "project_number": "695465421806",
-    "project_id": "uptodo-ef70c",
-    "storage_bucket": "uptodo-ef70c.appspot.com"
+      "project_number": "695465421806",
+      "project_id": "uptodo-ef70c",
+      "storage_bucket": "uptodo-ef70c.appspot.com"
   },
   "client": [
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:695465421806:android:fd0bb6fdb23a1bcc803cff",
-        "android_client_info": {
-          "package_name": "com.example.uptodo"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC_26xbqHkDq3ZgC3wJ3iBg8-OfM5jWlEs"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
+      {
+          "client_info": {
+              "mobilesdk_app_id": "1:695465421806:android:fd0bb6fdb23a1bcc803cff",
+              "android_client_info": {
+                  "package_name": "com.example.uptodo"
+              }
+          },
+          "oauth_client": [
+              {
+                  "client_id": "695465421806-95mf8mf4pj8e678aktacmstua5jrj263.apps.googleusercontent.com",
+                  "client_type": 1,
+                  "android_info": {
+                      "package_name": "com.example.uptodo",
+                      "certificate_hash": "62553d34d558682dbd4c1ca36539304e4c6ccde5"
+                  }
+              },
+              {
+                  "client_id": "695465421806-2292a4umcegbv19tquefbcnvnvqpsq6p.apps.googleusercontent.com",
+                  "client_type": 3
+              }
+          ],
+          "api_key": [
+              {
+                  "current_key": "AIzaSyC_26xbqHkDq3ZgC3wJ3iBg8-OfM5jWlEs"
+              }
+          ],
+          "services": {
+              "appinvite_service": {
+                  "other_platform_oauth_client": [
+                      {
+                          "client_id": "695465421806-2292a4umcegbv19tquefbcnvnvqpsq6p.apps.googleusercontent.com",
+                          "client_type": 3
+                      },
+                      {
+                          "client_id": "695465421806-vst889jg8snuq3vi43md0etn1n10oh4k.apps.googleusercontent.com",
+                          "client_type": 2,
+                          "ios_info": {
+                              "bundle_id": "com.example.uptodo"
+                          }
+                      }
+                  ]
+              }
+          }
       }
-    }
   ],
   "configuration_version": "1"
 }
