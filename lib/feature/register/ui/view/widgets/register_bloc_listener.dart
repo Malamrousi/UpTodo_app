@@ -24,21 +24,21 @@ class RegisterBlocListener extends StatelessWidget {
           showDialog(
             context: context,
             builder: (context) => const Center(
-              child: CircularProgressIndicator(
-               
-              ),
+              child: CircularProgressIndicator(),
             ),
           );
         } else if (state is RegisterSuccess) {
           context.pop();
-          context.pushNamed(Routes.homeScreen);
+          context.pushNamedAndRemoveUntil(Routes.homeScreen);
         } else if (state is RegisterFailure) {
           context.pop();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               backgroundColor: ColorsManger.primaryColor,
-              content: Text(state.errorMessage ,
-              style: AppStyles.font16WhiteRegular,),
+              content: Text(
+                state.errorMessage,
+                style: AppStyles.font16WhiteRegular,
+              ),
             ),
           );
         }

@@ -27,7 +27,7 @@ class _RegisterFormState extends State<RegisterForm> {
         children: [
           InputTextFormFiled(
             controller: context.read<RegisterCubit>().nameController,
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.name,
             inputTextType: 'Username',
             validator: (value) {
               if (value == null ||

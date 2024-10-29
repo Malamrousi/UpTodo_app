@@ -10,30 +10,54 @@ import 'package:uptodo/feature/login/data/repo/login_repo.dart';
 class LoginRepoImpl implements LoginRepo {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore db = FirebaseFirestore.instance;
+
+  
   @override
   Future<Either<AuthFailure, LoginUserInfoModel>> loginWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
-      var userCredential =
+      // 1. تسجيل الدخول باستخدام Firebase Auth
+      final UserCredential userCredential =
           await firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      //store user info
-      LoginUserInfoModel userInfoModel = LoginUserInfoModel(
-        email: userCredential.user!.email!,
-        displayName: userCredential.user!.displayName!,
-      );
-      getUser(userInfoModel, userCredential.user!);
-      return right(userInfoModel);
+
+      if (userCredential.user == null) {
+        return Left(UnknownFailure());
+      }
+
+      final userDoc =
+          await db.collection('users').doc(userCredential.user!.uid).get();
+
+      if (!userDoc.exists) {
+        final newUser = LoginUserInfoModel(
+          email: email,
+          displayName: userCredential.user!.displayName ?? email.split('@')[0],
+          uid: userCredential.user!.uid,
+        );
+
+        await db
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .set(newUser.toJson());
+
+        return right(newUser);
+      }
+
+      final userData =
+          LoginUserInfoModel.fromJson(userDoc.data() as Map<String, dynamic>);
+      return right(userData);
     } on FirebaseAuthException catch (error) {
-       print("FirebaseAuthException#############: ${error.message}");
-     return left(AuthExceptionHandler.handleException(error: error));
+      print('FirebaseAuthException: ${error.message}');
+      return left(AuthExceptionHandler.handleException(error: error));
     } catch (error) {
-        print("FirebaseAuthExceptiondd###############: ${error.toString()}");
-      return Left(UnknownFailure());
+      print('Unknown error: $error');
+      return left(UnknownFailure());
     }
   }
+
+ 
 
   @override
   Future<Either<AuthFailure, LoginUserInfoModel>> loginWithFacebook() async {
@@ -97,11 +121,20 @@ class LoginRepoImpl implements LoginRepo {
   }
 
   @override
-  void getUser(LoginUserInfoModel loginUserInfoModel, User fireBaseUser) async {
-    await db.collection('User').doc(fireBaseUser.uid).get().then((value) {
-      var result = LoginUserInfoModel.fromJson(value.data()!);
-      return result;
-    });
+  Future<void> getUser(
+      LoginUserInfoModel loginUserInfoModel, User fireBaseUser) async {
+    try {
+      final userDoc = await db.collection('users').doc(fireBaseUser.uid).get();
+
+      if (!userDoc.exists) {
+        await db
+            .collection('users')
+            .doc(fireBaseUser.uid)
+            .set(loginUserInfoModel.toJson());
+      }
+    } catch (e) {
+      print('Error getting/creating user: $e');
+    }
   }
 
   @override
@@ -110,4 +143,6 @@ class LoginRepoImpl implements LoginRepo {
     await GoogleSignIn().signOut();
     await FacebookAuth.instance.logOut();
   }
+
+
 }

@@ -71,8 +71,8 @@ class UnknownFailure extends AuthFailure {
 
 class AuthExceptionHandler {
   static AuthFailure handleException({required FirebaseAuthException error}) {
-    print('Firebase Error Code: ${error.code}'); // للتأكد من نوع الخطأ
-    print('Firebase Error Message: ${error.message}'); // للتأكد من رسالة الخطأ
+    print('Firebase Error Code: ${error.code}'); 
+    print('Firebase Error Message: ${error.message}');
 
     switch (error.code) {
       case "invalid-email":

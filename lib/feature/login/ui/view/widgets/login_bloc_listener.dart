@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uptodo/core/helper/extension.dart';
 
-
 import '../../../../../core/routing/routes.dart';
 import '../../../../../core/theming/app_styles.dart';
 import '../../../../../core/theming/colors_manger.dart';
 import '../../cubit/login_cubit/login_cubit.dart';
-
 
 class LoginBlocListener extends StatelessWidget {
   const LoginBlocListener({super.key});
@@ -25,21 +23,21 @@ class LoginBlocListener extends StatelessWidget {
           showDialog(
             context: context,
             builder: (context) => const Center(
-              child: CircularProgressIndicator(
-               
-              ),
+              child: CircularProgressIndicator(),
             ),
           );
         } else if (state is LoginSuccess) {
           context.pop();
-          context.pushNamed(Routes.homeScreen);
+          context.pushNamedAndRemoveUntil(Routes.homeScreen);
         } else if (state is LoginFailure) {
           context.pop();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               backgroundColor: ColorsManger.primaryColor,
-              content: Text(state.errorMessage ,
-              style: AppStyles.font16WhiteRegular,),
+              content: Text(
+                state.errorMessage,
+                style: AppStyles.font16WhiteRegular,
+              ),
             ),
           );
         }
