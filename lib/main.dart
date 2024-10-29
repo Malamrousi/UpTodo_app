@@ -9,18 +9,19 @@ import 'package:uptodo/firebase_options.dart';
 import 'package:uptodo/up_to_do.dart';
 
 void main() async {
- WidgetsFlutterBinding.ensureInitialized();
-    
-    // تهيئة Firebase مع الإعدادات الصحيحة
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+  WidgetsFlutterBinding.ensureInitialized();
 
-    // تكوين Firebase Auth
-    await FirebaseAuth.instance.setSettings(
-      appVerificationDisabledForTesting: true, // مفيد في بيئة التطوير
-      forceRecaptchaFlow: false,
-    );
+  // تهيئة Firebase مع الإعدادات الصحيحة
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // تكوين Firebase Auth
+  await FirebaseAuth.instance.setSettings(
+    appVerificationDisabledForTesting: false,
+    forceRecaptchaFlow: true,
+  );
+
   await ScreenUtil.ensureScreenSize();
   setUpGetIt();
   runApp(const UpToDo());
