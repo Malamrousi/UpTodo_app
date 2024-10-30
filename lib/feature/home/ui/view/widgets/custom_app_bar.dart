@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:uptodo/core/theming/app_styles.dart';
+import 'package:uptodo/core/theming/colors_manger.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});
@@ -12,7 +13,8 @@ class CustomAppBar extends StatelessWidget {
       children: [
         IconButton(
           onPressed: () {},
-          icon: const Icon(Icons.filter_list),
+          icon:  Icon(Icons.filter_list,
+          color: ColorsManger.whiteColorOpacity66,),
         ),
         Text(
           'Index',

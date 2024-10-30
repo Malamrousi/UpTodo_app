@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 //widgets
 import 'package:uptodo/feature/home/ui/view/widgets/custom_app_bar.dart';
 
+import 'widgets/home_screen_no_data_state.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -17,6 +19,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             CustomAppBar(),
             
+            HomeScreenNoDataState(),
             ],
         ),
       )),
