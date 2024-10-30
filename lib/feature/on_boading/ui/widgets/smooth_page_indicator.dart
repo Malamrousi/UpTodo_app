@@ -12,7 +12,7 @@ class CustomSmoothPageIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: MediaQuery.sizeOf(context).height * 0.39.h,
+      bottom: MediaQuery.sizeOf(context).height * 0.416.h,
       left: MediaQuery.sizeOf(context).width * 0.35.w,
       child: SmoothPageIndicator(
         controller: controller,

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:uptodo/core/helper/extension.dart';
 
 //cubit
 import 'package:uptodo/feature/register/ui/cubit/register_cubit/register_cubit.dart';
@@ -24,7 +25,9 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(onPressed: (){
+      context.pop();
+      }),
       body: SingleChildScrollView(
         child: SafeArea(
             child: Padding(
@@ -57,6 +60,7 @@ class RegisterScreen extends StatelessWidget {
                 },
                   buttonText: ' Register with Google',
                   socialImage: 'assets/svgs/google.svg'),
+                       verticalSpacing(20),
                CustomRegisterSocialAuthButton(
                 onPressed: () {
                     context.read<RegisterCubit>().registerWithFacebook();
@@ -73,6 +77,7 @@ class RegisterScreen extends StatelessWidget {
       ),
     );
   }
+
 
   void registerWidthEmailAndPassword(BuildContext context) {
     if (context.read<RegisterCubit>().formKey.currentState!.validate()) {

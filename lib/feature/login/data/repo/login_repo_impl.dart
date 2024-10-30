@@ -11,7 +11,6 @@ class LoginRepoImpl implements LoginRepo {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
-  
   @override
   Future<Either<AuthFailure, LoginUserInfoModel>> loginWithEmailAndPassword(
       {required String email, required String password}) async {
@@ -32,9 +31,9 @@ class LoginRepoImpl implements LoginRepo {
 
       if (!userDoc.exists) {
         final newUser = LoginUserInfoModel(
-          email: email,
-          displayName: userCredential.user!.displayName ?? email.split('@')[0],
+          email: userCredential.user?.email ?? 'No Email',
           uid: userCredential.user!.uid,
+          displayName: userCredential.user?.displayName ?? 'No Name',
         );
 
         await db
@@ -57,8 +56,6 @@ class LoginRepoImpl implements LoginRepo {
     }
   }
 
- 
-
   @override
   Future<Either<AuthFailure, LoginUserInfoModel>> loginWithFacebook() async {
     try {
@@ -76,11 +73,13 @@ class LoginRepoImpl implements LoginRepo {
       final UserCredential userCredential = await FirebaseAuth.instance
           .signInWithCredential(facebookAuthCredential);
 //get user data
-
+      final userData = await FacebookAuth.instance.getUserData();
       return right(
         LoginUserInfoModel(
-          email: userCredential.user!.email!,
-          displayName: userCredential.user!.displayName!,
+          email: userCredential.user?.email ?? userData['email'] ?? 'No Email',
+          uid: userCredential.user!.uid,
+          displayName:
+              userCredential.user?.displayName ?? userData['name'] ?? 'No Name',
         ),
       );
     } on FirebaseAuthException catch (error) {
@@ -90,7 +89,7 @@ class LoginRepoImpl implements LoginRepo {
     }
   }
 
-  @override
+    @override
   Future<Either<AuthFailure, LoginUserInfoModel>> loginWithGoogle() async {
     try {
       // Trigger the authentication flow
@@ -109,7 +108,6 @@ class LoginRepoImpl implements LoginRepo {
       // Once signed in, return the UserCredential
       final UserCredential userCredential =
           await firebaseAuth.signInWithCredential(credential);
-
       return right(LoginUserInfoModel(
           email: userCredential.user!.email!,
           displayName: userCredential.user!.displayName!));
@@ -143,6 +141,4 @@ class LoginRepoImpl implements LoginRepo {
     await GoogleSignIn().signOut();
     await FacebookAuth.instance.logOut();
   }
-
-
 }

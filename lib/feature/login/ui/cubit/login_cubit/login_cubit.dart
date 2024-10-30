@@ -44,7 +44,7 @@ class LoginCubit extends Cubit<LoginState> {
     login.fold((failure) {
       emit(LoginFailure(errorMessage: failure.errorMessage));
     }, (user) {
-      // emit(LoginSuccess(loginUserInfoModel: user));
+      emit(LoginSuccess(loginUserInfoModel: user));
     });
   }
   Future<void> signOut() async {

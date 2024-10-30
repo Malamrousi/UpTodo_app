@@ -11,12 +11,10 @@ import 'package:uptodo/up_to_do.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // تهيئة Firebase مع الإعدادات الصحيحة
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // تكوين Firebase Auth
   await FirebaseAuth.instance.setSettings(
     appVerificationDisabledForTesting: false,
     forceRecaptchaFlow: true,
