@@ -74,14 +74,14 @@ class LoginRepoImpl implements LoginRepo {
           .signInWithCredential(facebookAuthCredential);
 //get user data
       final userData = await FacebookAuth.instance.getUserData();
-      return right(
-        LoginUserInfoModel(
-          email: userCredential.user?.email ?? userData['email'] ?? 'No Email',
-          uid: userCredential.user!.uid,
-          displayName:
-              userCredential.user?.displayName ?? userData['name'] ?? 'No Name',
-        ),
+    
+             LoginUserInfoModel userInfoModel = LoginUserInfoModel(
+        email: userCredential.user?.email ?? userData['email'] ?? 'No Email',
+        displayName: userCredential.user?.displayName ?? userData['name'] ?? 'No Name',
+        uid: userCredential.user!.uid,
       );
+      getUser(userInfoModel, userCredential.user!);
+      return right(userInfoModel);
     } on FirebaseAuthException catch (error) {
       return left(AuthExceptionHandler.handleException(error: error));
     } catch (e) {
@@ -108,9 +108,13 @@ class LoginRepoImpl implements LoginRepo {
       // Once signed in, return the UserCredential
       final UserCredential userCredential =
           await firebaseAuth.signInWithCredential(credential);
-      return right(LoginUserInfoModel(
-          email: userCredential.user!.email!,
-          displayName: userCredential.user!.displayName!));
+             LoginUserInfoModel userInfoModel = LoginUserInfoModel(
+        email: userCredential.user?.email ?? 'No Email',
+        displayName: userCredential.user?.displayName ?? 'No Name',
+        uid: userCredential.user!.uid,
+      );
+      getUser(userInfoModel, userCredential.user!);
+      return right(userInfoModel);
     } on FirebaseAuthException catch (error) {
       return left(AuthExceptionHandler.handleException(error: error));
     } catch (e) {
