@@ -5,6 +5,7 @@ import 'package:uptodo/feature/register/ui/cubit/register_cubit/register_cubit.d
 import 'package:uptodo/feature/register/ui/view/register_screen.dart';
 
 import '../../feature/home/ui/view/home_screen.dart';
+import '../../feature/login/ui/cubit/login_cubit/login_cubit.dart';
 import '../../feature/login/ui/view/login_screen.dart';
 import '../../feature/on_boading/ui/on_boarding_screen.dart';
 import '../../feature/start_screen/ui/start_screen.dart';
@@ -21,7 +22,9 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const StartScreen());
       case Routes.loginScreen:
         return MaterialPageRoute(
-            builder: (_) => const LoginScreen());
+            builder: (_) => BlocProvider(
+                create: (context) => getIt.get<LoginCubit>(),
+                child: const LoginScreen()));
       case Routes.registerScreen:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
