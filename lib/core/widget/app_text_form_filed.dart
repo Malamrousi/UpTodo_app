@@ -5,20 +5,21 @@ import 'package:uptodo/core/theming/app_styles.dart';
 import 'package:uptodo/core/theming/colors_manger.dart';
 
 class InputTextFormFiled extends StatelessWidget {
-  const InputTextFormFiled(
-      {super.key,
-      this.hintText,
-      this.focusBorder,
-      this.enabledBorder,
-      this.hintStyle,
-      this.inputTextStyle,
-      this.obscureText,
-      this.controller,
-      required this.validator,
-      this.keyboardType,
-      required this.inputTextType,
-      this.suffixIcon,
-      this.prefixIcon});
+  const InputTextFormFiled({
+    super.key,
+    this.hintText,
+    this.focusBorder,
+    this.enabledBorder,
+    this.hintStyle,
+    this.inputTextStyle,
+    this.obscureText,
+    this.controller,
+    required this.validator,
+    this.keyboardType,
+    required this.inputTextType,
+    this.suffixIcon,
+    this.prefixIcon,
+  });
 
   final String? hintText;
   final TextInputType? keyboardType;

@@ -20,6 +20,7 @@ class IndexScreenHasData extends StatelessWidget {
         children: [
           const CustomAppBar(),
           InputTextFormFiled(
+      
             keyboardType: TextInputType.text,
             validator: (value) {},
             prefixIcon: const Icon(Icons.search),
@@ -152,7 +153,7 @@ class IndexScreenHasData extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Checkbox(
-                          value: false,
+                          value: true,
                           onChanged: (value) {},
                           activeColor: ColorsManger.purpleColor,
                           checkColor: ColorsManger.whiteColor,

@@ -40,16 +40,15 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               return GestureDetector(
                 onTap: () => widget.onItemTapped!(index),
                 child: Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 10.w),
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
                   child: Column(
                     children: [
                       Icon(
-
                         item.icon,
                         color: widget.currentIndex == index
                             ? ColorsManger.purpleColor
                             : ColorsManger.whiteColor,
-                            size: 28.sp,
+                        size: 28.sp,
                       ),
                       Text(
                         item.label,
