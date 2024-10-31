@@ -17,7 +17,8 @@ class InputTextFormFiled extends StatelessWidget {
       required this.validator,
       this.keyboardType,
       required this.inputTextType,
-      this.suffixIcon});
+      this.suffixIcon,
+      this.prefixIcon});
 
   final String? hintText;
   final TextInputType? keyboardType;
@@ -28,15 +29,16 @@ class InputTextFormFiled extends StatelessWidget {
   final bool? obscureText;
   final TextEditingController? controller;
   final Function(String? value) validator;
-  final String inputTextType;
+  final String? inputTextType;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          inputTextType,
+          inputTextType ?? '',
           style: AppStyles.font16WhiteRegular,
         ),
         verticalSpacing(8),
@@ -49,6 +51,7 @@ class InputTextFormFiled extends StatelessWidget {
           obscureText: obscureText ?? false,
           decoration: InputDecoration(
               suffixIcon: suffixIcon,
+              prefixIcon: prefixIcon,
               filled: true,
               fillColor: ColorsManger.charcoalGrayColor,
               enabledBorder: enabledBorder ?? inputBorder(),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'home_screen_no_data_state.dart';
+import 'index_screen_has_data.dart';
 
 class CustomPageIndex {
   static final  List<Widget> pages = [
-    const HomeScreenNoDataState(),
+    const IndexScreenHasData(),
     const Center(
         child: Text(
       'Calendar Page',
