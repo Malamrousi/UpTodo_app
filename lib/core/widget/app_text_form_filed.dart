@@ -18,7 +18,7 @@ class InputTextFormFiled extends StatelessWidget {
     this.keyboardType,
     required this.inputTextType,
     this.suffixIcon,
-    this.prefixIcon,
+    this.prefixIcon, this.fillColor, this.autoFocus,
   });
 
   final String? hintText;
@@ -31,6 +31,8 @@ class InputTextFormFiled extends StatelessWidget {
   final TextEditingController? controller;
   final Function(String? value) validator;
   final String? inputTextType;
+  final Color? fillColor;
+  final bool? autoFocus;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   @override
@@ -46,6 +48,7 @@ class InputTextFormFiled extends StatelessWidget {
         TextFormField(
           keyboardType: keyboardType,
           controller: controller,
+          autofocus: autoFocus ?? false,
           validator: (value) {
             return validator(value);
           },
@@ -54,7 +57,7 @@ class InputTextFormFiled extends StatelessWidget {
               suffixIcon: suffixIcon,
               prefixIcon: prefixIcon,
               filled: true,
-              fillColor: ColorsManger.charcoalGrayColor,
+              fillColor:fillColor?? ColorsManger.charcoalGrayColor,
               enabledBorder: enabledBorder ?? inputBorder(),
               focusedBorder: focusBorder ?? inputBorder(),
               errorBorder: errorBorder(),
