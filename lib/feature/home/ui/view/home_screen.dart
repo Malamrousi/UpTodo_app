@@ -5,7 +5,7 @@ import 'package:uptodo/core/theming/colors_manger.dart';
 import 'package:uptodo/feature/home/ui/view/widgets/custom_bottom_navigation_bar.dart';
 import 'package:uptodo/feature/home/ui/view/widgets/custom_page_index.dart';
 
-import 'widgets/add_ask_bottm_sheer.dart';
+import 'widgets/add_task_bottm_sheet.dart';
 import 'widgets/custom_floating_action_button.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
-                child: const AddAskBottomSheer()),
+                child: const AddTaskBottomSheet()),
           );
         },
       ),

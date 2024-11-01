@@ -11,6 +11,7 @@ class AddTaskForm extends StatelessWidget {
     return Column(
       children: [
         InputTextFormFiled(
+            keyboardType: TextInputType.text,
             validator: (value) {},
             inputTextType: '',
             hintText: 'Tittle',
@@ -19,6 +20,7 @@ class AddTaskForm extends StatelessWidget {
             autoFocus: true,
             enabledBorder: InputBorder.none),
         InputTextFormFiled(
+            keyboardType: TextInputType.text,
             validator: (value) {},
             inputTextType: '',
             hintText: 'Description',
