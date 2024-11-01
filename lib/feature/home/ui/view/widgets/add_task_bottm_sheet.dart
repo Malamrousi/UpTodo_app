@@ -10,7 +10,7 @@ import 'package:uptodo/core/helper/spacing.dart';
 //widgets
 import 'add_task_form.dart';
 import 'task_bottom_sheet_category_button.dart';
-import 'task_bottom_sheet_time_button.dart';
+import 'task_bottom_sheet_show_time_picker.dart';
 
 class AddTaskBottomSheet extends StatelessWidget {
   const AddTaskBottomSheet({super.key});
@@ -34,7 +34,7 @@ class AddTaskBottomSheet extends StatelessWidget {
           const Expanded(
             child: Row(
               children: [
-                TaskBottomSheetTimeButton(),
+                TaskBottomSheetShowTimePicker(),
                 TaskBottomSheetCategoryButton(),
                 TaskBottomSheetPriorityButton(),
                 Spacer(),
