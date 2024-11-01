@@ -30,7 +30,7 @@ class AddTaskBottomSheet extends StatelessWidget {
           ),
           verticalSpacing(14),
           const AddTaskForm(),
-          verticalSpacing(30),
+    verticalSpacing(20),
           const Expanded(
             child: Row(
               children: [
@@ -42,7 +42,7 @@ class AddTaskBottomSheet extends StatelessWidget {
               ],
             ),
           ),
-          verticalSpacing(30),
+     
         ],
       ),
     );
