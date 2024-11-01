@@ -42,7 +42,7 @@ class AddTaskBottomSheet extends StatelessWidget {
               ],
             ),
           ),
-              verticalSpacing(30),
+          verticalSpacing(30),
         ],
       ),
     );
