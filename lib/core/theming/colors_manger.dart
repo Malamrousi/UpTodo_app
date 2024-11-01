@@ -12,4 +12,6 @@ class ColorsManger {
   static const Color charcoalGrayColor = Color(0xff1D1D1D);
   static const Color smokeGrayColor = Color(0xff535353);
   static const Color darkGray = Color(0xff363636);
+
+  static const Color darkerGrayColor = Color(0xff272727);
 }

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:uptodo/core/assets/assets.dart';
 //core
 import '../../../../../core/helper/spacing.dart';
 import '../../../../../core/theming/app_styles.dart';
@@ -58,9 +59,10 @@ class IndexScreenTaskNotCompleted extends StatelessWidget {
                             color: const Color(0xff809CFF)),
                         child: Row(
                           children: [
-                            SvgPicture.asset('assets/svgs/university.svg',
-                            width: 21,
-                            height: 15,
+                            SvgPicture.asset(
+                              ImageAssets.svgsUniversity,
+                              width: 21,
+                              height: 15,
                             ),
                             horizontalSpacing(2),
                             Text(
@@ -81,7 +83,11 @@ class IndexScreenTaskNotCompleted extends StatelessWidget {
                             )),
                         child: Row(
                           children: [
-                            SvgPicture.asset('assets/svgs/flag.svg'),
+                            SvgPicture.asset(
+                              ImageAssets.svgsFlag,
+                              width: 14,
+                              height: 14,
+                            ),
                             Text(
                               '2',
                               style: AppStyles.font12WhiteColorRegular,
