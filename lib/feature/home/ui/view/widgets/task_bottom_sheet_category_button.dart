@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/theming/colors_manger.dart';
-import 'task_bottom_sheet_show_dialog.dart';
+import 'task_bottom_sheet_show_category_dialog.dart';
 
 class TaskBottomSheetCategoryButton extends StatelessWidget {
   const TaskBottomSheetCategoryButton({super.key});
@@ -14,7 +14,7 @@ class TaskBottomSheetCategoryButton extends StatelessWidget {
             context: context,
             builder: (context) {
               return const Center(
-                child: TaskBottomSheetShowDialog(),
+                child: TaskBottomSheetShowCategoryDialog(),
               );
             });
       },
