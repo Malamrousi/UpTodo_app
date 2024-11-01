@@ -94,4 +94,4 @@ flutter_assets:
     - assets/svgs/
   output_path: lib/core/assets
   filename: assets.dart
-  field_prefix: image
+  field_prefix: 

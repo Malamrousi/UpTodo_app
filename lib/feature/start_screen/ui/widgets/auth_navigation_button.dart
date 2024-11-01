@@ -22,7 +22,7 @@ class AuthNavigationButton extends StatelessWidget {
             context.pushNamed(Routes.loginScreen);
           },
           buttonText: 'LOGIN',
-          backgroundColor: ColorsManger.purpleColor,
+          backgroundColor: ColorsManger.primaryColor,
           textStyle: AppStyles.font16WhiteRegular,
         ),
         verticalSpacing(28),

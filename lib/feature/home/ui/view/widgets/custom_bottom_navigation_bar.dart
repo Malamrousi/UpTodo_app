@@ -46,7 +46,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                       Icon(
                         item.icon,
                         color: widget.currentIndex == index
-                            ? ColorsManger.purpleColor
+                            ? ColorsManger.primaryColor
                             : ColorsManger.whiteColor,
                         size: 28.sp,
                       ),

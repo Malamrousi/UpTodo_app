@@ -24,7 +24,7 @@ class IndexScreenTaskNotCompleted extends StatelessWidget {
               Checkbox(
                 value: false,
                 onChanged: (value) {},
-                activeColor: ColorsManger.purpleColor,
+                activeColor: ColorsManger.primaryColor,
                 checkColor: ColorsManger.whiteColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.r),
@@ -58,8 +58,11 @@ class IndexScreenTaskNotCompleted extends StatelessWidget {
                             color: const Color(0xff809CFF)),
                         child: Row(
                           children: [
-                            SvgPicture.asset('assets/svgs/university.svg'),
-                            horizontalSpacing(4),
+                            SvgPicture.asset('assets/svgs/university.svg',
+                            width: 21,
+                            height: 15,
+                            ),
+                            horizontalSpacing(2),
                             Text(
                               'University',
                               style: AppStyles.font12WhiteColorRegular,
@@ -74,7 +77,7 @@ class IndexScreenTaskNotCompleted extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(6.r),
                             border: Border.all(
-                              color: ColorsManger.purpleColor,
+                              color: ColorsManger.primaryColor,
                             )),
                         child: Row(
                           children: [

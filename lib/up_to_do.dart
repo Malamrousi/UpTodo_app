@@ -24,7 +24,7 @@ class UpToDo extends StatelessWidget {
         theme: ThemeData(
           brightness: Brightness.dark,
           fontFamily: 'Lato',
-          scaffoldBackgroundColor: ColorsManger.primaryColor,
+          scaffoldBackgroundColor: ColorsManger.darkColor,
         ),
         initialRoute: 
             user == null ? Routes.onBoardingScreen : Routes.homeScreen,

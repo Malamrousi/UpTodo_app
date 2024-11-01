@@ -44,7 +44,7 @@ class RegisterScreen extends StatelessWidget {
               const RegisterForm(),
               verticalSpacing(69),
               AppTextButton(
-                backgroundColor: ColorsManger.purpleColor,
+                backgroundColor: ColorsManger.primaryColor,
                 buttonText: 'Register',
                 textStyle: AppStyles.font16WhiteRegular,
                 onPressed: () {

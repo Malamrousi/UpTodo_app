@@ -86,7 +86,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       },
                       text: currentPage == 2 ? 'Get Started' : 'Next',
                       textStyle: AppStyles.font16WhiteRegular,
-                      backgroundColor: ColorsManger.purpleColor,
+                      backgroundColor: ColorsManger.primaryColor,
                     ),
                   ],
                 )

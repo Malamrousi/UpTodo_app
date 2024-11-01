@@ -7,7 +7,7 @@ FloatingActionButton customFloatingActionButton({void Function()? onPressed}) {
     onPressed: onPressed,
     elevation: 1,
     tooltip: 'Add Task',
-    backgroundColor: ColorsManger.purpleColor,
+    backgroundColor: ColorsManger.primaryColor,
     shape: const CircleBorder(),
     child: const Icon(
       Icons.add,

@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {
                   loginWithEmailAndPassword(context);
                 },
-                backgroundColor: ColorsManger.purpleColor,
+                backgroundColor: ColorsManger.primaryColor,
                 buttonText: 'login',
                 textStyle: AppStyles.font16WhiteRegular,
               ),

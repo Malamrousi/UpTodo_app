@@ -23,7 +23,7 @@ class IndexScreenTaskCompleted extends StatelessWidget {
               Checkbox(
                 value: true,
                 onChanged: (value) {},
-                activeColor: ColorsManger.purpleColor,
+                activeColor: ColorsManger.primaryColor,
                 checkColor: ColorsManger.whiteColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.r),

@@ -46,18 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            //to prevent the keyboard from covering the bottom navigation bar
-            // if (FocusScope.of(context).hasFocus)
-            //   Positioned.fill(
-            //     child: GestureDetector(
-            //       onTap: () {
-            //         FocusScope.of(context).unfocus();
-            //       },
-            //       child: Container(
-            //         color: Colors.transparent,
-            //       ),
-            //     ),
-            //   )
           ],
         ),
       ),

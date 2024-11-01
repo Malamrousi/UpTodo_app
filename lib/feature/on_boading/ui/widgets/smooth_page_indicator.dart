@@ -27,7 +27,7 @@ class CustomSmoothPageIndicator extends StatelessWidget {
             paintStyle: PaintingStyle.fill,
             dotColor: ColorsManger.grayColor,
             strokeWidth: 1,
-            activeDotColor: ColorsManger.purpleColor),
+            activeDotColor: ColorsManger.primaryColor),
       ),
     );
   }

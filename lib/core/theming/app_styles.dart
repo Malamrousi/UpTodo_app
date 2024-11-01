@@ -50,4 +50,8 @@ class AppStyles {
       fontSize: 12.sp,
       fontWeight: FontWeightHelper.regular,
       color: ColorsManger.whiteColor);
+             static TextStyle font14WhiteColorRegular = TextStyle(
+      fontSize: 14.sp,
+      fontWeight: FontWeightHelper.regular,
+      color: ColorsManger.whiteColor);
 }

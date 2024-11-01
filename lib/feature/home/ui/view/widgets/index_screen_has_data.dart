@@ -17,7 +17,7 @@ class IndexScreenHasData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      padding: const EdgeInsets.only(top: 16 , right: 16 , left: 16  ,),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -11,7 +11,7 @@ class TaskBottomSheetSendButton extends StatelessWidget {
       onPressed: () {},
       icon:const Icon(
         Icons.send_rounded,
-        color: ColorsManger.purpleColor,
+        color: ColorsManger.primaryColor,
         size: 26,
       ),
     );
