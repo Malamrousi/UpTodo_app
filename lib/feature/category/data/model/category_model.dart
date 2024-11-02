@@ -8,7 +8,7 @@ class CategoryModel {
     required this.icon,
     required this.color,
   });
-  factory CategoryModel.fromJson(Map<String, dynamic> json) {
+  factory CategoryModel.fromJson(json) {
     return CategoryModel(
       name: json['name'],
       icon: json['icon'],
