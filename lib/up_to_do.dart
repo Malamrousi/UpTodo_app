@@ -7,7 +7,6 @@ import 'package:uptodo/core/routing/app_routes.dart';
 import 'package:uptodo/core/routing/routes.dart';
 import 'package:uptodo/core/theming/colors_manger.dart';
 
-
 class UpToDo extends StatelessWidget {
   const UpToDo({super.key});
 
@@ -26,7 +25,7 @@ class UpToDo extends StatelessWidget {
           fontFamily: 'Lato',
           scaffoldBackgroundColor: ColorsManger.darkColor,
         ),
-        initialRoute: 
+        initialRoute:
             user == null ? Routes.onBoardingScreen : Routes.homeScreen,
         onGenerateRoute: AppRoutes.generateRoute,
       ),
