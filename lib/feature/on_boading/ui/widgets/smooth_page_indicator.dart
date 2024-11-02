@@ -1,7 +1,10 @@
+//packages
+//packages
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
+//core
+//core
 import '../../../../core/theming/colors_manger.dart';
 
 class CustomSmoothPageIndicator extends StatelessWidget {
@@ -11,7 +14,7 @@ class CustomSmoothPageIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: 350.h,
+      bottom: MediaQuery.sizeOf(context).height * 0.416.h,
       left: MediaQuery.sizeOf(context).width * 0.35.w,
       child: SmoothPageIndicator(
         controller: controller,
@@ -24,7 +27,7 @@ class CustomSmoothPageIndicator extends StatelessWidget {
             paintStyle: PaintingStyle.fill,
             dotColor: ColorsManger.grayColor,
             strokeWidth: 1,
-            activeDotColor: ColorsManger.purpleColor),
+            activeDotColor: ColorsManger.primaryColor),
       ),
     );
   }

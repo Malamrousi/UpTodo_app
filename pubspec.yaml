@@ -43,6 +43,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   get_it: ^8.0.1
   google_sign_in: ^6.2.1
+  logger: ^2.4.0
   smooth_page_indicator: ^1.2.0+3
 
 dev_dependencies:
@@ -87,3 +88,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_assets:
+  assets_path:
+    - assets/images/
+    - assets/svgs/
+  output_path: lib/core/assets
+  filename: assets.dart
+  field_prefix: 

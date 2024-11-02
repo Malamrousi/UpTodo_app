@@ -5,19 +5,21 @@ import 'package:uptodo/core/theming/app_styles.dart';
 import 'package:uptodo/core/theming/colors_manger.dart';
 
 class InputTextFormFiled extends StatelessWidget {
-  const InputTextFormFiled(
-      {super.key,
-      this.hintText,
-      this.focusBorder,
-      this.enabledBorder,
-      this.hintStyle,
-      this.inputTextStyle,
-      this.obscureText,
-      this.controller,
-      required this.validator,
-      this.keyboardType,
-      required this.inputTextType,
-      this.suffixIcon});
+  const InputTextFormFiled({
+    super.key,
+    this.hintText,
+    this.focusBorder,
+    this.enabledBorder,
+    this.hintStyle,
+    this.inputTextStyle,
+    this.obscureText,
+    this.controller,
+    required this.validator,
+    this.keyboardType,
+    required this.inputTextType,
+    this.suffixIcon,
+    this.prefixIcon, this.fillColor, this.autoFocus,
+  });
 
   final String? hintText;
   final TextInputType? keyboardType;
@@ -28,29 +30,34 @@ class InputTextFormFiled extends StatelessWidget {
   final bool? obscureText;
   final TextEditingController? controller;
   final Function(String? value) validator;
-  final String inputTextType;
+  final String? inputTextType;
+  final Color? fillColor;
+  final bool? autoFocus;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          inputTextType,
+          inputTextType ?? '',
           style: AppStyles.font16WhiteRegular,
         ),
         verticalSpacing(8),
         TextFormField(
           keyboardType: keyboardType,
           controller: controller,
+          autofocus: autoFocus ?? false,
           validator: (value) {
             return validator(value);
           },
           obscureText: obscureText ?? false,
           decoration: InputDecoration(
               suffixIcon: suffixIcon,
+              prefixIcon: prefixIcon,
               filled: true,
-              fillColor: ColorsManger.charcoalGrayColor,
+              fillColor:fillColor?? ColorsManger.charcoalGrayColor,
               enabledBorder: enabledBorder ?? inputBorder(),
               focusedBorder: focusBorder ?? inputBorder(),
               errorBorder: errorBorder(),

@@ -48,6 +48,7 @@ display a reasonable layout on different screen sizes!
 - **smooth_page_indicator: ^1.2.0+3**: Page indicators are a crucial part of any app that involves multiple pages.
 - **dartz: 0.10.1**: For functional programming utilities, particularly useful for handling success and failure cases in a clean and organized way without exceptions. This package is used to manage data flow and error handling using types like `Either` for success/failure cases and `Option` to handle nullable values safely.
 - **google_sign_in: ^6.2.1**: Flutter plugin for Google Sign-In, a secure authentication system for signing in with a Google account.
+- **logger: ^2.4.0**: A package for logging and debugging in Flutter applications.
 
 
 ## Branching Strategy
@@ -56,7 +57,11 @@ The development process of the **UpTodo** app follows a structured branching str
 
 - **`feature/*` Branches**: These branches are used for working on new features, UI improvements, or fixing bugs. Each feature or bug fix is developed in a separate `feature` branch, such as `feature/onboarding-screen` or `feature/bug-fix`.
 
+- **`hotfix/*` Branches**: `hotfix` branches are used to quickly address critical bugs or issues that need to be fixed immediately on the production code. These are minor fixes that require immediate attention. Once a hotfix is completed, it is merged to the `development` branch to ensure the fix is applied across the project.
+
+
 - **Pull Requests to `development`**: Once a feature or bug fix is completed, a pull request is created to merge the changes into the `development` branch. This allows for review and testing before integrating the changes.
+
 
 - **`development` Branch**: This is the main branch for ongoing development work. It is used to integrate completed features and bug fixes. Testing and adjustments are often done here before the final release.
 

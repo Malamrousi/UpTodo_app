@@ -42,7 +42,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(children: [
+        child: Stack(
+         
+          children: [
           Container(
             padding: REdgeInsets.symmetric(horizontal: 40.w, vertical: 40.h),
             width: double.infinity,
@@ -60,35 +62,35 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   ),
                 ),
                 CustomPageView(controller: pageController),
-              Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        CustomButton(
-          onPressed: () {
-            pageController.previousPage(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.decelerate);
-          },
-          text: 'Back',
-          textStyle: AppStyles.font16WhiteOpacity44Regular,
-        ),
-        CustomButton(
-          onPressed: () {
-            if (currentPage < 2) {
-              pageController.nextPage(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.decelerate);
-            } else {
-              context.pushNamed(Routes.startScreen);
-            }
-          },
-          text: currentPage == 2 ? 'Get Started' : 'Next',
-          textStyle: AppStyles.font16WhiteRegular,
-          backgroundColor: ColorsManger.purpleColor,
-        ),
-      ],
-    
-             ) ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomButton(
+                      onPressed: () {
+                        pageController.previousPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.decelerate);
+                      },
+                      text: 'Back',
+                      textStyle: AppStyles.font16WhiteOpacity44Regular,
+                    ),
+                    CustomButton(
+                      onPressed: () {
+                        if (currentPage < 2) {
+                          pageController.nextPage(
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.decelerate);
+                        } else {
+                          context.pushNamed(Routes.startScreen);
+                        }
+                      },
+                      text: currentPage == 2 ? 'Get Started' : 'Next',
+                      textStyle: AppStyles.font16WhiteRegular,
+                      backgroundColor: ColorsManger.primaryColor,
+                    ),
+                  ],
+                )
+              ],
             ),
           ),
           CustomSmoothPageIndicator(

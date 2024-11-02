@@ -34,7 +34,7 @@ class RegisterBlocListener extends StatelessWidget {
           context.pop();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              backgroundColor: ColorsManger.primaryColor,
+              backgroundColor: ColorsManger.darkColor,
               content: Text(
                 state.errorMessage,
                 style: AppStyles.font16WhiteRegular,

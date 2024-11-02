@@ -59,7 +59,7 @@ class _LoginFormState extends State<LoginForm> {
               },
               child: Icon(
                 obscureTextIcon ? Icons.visibility : Icons.visibility_off,
-                color: ColorsManger.purpleColor,
+                color: ColorsManger.primaryColor,
                 size: 22.sp,
               ),
             ),

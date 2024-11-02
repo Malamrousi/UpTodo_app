@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-// Base Abstract Class - لا تغيير
 abstract class AuthFailure {
   final dynamic errorMessage;
   AuthFailure({
@@ -71,9 +70,7 @@ class UnknownFailure extends AuthFailure {
 
 class AuthExceptionHandler {
   static AuthFailure handleException({required FirebaseAuthException error}) {
-    print('Firebase Error Code: ${error.code}'); 
-    print('Firebase Error Message: ${error.message}');
-
+   
     switch (error.code) {
       case "invalid-email":
         return InvalidEmailFailure();
@@ -106,7 +103,6 @@ class AuthExceptionHandler {
         return InvalidCredentialFailure();
 
       default:
-        print('***************UnknownFailure*****${error.message}');
         return UnknownFailure();
     }
   }

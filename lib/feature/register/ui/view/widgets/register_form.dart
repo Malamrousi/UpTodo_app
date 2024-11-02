@@ -74,7 +74,7 @@ class _RegisterFormState extends State<RegisterForm> {
               },
               child: Icon(
                 obscureTextIcon ? Icons.visibility : Icons.visibility_off,
-                color: ColorsManger.purpleColor,
+                color: ColorsManger.primaryColor,
                 size: 22.sp,
               ),
             ),

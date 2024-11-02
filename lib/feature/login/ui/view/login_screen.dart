@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:uptodo/core/helper/extension.dart';
 import 'package:uptodo/core/theming/colors_manger.dart';
 import 'package:uptodo/core/widget/app_text_button.dart';
 
@@ -23,11 +24,14 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool obscureTextIcon = false;
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(onPressed: (){
+      context.pop();
+      }),
       body: SingleChildScrollView(
         child: SafeArea(
             child: Padding(
@@ -47,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {
                   loginWithEmailAndPassword(context);
                 },
-                backgroundColor: ColorsManger.purpleColor,
+                backgroundColor: ColorsManger.primaryColor,
                 buttonText: 'login',
                 textStyle: AppStyles.font16WhiteRegular,
               ),
