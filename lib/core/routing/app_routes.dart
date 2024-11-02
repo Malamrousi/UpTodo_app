@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uptodo/core/di/dependency_injection.dart';
+import 'package:uptodo/feature/category/ui/view/category_screen.dart';
 
 import 'package:uptodo/feature/register/ui/cubit/register_cubit/register_cubit.dart';
 import 'package:uptodo/feature/register/ui/view/register_screen.dart';
@@ -34,6 +35,9 @@ class AppRoutes {
 
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
+
+            case Routes.categoryScreen:
+        return MaterialPageRoute(builder: (_) => const CategoryScreen());
 
       default:
         return MaterialPageRoute(

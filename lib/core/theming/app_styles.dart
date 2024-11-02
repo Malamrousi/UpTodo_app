@@ -36,22 +36,25 @@ class AppStyles {
       fontSize: 20.sp,
       fontWeight: FontWeightHelper.regular,
       color: ColorsManger.whiteColor);
-        static TextStyle font20WhiteColorBold = TextStyle(
+  static TextStyle font20WhiteColorBold = TextStyle(
       fontSize: 20.sp,
       fontWeight: FontWeightHelper.bold,
       color: ColorsManger.whiteColor);
-
 
   static TextStyle font14GrayColorRegular = TextStyle(
       fontSize: 14.sp,
       fontWeight: FontWeightHelper.regular,
       color: ColorsManger.grayColor);
-        static TextStyle font12WhiteColorRegular = TextStyle(
+  static TextStyle font12WhiteColorRegular = TextStyle(
       fontSize: 12.sp,
       fontWeight: FontWeightHelper.regular,
       color: ColorsManger.whiteColor);
-             static TextStyle font14WhiteColorRegular = TextStyle(
+  static TextStyle font14WhiteColorRegular = TextStyle(
       fontSize: 14.sp,
       fontWeight: FontWeightHelper.regular,
       color: ColorsManger.whiteColor);
+  static TextStyle font16WPrimaryColorRegular = TextStyle(
+      fontSize: 16.sp,
+      fontWeight: FontWeightHelper.regular,
+      color: ColorsManger.primaryColor);
 }
