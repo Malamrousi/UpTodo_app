@@ -11,7 +11,8 @@ class AppTextButton extends StatelessWidget {
       this.textStyle,
       this.onPressed,
       this.bottomHeight,
-      this.bottomWidth});
+      this.bottomWidth,
+      this.borderColor});
 
   final double? borderRadius;
   final Color? backgroundColor;
@@ -22,25 +23,28 @@ class AppTextButton extends StatelessWidget {
   final double? bottomHeight;
   final double? bottomWidth;
 
+  final Color? borderColor;
+
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        style: ButtonStyle(
-          fixedSize: WidgetStatePropertyAll<Size>(
-              Size(bottomWidth?.w ?? double.maxFinite, bottomHeight ?? 48.h)),
-          backgroundColor: WidgetStatePropertyAll<Color>(
-              backgroundColor ?? Colors.transparent),
-          shape: WidgetStatePropertyAll(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius ?? 4.r),
-              side: const BorderSide(color: ColorsManger.primaryColor),
-            ),
+      style: ButtonStyle(
+        fixedSize: WidgetStatePropertyAll<Size>(
+            Size(bottomWidth?.w ?? double.maxFinite, bottomHeight ?? 48.h)),
+        backgroundColor: WidgetStatePropertyAll<Color>(
+            backgroundColor ?? Colors.transparent),
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(borderRadius ?? 4.r),
+            side: BorderSide(color: borderColor ?? ColorsManger.primaryColor),
           ),
         ),
-        onPressed: onPressed,
-        child: Text(
-          buttonText,
-          style: textStyle,
-        ));
+      ),
+      onPressed: onPressed,
+      child: Text(
+        buttonText,
+        style: textStyle,
+      ),
+    );
   }
 }

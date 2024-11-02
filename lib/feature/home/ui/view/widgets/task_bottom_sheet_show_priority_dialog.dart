@@ -83,6 +83,8 @@ class _TaskBottomSheetShowPriorityDialogState
                     child: Row(
                       children: [
                         AppTextButton(
+                           textStyle: AppStyles.font16WPrimaryColorRegular,
+                           borderColor: Colors.transparent,
                           bottomWidth: MediaQuery.sizeOf(context).width * .33,
                           bottomHeight: 48,
                           onPressed: () {},
@@ -90,14 +92,16 @@ class _TaskBottomSheetShowPriorityDialogState
                         ),
                         horizontalSpacing(20),
                         AppTextButton(
+                          textStyle: AppStyles.font16WhiteRegular,
                           bottomWidth: MediaQuery.sizeOf(context).width * .33,
                           bottomHeight: 48,
                           onPressed: () {},
-                          buttonText: 'Ok',
+                          buttonText: 'Save',
                           backgroundColor: ColorsManger.primaryColor,
                         ),
                       ],
-                    ),)
+                    ),
+                    )
               ],
             ),
           ),

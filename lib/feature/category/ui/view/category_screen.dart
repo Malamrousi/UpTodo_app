@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:uptodo/core/helper/extension.dart';
 import 'package:uptodo/core/helper/spacing.dart';
 import 'package:uptodo/core/widget/app_text_form_filed.dart';
 
 import '../../../../core/theming/app_styles.dart';
 
+import '../../../../core/theming/colors_manger.dart';
+import '../../../../core/widget/app_text_button.dart';
 import 'widgets/custom_category_icon_color_picker.dart';
 import 'widgets/icon_picker_button.dart';
 
@@ -45,19 +48,43 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 ),
                 verticalSpacing(16),
                 const IconPickerButton(),
-                   verticalSpacing(16),
+                verticalSpacing(16),
                 Text(
                   'Category color :',
                   style: AppStyles.font16WhiteRegular,
                 ),
                 verticalSpacing(16),
-             CustomCategoryIconColorPicker(
-              onColorSelected: (color){
-                setState(() {
-                  categoryColor = color;
-                });
-              }
-             )
+                CustomCategoryIconColorPicker(onColorSelected: (color) {
+                  setState(() {
+                    categoryColor = color;
+                  });
+                }),
+                verticalSpacing(MediaQuery.sizeOf(context).height * .4),
+                Row(
+                  children: [
+                    AppTextButton(
+                      textStyle: AppStyles.font16WPrimaryColorRegular,
+                      borderColor: Colors.transparent,
+                      bottomWidth: MediaQuery.sizeOf(context).width * .35,
+                      bottomHeight: 48,
+                      onPressed: () {
+                        context.pop();
+                      },
+                      buttonText: 'Cancel',
+                    ),
+                    horizontalSpacing(20),
+                    AppTextButton(
+                      textStyle: AppStyles.font16WhiteRegular,
+                      bottomWidth: MediaQuery.sizeOf(context).width * .37,
+                      bottomHeight: 48,
+                      onPressed: () {
+                            context.pop();
+                      },
+                      buttonText: 'Create Category',
+                      backgroundColor: ColorsManger.primaryColor,
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

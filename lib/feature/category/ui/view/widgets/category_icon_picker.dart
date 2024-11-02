@@ -79,6 +79,8 @@ class _CategoryIconPickerState extends State<CategoryIconPicker> {
                     child: Row(
                       children: [
                         AppTextButton(
+                               textStyle: AppStyles.font16WPrimaryColorRegular,
+                           borderColor: Colors.transparent,
                           bottomWidth: MediaQuery.sizeOf(context).width * .33,
                           bottomHeight: 48,
                           onPressed: () {
@@ -89,6 +91,7 @@ class _CategoryIconPickerState extends State<CategoryIconPicker> {
                         ),
                         horizontalSpacing(20),
                         AppTextButton(
+                               textStyle: AppStyles.font16WhiteRegular,
                           bottomWidth: MediaQuery.sizeOf(context).width * .33,
                           bottomHeight: 48,
                           onPressed: () {
