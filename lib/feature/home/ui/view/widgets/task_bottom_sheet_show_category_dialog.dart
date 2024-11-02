@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:uptodo/core/helper/extension.dart';
+import 'package:uptodo/core/routing/routes.dart';
 //widgets
 import 'package:uptodo/feature/home/ui/view/widgets/custom_category_item_index.dart';
 //core
@@ -73,15 +75,15 @@ class _TaskBottomSheetShowCategoryDialogState
                       }),
                 ),
                 verticalSpacing(10),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: AppTextButton(
-                    onPressed: () {},
-                    buttonText: 'Add Category',
-                    backgroundColor: ColorsManger.primaryColor,
-                    textStyle: AppStyles.font16WhiteRegular,
-                    bottomWidth: double.maxFinite,
-                  ),
+                AppTextButton(
+                  onPressed: () {
+               context.pushNamed(Routes.categoryScreen);
+                  },
+                  buttonText: 'Add Category',
+                  backgroundColor: ColorsManger.primaryColor,
+                  textStyle: AppStyles.font16WhiteRegular,
+                  bottomWidth: MediaQuery.sizeOf(context).width * 0.7.w,
+                  bottomHeight: 48.h,
                 )
               ],
             ),

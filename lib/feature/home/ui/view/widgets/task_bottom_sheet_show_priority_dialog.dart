@@ -83,21 +83,21 @@ class _TaskBottomSheetShowPriorityDialogState
                     child: Row(
                       children: [
                         AppTextButton(
-                          bottomWidth: MediaQuery.sizeOf(context).width * .34,
+                          bottomWidth: MediaQuery.sizeOf(context).width * .33,
                           bottomHeight: 48,
                           onPressed: () {},
                           buttonText: 'Cancel',
                         ),
                         horizontalSpacing(20),
                         AppTextButton(
-                          bottomWidth: MediaQuery.sizeOf(context).width * .34,
+                          bottomWidth: MediaQuery.sizeOf(context).width * .33,
                           bottomHeight: 48,
                           onPressed: () {},
                           buttonText: 'Ok',
                           backgroundColor: ColorsManger.primaryColor,
                         ),
                       ],
-                    ))
+                    ),)
               ],
             ),
           ),
