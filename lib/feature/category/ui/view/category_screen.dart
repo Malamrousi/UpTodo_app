@@ -75,7 +75,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     horizontalSpacing(20),
                     AppTextButton(
                       textStyle: AppStyles.font16WhiteRegular,
-                      bottomWidth: MediaQuery.sizeOf(context).width * .37,
+                      bottomWidth: MediaQuery.sizeOf(context).width * .4,
                       bottomHeight: 48,
                       onPressed: () {
                             context.pop();
