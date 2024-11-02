@@ -12,7 +12,7 @@ class CategoryCubit extends Cubit<CategoryState> {
   final CategoryRepoImpl categoryRepoImpl;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final TextEditingController categoryController = TextEditingController();
+  final TextEditingController categoryNameController = TextEditingController();
 
   Future<void> addCategory(CategoryModel categoryModel) async {
     emit(CategoryLoading());

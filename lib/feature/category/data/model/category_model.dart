@@ -2,7 +2,7 @@
 class CategoryModel {
   final String name;
   final String icon;
-  final int color;
+  final String color;
   CategoryModel({
     required this.name,
     required this.icon,

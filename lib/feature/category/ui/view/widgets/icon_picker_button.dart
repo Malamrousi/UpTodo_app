@@ -6,14 +6,16 @@ import '../../../../../core/theming/colors_manger.dart';
 import 'category_icon_picker.dart';
 
 class IconPickerButton extends StatefulWidget {
-  const IconPickerButton({super.key});
+  const IconPickerButton({super.key, this.onIconSelected});
+  final void Function(IconData icon)? onIconSelected;
 
   @override
   State<IconPickerButton> createState() => _IconPickerButtonState();
 }
 
 class _IconPickerButtonState extends State<IconPickerButton> {
-  IconData? categoryIcon;
+  IconData? _selectedIcon;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -25,27 +27,30 @@ class _IconPickerButtonState extends State<IconPickerButton> {
                 child: CategoryIconPicker(
                   selectedIcon: (icon) {
                     setState(() {
-                      categoryIcon = icon;
+                      _selectedIcon = icon;
                     });
+                    if (widget.onIconSelected != null) {
+                      widget.onIconSelected!(icon);
+                    }
                   },
                 ),
               );
             });
       },
       child: Container(
-        width: categoryIcon == null ? 154.w : 48,
-        height: categoryIcon == null ? 42.h : 48.h,
+        width: _selectedIcon == null ? 154.w : 48,
+        height: _selectedIcon == null ? 42.h : 48.h,
         decoration: BoxDecoration(
           color: ColorsManger.darkGray,
           borderRadius: BorderRadius.circular(4),
         ),
-        child: categoryIcon == null
+        child: _selectedIcon == null
             ? Center(
                 child: Text('Choose icon from library',
                     style: AppStyles.font12WhiteColorRegular),
               )
             : Icon(
-                categoryIcon!,
+                _selectedIcon!,
                 color: ColorsManger.whiteColor,
               ),
       ),
