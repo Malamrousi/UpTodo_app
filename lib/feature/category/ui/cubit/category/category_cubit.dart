@@ -25,13 +25,5 @@ class CategoryCubit extends Cubit<CategoryState> {
     });
   }
 
-  Future<void> getCategories(String categoryId) async {
-    emit(CategoryLoading());
-    final getCategory = await categoryRepoImpl.getCategories(categoryId);
-    getCategory.fold((failure) {
-      emit(CategoryFailure(errorMessage: failure.errorMessage));
-    }, (category) {
-      emit(CategorySuccess(categoryModel: category));
-    });
-  }
+ 
 }

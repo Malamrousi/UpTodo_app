@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uptodo/core/helper/extension.dart';
 import 'package:uptodo/core/helper/spacing.dart';
-import 'package:uptodo/core/widget/app_text_form_filed.dart';
 import 'package:uptodo/feature/category/data/model/category_model.dart';
 import 'package:uptodo/feature/category/ui/cubit/category/category_cubit.dart';
+import 'package:uptodo/feature/category/ui/view/widgets/category_bloc_listener.dart';
+import 'package:uptodo/feature/category/ui/view/widgets/custom_category_button.dart';
 
 import '../../../../core/theming/app_styles.dart';
 
-import '../../../../core/theming/colors_manger.dart';
-import '../../../../core/widget/app_text_button.dart';
+import 'widgets/category_form_filed.dart';
 import 'widgets/custom_category_icon_color_picker.dart';
 import 'widgets/icon_picker_button.dart';
 
@@ -39,28 +38,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   style: AppStyles.font20WhiteColorBold,
                 ),
                 verticalSpacing(20),
-                Form(
-                  key: context.read<CategoryCubit>().formKey,
-                  child: InputTextFormFiled(
-                    controller:
-                        context.read<CategoryCubit>().categoryNameController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter category name';
-                      }
-                      return null;
-                    },
-                    inputTextType: 'Category name :',
-                    hintText: 'Category name',
-                  ),
-                ),
+                const CategoryFormFiled(),
                 verticalSpacing(20),
                 Text(
                   'Category icon :',
                   style: AppStyles.font16WhiteRegular,
                 ),
                 verticalSpacing(16),
-                 IconPickerButton(
+                IconPickerButton(
                   onIconSelected: (icon) {
                     setState(() {
                       categoryIcon = icon;
@@ -79,42 +64,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   });
                 }),
                 verticalSpacing(MediaQuery.sizeOf(context).height * .4),
-                Row(
-                  children: [
-                    AppTextButton(
-                      textStyle: AppStyles.font16WPrimaryColorRegular,
-                      borderColor: Colors.transparent,
-                      bottomWidth: MediaQuery.sizeOf(context).width * .35,
-                      bottomHeight: 48,
-                      onPressed: () {
-                        context.pop();
-                      },
-                      buttonText: 'Cancel',
-                    ),
-                    horizontalSpacing(20),
-                    AppTextButton(
-                      textStyle: AppStyles.font16WhiteRegular,
-                      bottomWidth: MediaQuery.sizeOf(context).width * .4,
-                      bottomHeight: 48,
-                      onPressed: () {
-                        final CategoryModel categoryModel = CategoryModel(
-                          name: context
-                              .read<CategoryCubit>()
-                              .categoryNameController
-                              .text,
-                          icon: categoryIcon!.codePoint.toString(),
-                          color: categoryColor!.value.toString(),
-                        );
-
-                        addCategory(categoryModel);
-
-                        context.pop();
-                      },
-                      buttonText: 'Create Category',
-                      backgroundColor: ColorsManger.primaryColor,
-                    ),
-                  ],
+                CustomCategoryButtons(
+                  onPressed: () {
+                    addCategory(getCategoryModel());
+                  },
                 ),
+                const CategoryBlocListener(),
               ],
             ),
           ),
@@ -127,5 +82,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
     if (context.read<CategoryCubit>().formKey.currentState!.validate()) {
       context.read<CategoryCubit>().addCategory(categoryModel);
     }
+  }
+
+  CategoryModel getCategoryModel() {
+    return CategoryModel(
+      name: context.read<CategoryCubit>().categoryNameController.text,
+      icon: categoryIcon!.codePoint.toString(),
+      color: categoryColor!.value.toString(),
+    );
   }
 }

@@ -5,6 +5,8 @@ import 'package:uptodo/core/failures/firestore_failure.dart';
 import 'package:uptodo/feature/category/data/model/category_model.dart';
 import 'package:uptodo/feature/category/data/repo/category_repo.dart';
 
+import '../../../../core/constant/app_constant.dart';
+
 class CategoryRepoImpl implements CategoryRepo {
   static const String userCollection = 'User';
   static const String categoryCollection = 'Categories';
@@ -14,9 +16,9 @@ class CategoryRepoImpl implements CategoryRepo {
 
   static CollectionReference<CategoryModel> categoriesCollection() {
     return db
-        .collection(userCollection)
+        .collection(AppConstant.userCollection)
         .doc(firebaseUser.uid)
-        .collection(categoryCollection)
+        .collection(AppConstant.categoryCollection)
         .withConverter(
             fromFirestore: (snapShot, _) =>
                 CategoryModel.fromJson(snapShot.data()!),
@@ -36,17 +38,5 @@ class CategoryRepoImpl implements CategoryRepo {
     }
   }
 
-  @override
-  Future<Either<FireStoreFailure, CategoryModel>> getCategories(
-      String categoryId) async {
-    try {
-      var category = await categoriesCollection().doc(categoryId).get();
-      var response = category.data()!;
-      return right(CategoryModel.fromJson(response));
-    } on FirebaseException catch (error) {
-      return left(FirestoreExceptionHandler.handleException(error: error));
-    } catch (e) {
-      return left(UnknownFailure());
-    }
-  }
+
 }

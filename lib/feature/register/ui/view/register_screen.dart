@@ -77,8 +77,6 @@ class RegisterScreen extends StatelessWidget {
       ),
     );
   }
-
-
   void registerWidthEmailAndPassword(BuildContext context) {
     if (context.read<RegisterCubit>().formKey.currentState!.validate()) {
       context.read<RegisterCubit>().registerWidthEmailAndPassword();
