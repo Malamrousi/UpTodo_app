@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AllIconList {
+class CategoryAllIconList {
   static final List<IconData> allIcons = [
     Icons.umbrella_sharp,
     Icons.favorite,

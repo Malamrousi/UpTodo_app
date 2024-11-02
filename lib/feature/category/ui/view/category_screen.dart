@@ -4,6 +4,7 @@ import 'package:uptodo/core/widget/app_text_form_filed.dart';
 
 import '../../../../core/theming/app_styles.dart';
 
+import 'widgets/custom_category_icon_color_picker.dart';
 import 'widgets/icon_picker_button.dart';
 
 class CategoryScreen extends StatefulWidget {
@@ -15,6 +16,7 @@ class CategoryScreen extends StatefulWidget {
 
 class _CategoryScreenState extends State<CategoryScreen> {
   IconData? categoryIcon;
+  Color? categoryColor;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,20 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   style: AppStyles.font16WhiteRegular,
                 ),
                 verticalSpacing(16),
-              const  IconPickerButton()
+                const IconPickerButton(),
+                   verticalSpacing(16),
+                Text(
+                  'Category color :',
+                  style: AppStyles.font16WhiteRegular,
+                ),
+                verticalSpacing(16),
+             CustomCategoryIconColorPicker(
+              onColorSelected: (color){
+                setState(() {
+                  categoryColor = color;
+                });
+              }
+             )
               ],
             ),
           ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:uptodo/core/helper/extension.dart';
-import 'package:uptodo/feature/category/data/all_icon_list.dart';
+import 'package:uptodo/feature/category/data/category_all_icon_list.dart';
 
 import '../../../../../core/helper/spacing.dart';
 import '../../../../../core/theming/app_styles.dart';
@@ -40,7 +40,7 @@ class _CategoryIconPickerState extends State<CategoryIconPicker> {
                   Expanded(
                     child: GridView.builder(
                         physics: const BouncingScrollPhysics(),
-                        itemCount: AllIconList.allIcons.length,
+                        itemCount: CategoryAllIconList.allIcons.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 4,
@@ -60,7 +60,7 @@ class _CategoryIconPickerState extends State<CategoryIconPicker> {
                                     currentIndex = index;
                                   }),
                                   child: Icon(
-                                    AllIconList.allIcons[index],
+                                    CategoryAllIconList.allIcons[index],
                                     color: currentIndex == index
                                         ? ColorsManger.primaryColor
                                         : ColorsManger.whiteColor,
@@ -82,7 +82,7 @@ class _CategoryIconPickerState extends State<CategoryIconPicker> {
                           bottomWidth: MediaQuery.sizeOf(context).width * .33,
                           bottomHeight: 48,
                           onPressed: () {
-                      widget.selectedIcon(AllIconList.allIcons[currentIndex]);
+                      widget.selectedIcon(CategoryAllIconList.allIcons[currentIndex]);
                             context.pop();
                           },
                           buttonText: 'Cancel',
@@ -92,7 +92,7 @@ class _CategoryIconPickerState extends State<CategoryIconPicker> {
                           bottomWidth: MediaQuery.sizeOf(context).width * .33,
                           bottomHeight: 48,
                           onPressed: () {
-                           widget.selectedIcon(AllIconList.allIcons[currentIndex]);
+                           widget.selectedIcon(CategoryAllIconList.allIcons[currentIndex]);
                             context.pop();
                           },
                           buttonText: 'Ok',
