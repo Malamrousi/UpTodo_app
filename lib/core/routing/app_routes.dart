@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uptodo/core/di/dependency_injection.dart';
-import 'package:uptodo/feature/category/ui/cubit/category/category_cubit.dart';
+import 'package:uptodo/feature/category/ui/cubit/add_category/add_category_cubit.dart';
 import 'package:uptodo/feature/category/ui/view/category_screen.dart';
 
 import 'package:uptodo/feature/register/ui/cubit/register_cubit/register_cubit.dart';
@@ -40,7 +40,7 @@ class AppRoutes {
       case Routes.categoryScreen:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => getIt.get<CategoryCubit>(),
+                  create: (context) => getIt.get<AddCategoryCubit>(),
                   child: const CategoryScreen(),
                 ));
 

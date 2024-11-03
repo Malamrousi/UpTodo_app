@@ -6,7 +6,7 @@ import 'package:uptodo/feature/category/data/model/category_model.dart';
 import '../model/task_model.dart';
 
 abstract class TaskRepo {
-  Future<Either<FireStoreFailure, TaskModel>> getTask(
+  Future<Either<FireStoreFailure, List<TaskModel>>> getTask(
       String taskId, TaskModel taskModel);
 
   Future<Either<FireStoreFailure, TaskModel>> addTask(TaskModel taskModel);
@@ -16,8 +16,8 @@ abstract class TaskRepo {
   Future<Either<FireStoreFailure, TaskModel>> deleteTask(TaskModel taskModel);
 
   Future<Either<FireStoreFailure, dynamic>> updateTaskDone(
-    TimeOfDay endTime, bool isDone, TaskModel taskModel);
+      TimeOfDay endTime, bool isDone, TaskModel taskModel);
 
-  Future<Either<FireStoreFailure, CategoryModel>> getCategory(
+  Future<Either<FireStoreFailure, List<CategoryModel>>> getCategory(
       CategoryModel categoryModel);
 }

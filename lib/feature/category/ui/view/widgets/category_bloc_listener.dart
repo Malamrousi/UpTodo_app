@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uptodo/core/helper/extension.dart';
-import 'package:uptodo/feature/category/ui/cubit/category/category_cubit.dart';
+import 'package:uptodo/feature/category/ui/cubit/add_category/add_category_cubit.dart';
 
 import '../../../../../core/theming/app_styles.dart';
 import '../../../../../core/theming/colors_manger.dart';
@@ -11,23 +11,23 @@ class CategoryBlocListener extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<CategoryCubit, CategoryState>(
+    return BlocListener<AddCategoryCubit, AddCategoryState>(
       listenWhen: (previous, current) =>
-          current is CategoryLoading ||
-          current is CategorySuccess ||
-          current is CategoryFailure,
+          current is AddCategoryLoading ||
+          current is AddCategorySuccess ||
+          current is AddCategoryFailure,
       listener: (context, state) {
-        if (state is CategoryLoading) {
+        if (state is AddCategoryLoading) {
           showDialog(
             context: context,
             builder: (context) => const Center(
               child: CircularProgressIndicator(),
             ),
           );
-        } else if (state is CategorySuccess) {
+        } else if (state is AddCategorySuccess) {
           context.pop();
           context.pop();
-        } else if (state is CategoryFailure) {
+        } else if (state is AddCategoryFailure) {
           context.pop();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

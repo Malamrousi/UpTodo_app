@@ -5,23 +5,23 @@ import 'package:meta/meta.dart';
 import '../../../data/model/category_model.dart';
 import '../../../data/repo/category_repo_impl.dart';
 
-part 'category_state.dart';
+part 'add_category_state.dart';
 
-class CategoryCubit extends Cubit<CategoryState> {
-  CategoryCubit(this.categoryRepoImpl) : super(CategoryInitial());
+class AddCategoryCubit extends Cubit<AddCategoryState> {
+  AddCategoryCubit(this.categoryRepoImpl) : super(AddCategoryInitial());
   final CategoryRepoImpl categoryRepoImpl;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController categoryNameController = TextEditingController();
 
   Future<void> addCategory(CategoryModel categoryModel) async {
-    emit(CategoryLoading());
+    emit(AddCategoryLoading());
 
     final addCategory = await categoryRepoImpl.addCategory(categoryModel);
     addCategory.fold((failure) {
-      emit(CategoryFailure(errorMessage: failure.errorMessage));
+      emit(AddCategoryFailure(errorMessage: failure.errorMessage));
     }, (category) {
-      emit(CategorySuccess(categoryModel: category));
+      emit(AddCategorySuccess(categoryModel: category));
     });
   }
 

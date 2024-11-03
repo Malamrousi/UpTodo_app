@@ -63,11 +63,13 @@ class TaskRepoImpl implements TaskRepo {
   }
 
   @override
-  Future<Either<FireStoreFailure, CategoryModel>> getCategory(
+  Future<Either<FireStoreFailure, List<CategoryModel>>> getCategory(
       CategoryModel categoryModel) async {
     try {
-      await categoriesCollection().doc().get();
-      return right(categoryModel);
+    final data=await categoriesCollection().get();
+    final categories=data.docs.map((doc) => CategoryModel.fromJson(doc.data())).toList();
+      return right(categories);
+      
     } on FirebaseException catch (error) {
       return left(FirestoreExceptionHandler.handleException(error: error));
     } catch (e) {
@@ -87,12 +89,13 @@ class TaskRepoImpl implements TaskRepo {
       return left(UnknownFailure());
     }
   }
-
-  Future<Either<FireStoreFailure, TaskModel>> getTask(
+@override
+  Future<Either<FireStoreFailure, List<TaskModel>>> getTask(
       String taskId, TaskModel taskModel) async {
     try {
-      await tasksCollection().doc(taskId).get();
-      return right(taskModel);
+      final querySnapshot =await tasksCollection().get();
+      final tasks=querySnapshot.docs.map((doc) => TaskModel.fromJson(doc.data())).toList();
+      return right(tasks);
     } on FirebaseException catch (error) {
       return left(FirestoreExceptionHandler.handleException(error: error));
     } catch (e) {
