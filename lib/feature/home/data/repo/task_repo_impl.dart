@@ -24,16 +24,7 @@ class TaskRepoImpl implements TaskRepo {
         );
   }
 
-  static CollectionReference<CategoryModel> categoriesCollection() {
-    return db
-        .collection(AppConstant.userCollection)
-        .doc(firebaseUser.uid)
-        .collection(AppConstant.categoryCollection)
-        .withConverter(
-            fromFirestore: (snapShot, _) =>
-                CategoryModel.fromJson(snapShot.data()!),
-            toFirestore: (categories, _) => categories.toJson());
-  }
+
 
   @override
   Future<Either<FireStoreFailure, TaskModel>> addTask(
@@ -64,9 +55,14 @@ class TaskRepoImpl implements TaskRepo {
 
   @override
   Future<Either<FireStoreFailure, List<CategoryModel>>> getCategory(
-      CategoryModel categoryModel) async {
+       ) async {
     try {
-    final data=await categoriesCollection().get();
+  
+    final data = await db
+    .collection(AppConstant.userCollection)
+    .doc(firebaseUser.uid)
+    .collection(AppConstant.categoryCollection)
+    .get();
     final categories=data.docs.map((doc) => CategoryModel.fromJson(doc.data())).toList();
       return right(categories);
       

@@ -66,7 +66,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 verticalSpacing(MediaQuery.sizeOf(context).height * .4),
                 CustomCategoryButtons(
                   onPressed: () {
-                    addCategory(getCategoryModel());
+                    addCategory(addCategoryModel());
                   },
                 ),
                 const CategoryBlocListener(),
@@ -84,7 +84,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     }
   }
 
-  CategoryModel getCategoryModel() {
+  CategoryModel addCategoryModel() {
     return CategoryModel(
       name: context.read<AddCategoryCubit>().categoryNameController.text,
       icon: categoryIcon!.codePoint.toString(),

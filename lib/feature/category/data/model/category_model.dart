@@ -10,9 +10,9 @@ class CategoryModel {
   });
   factory CategoryModel.fromJson(json) {
     return CategoryModel(
-      name: json['name'],
-      icon: json['icon'],
-      color: json['color'],
+      name: json['name'] as String,
+      icon: json['icon'] as String,
+      color: json['color'] as String,
     );
   }
 

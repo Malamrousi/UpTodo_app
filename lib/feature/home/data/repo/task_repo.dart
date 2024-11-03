@@ -19,5 +19,5 @@ abstract class TaskRepo {
       TimeOfDay endTime, bool isDone, TaskModel taskModel);
 
   Future<Either<FireStoreFailure, List<CategoryModel>>> getCategory(
-      CategoryModel categoryModel);
+       );
 }

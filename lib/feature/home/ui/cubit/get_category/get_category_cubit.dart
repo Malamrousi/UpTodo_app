@@ -13,9 +13,9 @@ class GetCategoryCubit extends Cubit<GetCategoryState> {
 
    List<CategoryModel> categoryList = [];
 
-  Future<void> getCategory(CategoryModel categoryModel) async {
+  Future<void> getCategory( ) async {
     emit(GetCategoryLoading());
-    final getCategoryEither = await taskRepoImpl.getCategory(categoryModel);
+    final getCategoryEither = await taskRepoImpl.getCategory();
     getCategoryEither.fold(
         (failure) => emit(GetCategoryFailure(errorMessage: failure.errorMessage)),
         (category) {

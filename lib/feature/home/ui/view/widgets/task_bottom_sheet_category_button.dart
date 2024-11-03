@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/di/dependency_injection.dart';
 import '../../../../../core/theming/colors_manger.dart';
+import '../../cubit/get_category/get_category_cubit.dart';
 import 'task_bottom_sheet_show_category_dialog.dart';
 
 class TaskBottomSheetCategoryButton extends StatelessWidget {
@@ -13,8 +16,10 @@ class TaskBottomSheetCategoryButton extends StatelessWidget {
         showDialog(
             context: context,
             builder: (context) {
-              return const Center(
-                child: TaskBottomSheetShowCategoryDialog(),
+              return Center(
+                child: BlocProvider(
+                    create: (context) => getIt.get<GetCategoryCubit>(),
+                    child: const TaskBottomSheetShowCategoryDialog()),
               );
             });
       },

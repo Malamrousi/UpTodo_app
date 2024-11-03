@@ -8,8 +8,7 @@ import 'package:uptodo/feature/category/data/repo/category_repo.dart';
 import '../../../../core/constant/app_constant.dart';
 
 class CategoryRepoImpl implements CategoryRepo {
-  static const String userCollection = 'User';
-  static const String categoryCollection = 'Categories';
+
 
   static final db = FirebaseFirestore.instance;
   static final User firebaseUser = FirebaseAuth.instance.currentUser!;
