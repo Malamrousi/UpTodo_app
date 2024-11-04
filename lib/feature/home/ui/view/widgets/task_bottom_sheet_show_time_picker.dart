@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:uptodo/core/theming/colors_manger.dart';
 
 class TaskBottomSheetShowTimePicker extends StatefulWidget {
-  const TaskBottomSheetShowTimePicker({super.key});
+  const TaskBottomSheetShowTimePicker({super.key, required this.showTimePicker});
+
+  final void Function(DateTime date ,TimeOfDay time) showTimePicker;
 
   @override
   State<TaskBottomSheetShowTimePicker> createState() =>
@@ -41,6 +43,8 @@ class _TaskBottomSheetShowTimePickerState
         selectedTime = picTime;
       });
     }
+
+    widget.showTimePicker(selectedDate!, selectedTime!);
   }
 
   @override

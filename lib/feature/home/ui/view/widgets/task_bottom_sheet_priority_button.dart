@@ -4,7 +4,10 @@ import '../../../../../core/theming/colors_manger.dart';
 import 'task_bottom_sheet_show_priority_dialog.dart';
 
 class TaskBottomSheetPriorityButton extends StatelessWidget {
-  const TaskBottomSheetPriorityButton({super.key});
+  const TaskBottomSheetPriorityButton({super.key ,required this.taskPriority});
+
+  final void Function(int) taskPriority;
+
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +15,10 @@ class TaskBottomSheetPriorityButton extends StatelessWidget {
       onPressed: () {
         showDialog(
           context: context,
-          builder: (context) => const Center(
-            child: TaskBottomSheetShowPriorityDialog(),
+          builder: (context) => Center(
+            child: TaskBottomSheetShowPriorityDialog(
+              taskPriority: taskPriority
+            ),
           ),
         );
       },

@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:uptodo/feature/home/data/repo/task_repo_impl.dart';
 
 import '../../../../category/data/model/category_model.dart';
@@ -14,7 +13,9 @@ class TaskCubit extends Cubit<TaskState> {
   final TaskRepoImpl taskRepoImpl;
 
   List<TaskModel> taskList = [];
-  List<CategoryModel> categoryList = [];
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   Future<void> addTask(TaskModel taskModel) async {
     emit(TaskLoading());
@@ -28,33 +29,33 @@ class TaskCubit extends Cubit<TaskState> {
     });
   }
 
-  Future<void> getTask(TaskModel taskModel) async {
+  void getTask(String id) {
     emit(TaskLoading());
-
-    final getTaskEither = await taskRepoImpl.getTask(taskModel.uid!, taskModel);
-    getTaskEither.fold(
-        (failure) => emit(TaskFailure(errorMessage: failure.errorMessage)),
-        (task) {
-      taskList = task;
-      emit(TaskSuccess(tasks: taskList));
+    taskRepoImpl.getTask(id).listen((event) {
+      event.fold((failure) {
+        emit(TaskFailure(errorMessage: failure.errorMessage));
+      }, (task) {
+        task = taskList;
+        emit(TaskSuccess(tasks: task));
+      });
     });
   }
 
   Future<void> updateTask(TaskModel taskModel) async {
-    emit(TaskLoading());  
+    emit(TaskLoading());
 
     final updateTaskEither = await taskRepoImpl.updateTask(taskModel);
     updateTaskEither.fold(
         (failure) => emit(TaskFailure(errorMessage: failure.errorMessage)),
         (task) {
-      int index=taskList.indexWhere( (element) => element.uid==taskModel.uid);
+      int index =
+          taskList.indexWhere((element) => element.uid == taskModel.uid);
 
-      if(index!=-1){
-        taskList[index]=task;
+      if (index != -1) {
+        taskList[index] = task;
         emit(TaskSuccess(tasks: taskList));
       }
-    }
-    );
+    });
   }
 
   Future<void> deleteTask(TaskModel taskModel) async {
@@ -78,15 +79,13 @@ class TaskCubit extends Cubit<TaskState> {
     updateTaskDoneEither.fold(
         (failure) => emit(TaskFailure(errorMessage: failure.errorMessage)),
         (task) {
-      int index=taskList.indexWhere( (element) => element.uid==taskModel.uid);
+      int index =
+          taskList.indexWhere((element) => element.uid == taskModel.uid);
 
-      if(index!=-1){
-        taskList[index]=task;
+      if (index != -1) {
+        taskList[index] = task;
         emit(TaskSuccess(tasks: taskList));
       }
-    }
-    );
+    });
   }
-
- 
 }

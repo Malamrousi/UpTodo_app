@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class TaskModel {
@@ -14,12 +15,12 @@ class TaskModel {
   final TimeOfDay? startTime;
   final TimeOfDay? endTime;
 
-  final String taskPriority;
+  final int taskPriority;
   TaskModel({
     this.uid,
     required this.title,
     required this.description,
-    this.isDone =false,
+    this.isDone,
     required this.category,
     required this.date,
     this.startTime,

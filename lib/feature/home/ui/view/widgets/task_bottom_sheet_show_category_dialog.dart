@@ -15,7 +15,10 @@ import '../../../data/model/category_item_model.dart';
 import 'category_item_widget.dart';
 
 class TaskBottomSheetShowCategoryDialog extends StatefulWidget {
-  const TaskBottomSheetShowCategoryDialog({super.key});
+  const TaskBottomSheetShowCategoryDialog(
+      {super.key,  required this.categorySelected});
+
+  final void Function(Map<String, dynamic> category) categorySelected;
 
   @override
   State<TaskBottomSheetShowCategoryDialog> createState() =>
@@ -27,8 +30,8 @@ class _TaskBottomSheetShowCategoryDialogState
   @override
   void initState() {
     super.initState();
-    // context.read<GetCategoryCubit>().getCategory();
-      context.read<GetCategoryCubit>().listenToCategoryStream();
+
+    context.read<GetCategoryCubit>().listenToCategoryStream();
   }
 
   @override
@@ -72,11 +75,17 @@ class _TaskBottomSheetShowCategoryDialogState
                           ),
                           itemBuilder: (context, index) {
                             var item = allCategories[index];
-                            print(
-                                "Item at index **************** $index: $item");
 
                             if (item is CategoryItemModel) {
                               return GestureDetector(
+                                onTap: () {
+                                  widget.categorySelected({
+                                    'name': item.title,
+                                    'color': item.color,
+                                    'image': item.image
+                                  });
+                                  context.pop();
+                                },
                                 child: CategoryItemWidget(
                                   color: item.color,
                                   icon: SvgPicture.asset(item.image),
@@ -86,19 +95,29 @@ class _TaskBottomSheetShowCategoryDialogState
                             }
 
                             if (item is CategoryModel) {
-                              return CategoryItemWidget(
-                                color: Color(int.parse(item.color)),
-                                icon: Icon(
-                                  IconData(
-                                    int.parse(item.icon),
+                              return GestureDetector(
+                                onTap: () {
+                                  widget.categorySelected({
+                                    'name': item.name,
+                                    'color': item.color,
+                                    'icon': item.icon
+                                  });
+                                  context.pop();
+                                },
+                                child: CategoryItemWidget(
+                                  color: Color(int.parse(item.color)),
+                                  icon: Icon(
+                                    IconData(
+                                      int.parse(item.icon),
                                       fontFamily: 'MaterialIcons',
+                                    ),
+                                    size: 30.sp,
+                                    color: Color(
+                                      int.parse(item.color),
+                                    ).withOpacity(1),
                                   ),
-                                  size: 30.sp,
-                                  color: Color(int.parse(item.color),
-                                   
-                                  ).withOpacity(1),
+                                  title: item.name,
                                 ),
-                                title: item.name,
                               );
                             }
 
@@ -137,4 +156,3 @@ class _TaskBottomSheetShowCategoryDialogState
     );
   }
 }
-

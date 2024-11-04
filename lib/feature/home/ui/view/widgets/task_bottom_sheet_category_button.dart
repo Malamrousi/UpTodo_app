@@ -7,7 +7,9 @@ import '../../cubit/get_category/get_category_cubit.dart';
 import 'task_bottom_sheet_show_category_dialog.dart';
 
 class TaskBottomSheetCategoryButton extends StatelessWidget {
-  const TaskBottomSheetCategoryButton({super.key});
+  const TaskBottomSheetCategoryButton(
+      {super.key, required this.selectCategory});
+  final void Function(Map<String, dynamic> category) selectCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,9 @@ class TaskBottomSheetCategoryButton extends StatelessWidget {
               return Center(
                 child: BlocProvider(
                     create: (context) => getIt.get<GetCategoryCubit>(),
-                    child: const TaskBottomSheetShowCategoryDialog()),
+                    child: TaskBottomSheetShowCategoryDialog(
+                      categorySelected: selectCategory,
+                    )),
               );
             });
       },

@@ -25,6 +25,9 @@ void setUpGetIt() {
   // GetCategoryRepoImpl
   getIt.registerFactory<GetCategoryRepoImpl>(() => GetCategoryRepoImpl());
 
+  //taskCubit
+  getIt.registerFactory<TaskCubit>(() => TaskCubit(getIt.get<TaskRepoImpl>()));
+
   //registerCubit
   getIt.registerFactory<RegisterCubit>(
       () => RegisterCubit(getIt.get<RegisterRepoImpl>()));
@@ -37,7 +40,6 @@ void setUpGetIt() {
   getIt.registerFactory<AddCategoryCubit>(
       () => AddCategoryCubit(getIt.get<AddCategoryRepoImpl>()));
 //TaskCubit
-  getIt.registerFactory<TaskCubit>(() => TaskCubit(getIt.get<TaskRepoImpl>()));
 //GetCategoryCubit
   getIt.registerFactory<GetCategoryCubit>(
       () => GetCategoryCubit(getIt.get<GetCategoryRepoImpl>()));
