@@ -7,7 +7,7 @@ import 'package:uptodo/feature/category/data/repo/category_repo.dart';
 
 import '../../../../core/constant/app_constant.dart';
 
-class CategoryRepoImpl implements CategoryRepo {
+class AddCategoryRepoImpl implements CategoryRepo {
 
 
   static final db = FirebaseFirestore.instance;

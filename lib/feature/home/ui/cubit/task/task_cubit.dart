@@ -88,15 +88,5 @@ class TaskCubit extends Cubit<TaskState> {
     );
   }
 
-  Future<void> getCategory( ) async {
-    emit(TaskLoading());
-    final getCategoryEither = await taskRepoImpl.getCategory();
-    getCategoryEither.fold(
-        (failure) => emit(TaskFailure(errorMessage: failure.errorMessage)),
-        (category) {
-      categoryList = category;
-      emit(CategorySuccess(category: categoryList));
-    }
-    );
-  }
+ 
 }

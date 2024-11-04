@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:uptodo/feature/category/data/model/category_model.dart';
 
 import '../../../../core/constant/app_constant.dart';
 import '../../../../core/failures/firestore_failure.dart';
@@ -23,8 +22,6 @@ class TaskRepoImpl implements TaskRepo {
           toFirestore: (task, _) => task.toJson(),
         );
   }
-
-
 
   @override
   Future<Either<FireStoreFailure, TaskModel>> addTask(
@@ -53,25 +50,7 @@ class TaskRepoImpl implements TaskRepo {
     }
   }
 
-  @override
-  Future<Either<FireStoreFailure, List<CategoryModel>>> getCategory(
-       ) async {
-    try {
-  
-    final data = await db
-    .collection(AppConstant.userCollection)
-    .doc(firebaseUser.uid)
-    .collection(AppConstant.categoryCollection)
-    .get();
-    final categories=data.docs.map((doc) => CategoryModel.fromJson(doc.data())).toList();
-      return right(categories);
-      
-    } on FirebaseException catch (error) {
-      return left(FirestoreExceptionHandler.handleException(error: error));
-    } catch (e) {
-      return left(UnknownFailure());
-    }
-  }
+
 
   @override
   Future<Either<FireStoreFailure, TaskModel>> updateTask(
@@ -85,12 +64,15 @@ class TaskRepoImpl implements TaskRepo {
       return left(UnknownFailure());
     }
   }
-@override
+
+  @override
   Future<Either<FireStoreFailure, List<TaskModel>>> getTask(
       String taskId, TaskModel taskModel) async {
     try {
-      final querySnapshot =await tasksCollection().get();
-      final tasks=querySnapshot.docs.map((doc) => TaskModel.fromJson(doc.data())).toList();
+      final querySnapshot = await tasksCollection().get();
+      final tasks = querySnapshot.docs
+          .map((doc) => TaskModel.fromJson(doc.data()))
+          .toList();
       return right(tasks);
     } on FirebaseException catch (error) {
       return left(FirestoreExceptionHandler.handleException(error: error));

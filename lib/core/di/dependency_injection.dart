@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:uptodo/feature/category/data/repo/category_repo_impl.dart';
 import 'package:uptodo/feature/category/ui/cubit/add_category/add_category_cubit.dart';
+import 'package:uptodo/feature/home/data/repo/get_category_repo_impl.dart';
 import 'package:uptodo/feature/home/data/repo/task_repo_impl.dart';
 import 'package:uptodo/feature/home/ui/cubit/task/task_cubit.dart';
 import 'package:uptodo/feature/login/data/repo/login_repo_impl.dart';
@@ -20,7 +21,10 @@ void setUpGetIt() {
 //LoginRepoImpl
   getIt.registerLazySingleton<LoginRepoImpl>(() => LoginRepoImpl());
   //categoryRepoImpl
-  getIt.registerLazySingleton<CategoryRepoImpl>(() => CategoryRepoImpl());
+  getIt.registerLazySingleton<AddCategoryRepoImpl>(() => AddCategoryRepoImpl());
+  // GetCategoryRepoImpl
+  getIt.registerFactory<GetCategoryRepoImpl>(() => GetCategoryRepoImpl());
+
   //registerCubit
   getIt.registerFactory<RegisterCubit>(
       () => RegisterCubit(getIt.get<RegisterRepoImpl>()));
@@ -31,10 +35,10 @@ void setUpGetIt() {
 
 //AddCategoryCubit
   getIt.registerFactory<AddCategoryCubit>(
-      () => AddCategoryCubit(getIt.get<CategoryRepoImpl>()));
+      () => AddCategoryCubit(getIt.get<AddCategoryRepoImpl>()));
 //TaskCubit
   getIt.registerFactory<TaskCubit>(() => TaskCubit(getIt.get<TaskRepoImpl>()));
 //GetCategoryCubit
   getIt.registerFactory<GetCategoryCubit>(
-      () => GetCategoryCubit(getIt.get<TaskRepoImpl>()));
+      () => GetCategoryCubit(getIt.get<GetCategoryRepoImpl>()));
 }

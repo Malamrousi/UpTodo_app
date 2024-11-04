@@ -1,27 +1,28 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:uptodo/feature/home/data/repo/task_repo_impl.dart';
 
 import '../../../../category/data/model/category_model.dart';
+import '../../../data/repo/get_category_repo_impl.dart';
 
 part 'get_category_state.dart';
 
 class GetCategoryCubit extends Cubit<GetCategoryState> {
-  GetCategoryCubit(this.taskRepoImpl) : super(GetCategoryInitial());
+  GetCategoryCubit(this.getCategoryRepoImpl) : super(GetCategoryInitial());
 
-  final TaskRepoImpl taskRepoImpl;
+  final GetCategoryRepoImpl getCategoryRepoImpl;
 
    List<CategoryModel> categoryList = [];
 
-  Future<void> getCategory( ) async {
-    emit(GetCategoryLoading());
-    final getCategoryEither = await taskRepoImpl.getCategory();
-    getCategoryEither.fold(
-        (failure) => emit(GetCategoryFailure(errorMessage: failure.errorMessage)),
-        (category) {
-      categoryList = category;
-      emit(GetCategorySuccess(category: categoryList));
-    }
-    );
+
+
+  void listenToCategoryStream() {
+    getCategoryRepoImpl.getCategoryStream().listen((event) {
+      event.fold(
+          (failure) => emit(GetCategoryFailure(errorMessage: failure.errorMessage)),
+          (category) {
+        categoryList = category;
+        emit(GetCategorySuccess(category: categoryList));
+      });
+    });
   }
 }

@@ -27,7 +27,8 @@ class _TaskBottomSheetShowCategoryDialogState
   @override
   void initState() {
     super.initState();
-    context.read<GetCategoryCubit>().getCategory();
+    // context.read<GetCategoryCubit>().getCategory();
+      context.read<GetCategoryCubit>().listenToCategoryStream();
   }
 
   @override

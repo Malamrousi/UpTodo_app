@@ -9,7 +9,7 @@ part 'add_category_state.dart';
 
 class AddCategoryCubit extends Cubit<AddCategoryState> {
   AddCategoryCubit(this.categoryRepoImpl) : super(AddCategoryInitial());
-  final CategoryRepoImpl categoryRepoImpl;
+  final AddCategoryRepoImpl categoryRepoImpl;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController categoryNameController = TextEditingController();
