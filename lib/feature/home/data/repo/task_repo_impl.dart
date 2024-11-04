@@ -27,7 +27,7 @@ class TaskRepoImpl implements TaskRepo {
   Future<Either<FireStoreFailure, TaskModel>> addTask(
       TaskModel taskModel) async {
     try {
-      final String taskId = taskModel.uid ?? tasksCollection().doc().id;
+      final String taskId = taskModel.uid;
       await tasksCollection().doc(taskId).set(taskModel);
       return right(taskModel);
     } on FirebaseException catch (error) {

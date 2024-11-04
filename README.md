@@ -49,7 +49,7 @@ display a reasonable layout on different screen sizes!
 - **dartz: 0.10.1**: For functional programming utilities, particularly useful for handling success and failure cases in a clean and organized way without exceptions. This package is used to manage data flow and error handling using types like `Either` for success/failure cases and `Option` to handle nullable values safely.
 - **google_sign_in: ^6.2.1**: Flutter plugin for Google Sign-In, a secure authentication system for signing in with a Google account.
 - **logger: ^2.4.0**: A package for logging and debugging in Flutter applications.
-
+-**intl: ^0.17.0**: A package for internationalization and localization.
 
 ## Branching Strategy
 

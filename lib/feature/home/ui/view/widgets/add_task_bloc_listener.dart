@@ -37,8 +37,9 @@ class AddTaskBlocListener extends StatelessWidget {
           );
         } else if (state is TaskSuccess) {
           context.pop();
+          context.read<TaskCubit>().titleController.clear();
+          context.read<TaskCubit>().descriptionController.clear();
           context.pop();
-
         }
       },
       child: const SizedBox.shrink(),

@@ -12,6 +12,7 @@ import '../../../../../core/theming/app_styles.dart';
 import 'package:uptodo/core/helper/spacing.dart';
 
 //widgets
+import '../../../../../core/theming/colors_manger.dart';
 import 'add_task_bloc_listener.dart';
 import 'add_task_form.dart';
 import 'task_bottom_sheet_category_button.dart';
@@ -27,8 +28,8 @@ class AddTaskBottomSheet extends StatefulWidget {
 class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
   int? taskPriority;
   Map<String, dynamic>? taskCategory;
-  DateTime? dateOfTask;
-  TimeOfDay? startTime;
+  DateTime dateOfTask = DateTime.now();
+  TimeOfDay startTime = TimeOfDay.now();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -73,22 +74,28 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                 const Spacer(),
                 TaskBottomSheetSendButton(
                   onPressed: () {
+                    String? formattedStartTime = startTime.toString() != '00:00:00.000'
+                        ? TaskModel.timeOfDayToString(startTime)
+                        : null;
                     TaskModel taskModel = TaskModel(
                       uid: DateTime.now().toString(),
                       title: context.read<TaskCubit>().titleController.text,
                       description:
                           context.read<TaskCubit>().descriptionController.text,
                       isDone: false,
-                      taskPriority: taskPriority!,
-                      category: taskCategory!,
-                      date: dateOfTask!,
-                      startTime: startTime!,
+                      taskPriority: taskPriority??1,
+                      category: taskCategory??{
+                        'title': 'Personal',
+                        'color': ColorsManger.primaryColor.value.toString(),
+                        'icon': '0xeb93'              
+                      },
+                      date: dateOfTask,
+                      startTime: formattedStartTime!,
                     );
                     addTask(taskModel);
-                 
                   },
                 ),
-               const AddTaskBlocListener()
+                const AddTaskBlocListener()
               ],
             ),
           ),
