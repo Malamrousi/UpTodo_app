@@ -29,19 +29,7 @@ class IndexScreenHasData extends StatelessWidget {
             hintText: 'Search for your task...',
             inputTextType: '',
           ),
-          Expanded(
-            flex: 2,
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.only(top: 20.h),
-                  child: const IndexScreenTaskNotCompleted(),
-                );
-              },
-            ),
-          ),
+        const IndexScreenTaskNotCompleted(),
           verticalSpacing(20),
           Container(
             width: 102,

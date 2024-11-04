@@ -21,7 +21,7 @@ class UpToDo extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: BlocProvider(
-        create: (context) => getIt.get<TaskCubit>(),
+        create: (context) => getIt.get<TaskCubit>()..getTask(),
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'UpToDo',

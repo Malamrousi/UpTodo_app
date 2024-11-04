@@ -29,16 +29,20 @@ class TaskCubit extends Cubit<TaskState> {
     });
   }
 
-  void getTask(String id) {
+  Future<dynamic> getTask() async {
     emit(TaskLoading());
-    taskRepoImpl.getTask(id).listen((event) {
-      event.fold((failure) {
+
+    try {
+      final taskEither = await taskRepoImpl.getTask();
+      taskEither.fold((failure) {
         emit(TaskFailure(errorMessage: failure.errorMessage));
-      }, (task) {
-        task = taskList;
-        emit(TaskSuccess(tasks: task));
+      }, (tasks) {
+        taskList = tasks;
+        emit(TaskSuccess(tasks: tasks));
       });
-    });
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<void> updateTask(TaskModel taskModel) async {

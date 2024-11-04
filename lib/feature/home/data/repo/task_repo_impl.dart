@@ -79,18 +79,42 @@ class TaskRepoImpl implements TaskRepo {
     }
   }
 
+  // @override
+  // Stream<Either<FireStoreFailure, List<TaskModel>>> getListenTask() {
+  //   return db
+  //       .collection(AppConstant.userCollection)
+  //       .doc(firebaseUser.uid)
+  //       .collection(AppConstant.taskCollection)
+  //       .snapshots()
+  //       .map((data) => right(
+  //           data.docs.map((doc) => TaskModel.fromJson(doc.data())).toList()));
+  // }
+  
   @override
-  Stream<Either<FireStoreFailure, List<TaskModel>>> getTask(String taskId) {
-    return tasksCollection().snapshots().map(
-          (task) => right(
-            task.docs
-                .map(
-                  (doc) => TaskModel.fromJson(
-                    doc.data(),
-                  ),
-                )
-                .toList(),
-          ),
-        );
+  Future<Either<FireStoreFailure, List<TaskModel>>> getTask() async{
+   try {
+   final snapShot=  await db
+        .collection(AppConstant.userCollection)
+        .doc(firebaseUser.uid)
+        .collection(AppConstant.taskCollection)
+        .get();
+        final data=snapShot.docs.map((doc) => TaskModel.fromJson(doc.data())).toList();
+
+   return right(data);
+   }on FirebaseException catch (error) {
+      return left(FirestoreExceptionHandler.handleException(error: error));
+    } catch (e) {
+      return left(UnknownFailure());
+    }
   }
 }
+//  Stream<Either<FireStoreFailure, List<CategoryModel>>> getCategoryStream() {
+//     return db
+//         .collection(AppConstant.userCollection)
+//         .doc(firebaseUser.uid)
+//         .collection(AppConstant.categoryCollection)
+//         .snapshots()
+//         .map((data) => right(data.docs
+//             .map((doc) => CategoryModel.fromJson(doc.data()))
+//             .toList()));
+//   }

@@ -8,53 +8,54 @@ import '../../../data/model/category_item_model.dart';
 class CustomCategoryItemIndex {
   static  final List<CategoryItemModel> items = [
     CategoryItemModel(
-      title: 'Grocery',
-      image: ImageAssets.svgsGrocery,
+      name: 'Grocery',
+      icon: ImageAssets.svgsGrocery,
       color: const Color(0xffCCFF80),
     ),
     CategoryItemModel(
-      title: 'Work',
-      image: ImageAssets.svgsWork,
+      name: 'Work',
+      icon: ImageAssets.svgsWork,
       color: const Color(0xffFF9680),
     ),
     CategoryItemModel(
-      title: 'Sport',
-      image: ImageAssets.svgsSport,
+      name: 'Sport',
+      icon: ImageAssets.svgsSport,
       color: const Color(0xff80FFFF),
     ),
     CategoryItemModel(
-      title: 'Design',
-      image: ImageAssets.svgsDesign,
+      name: 'Design',
+      icon: ImageAssets.svgsDesign,
       color: const Color(0xff80FFFF),
     ),
     CategoryItemModel(
-      title: 'University',
-      image: ImageAssets.svgsUniversity,
+      name: 'University',
+      icon: ImageAssets.svgsUniversity,
       color: const Color(0xff809CFF),
     ),
     CategoryItemModel(
-      title: 'University',
-      image: ImageAssets.svgsSocial,
+      name: 'University',
+      icon: ImageAssets.svgsSocial,
       color: const Color(0xffFF80EB),
     ),
     CategoryItemModel(
-      title: 'Music',
-      image: ImageAssets.svgsMusic,
+      name: 'Music',
+      icon: ImageAssets.svgsMusic,
       color: const Color(0xffFF80EB),
     ),
     CategoryItemModel(
-      title: 'Health',
-      image: ImageAssets.svgsHealth,
+      name: 'Health',
+      icon: ImageAssets.svgsHealth,
       color: const Color(0xff80FFA3),
     ),
     CategoryItemModel(
-      title: 'Movie',
-      image: ImageAssets.svgsMovie,
+      name: 'Movie',
+      icon: ImageAssets.svgsMovie,
       color: const Color(0xff80D1FF),
     ),
     CategoryItemModel(
-      title: 'Home',
-      image: ImageAssets.svgsHome,
+      name: 'Home',
+      icon: ImageAssets.svgsHome,
       color: const Color(0xffFFCC80),
-    ),];
+    ),
+    ];
 }

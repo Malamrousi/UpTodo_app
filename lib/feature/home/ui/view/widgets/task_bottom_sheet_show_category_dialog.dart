@@ -80,16 +80,16 @@ class _TaskBottomSheetShowCategoryDialogState
                               return GestureDetector(
                                 onTap: () {
                                   widget.categorySelected({
-                                    'name': item.title,
-                                    'color': item.color,
-                                    'image': item.image
+                                    'name': item.name,
+                                    'color': item.color.value,
+                                    'icon': item.icon
                                   });
                                   context.pop();
                                 },
                                 child: CategoryItemWidget(
                                   color: item.color,
-                                  icon: SvgPicture.asset(item.image),
-                                  title: item.title,
+                                  icon: SvgPicture.asset(item.icon),
+                                  title: item.name,
                                 ),
                               );
                             }
@@ -105,7 +105,7 @@ class _TaskBottomSheetShowCategoryDialogState
                                   context.pop();
                                 },
                                 child: CategoryItemWidget(
-                                  color: Color(int.parse(item.color)),
+                                  color: Color(int.parse(item.color.toString())),
                                   icon: Icon(
                                     IconData(
                                       int.parse(item.icon),
@@ -113,7 +113,7 @@ class _TaskBottomSheetShowCategoryDialogState
                                     ),
                                     size: 30.sp,
                                     color: Color(
-                                      int.parse(item.color),
+                                      int.parse(item.color.toString()),
                                     ).withOpacity(1),
                                   ),
                                   title: item.name,

@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uptodo/feature/home/ui/cubit/task/task_cubit.dart';
+import 'package:uptodo/feature/home/ui/view/widgets/index_screen_no_data_state.dart';
 
+import '../../../../../core/theming/app_styles.dart';
 import 'index_screen_has_data.dart';
 
 class CustomPageIndex {
-  static final  List<Widget> pages = [
-    const IndexScreenHasData(),
+  static final List<Widget> pages = [
+    BlocBuilder<TaskCubit, TaskState>(
+      builder: (context, state) {
+        if (state is TaskSuccess) {
+          if(state.tasks.isEmpty) {
+            return const IndexScreenNoDataState();
+          }
+          else {
+            return const IndexScreenHasData();
+          }
+        } else if(state is TaskFailure) {
+         return Center(child: Text(state.errorMessage , style: AppStyles.font16WhiteRegular),);
+        }else{
+          return const Center(child: CircularProgressIndicator());
+        }
+      },
+    ),
     const Center(
         child: Text(
       'Calendar Page',

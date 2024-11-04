@@ -14,5 +14,6 @@ abstract class TaskRepo {
   Future<Either<FireStoreFailure, dynamic>> updateTaskDone(
       TimeOfDay endTime, bool isDone, TaskModel taskModel);
 
-  Stream<Either<FireStoreFailure, List<TaskModel>>> getTask(String taskId);
+  // Stream<Either<FireStoreFailure, List<TaskModel>>> getTask();
+  Future<Either<FireStoreFailure, List<TaskModel>>> getTask();
 }
