@@ -9,12 +9,12 @@ class TaskModel {
   final String title;
   final String description;
 
-  final bool? isDone;
+   bool? isDone;
   final Map<String, dynamic> category;
 
   final DateTime date;
   final String? startTime;
-  final String? endTime;
+   String? endTime;
 
   final int taskPriority;
   TaskModel({
@@ -35,8 +35,8 @@ class TaskModel {
     final format = DateFormat('h:mm a');
     return format.format(dt);
   }
+  
 
- 
 
   factory TaskModel.fromJson(json) {
     return TaskModel(

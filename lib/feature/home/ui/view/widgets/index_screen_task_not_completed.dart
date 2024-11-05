@@ -20,8 +20,7 @@ class IndexScreenTaskNotCompleted extends StatefulWidget {
 
 class _IndexScreenTaskNotCompletedState
     extends State<IndexScreenTaskNotCompleted> {
-  @override
-
+  TimeOfDay endTime = TimeOfDay.now();
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +30,12 @@ class _IndexScreenTaskNotCompletedState
           physics: const BouncingScrollPhysics(),
           itemCount: context.read<TaskCubit>().taskList.length,
           itemBuilder: (context, index) {
-            final task = context.read<TaskCubit>().taskList[index];
+            var task = context.read<TaskCubit>().taskList[index];
 
             final taskCategory =
                 context.read<TaskCubit>().taskList[index].category;
+
+            
 
             return Padding(
               padding: EdgeInsets.only(top: 20.h),
@@ -48,8 +49,14 @@ class _IndexScreenTaskNotCompletedState
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Checkbox(
-                          value: false,
-                          onChanged: (value) {},
+                          value: task.isDone ?? false,
+                          onChanged: (value) {
+                            context.read<TaskCubit>().updateTaskDone(
+                                  endTime: endTime,
+                                  isDone: value ?? false,
+                                  taskModel: task,
+                                );
+                          },
                           activeColor: ColorsManger.primaryColor,
                           checkColor: ColorsManger.whiteColor,
                           shape: RoundedRectangleBorder(
@@ -77,21 +84,20 @@ class _IndexScreenTaskNotCompletedState
                                   style: AppStyles.font14GrayColorRegular,
                                 ),
                                 horizontalSpacing(
-                                    MediaQuery.sizeOf(context).width * 0.1),
+                                    MediaQuery.sizeOf(context).width * 0.04),
                                 Container(
-                               
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 8.w, vertical: 8.h),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(6.r),
                                     color: Color(
-                                      int.parse(taskCategory['color'].toString()),
+                                      int.parse(
+                                          taskCategory['color'].toString()),
                                     ),
                                   ),
                                   child: Row(
                                     children: [
-                                      showCategoryIcon(taskCategory['icon'] ),
-                                  
+                                      showCategoryIcon(taskCategory['icon']),
                                       horizontalSpacing(6),
                                       Text(
                                         overflow: TextOverflow.ellipsis,
@@ -111,7 +117,6 @@ class _IndexScreenTaskNotCompletedState
                                       border: Border.all(
                                         color: ColorsManger.primaryColor,
                                       )),
-
                                   child: Row(
                                     children: [
                                       SvgPicture.asset(
@@ -120,7 +125,7 @@ class _IndexScreenTaskNotCompletedState
                                         height: 14,
                                       ),
                                       Text(
-                                        '${task.taskPriority+1} ',
+                                        '${task.taskPriority + 1} ',
                                         style:
                                             AppStyles.font12WhiteColorRegular,
                                       ),
@@ -141,7 +146,7 @@ class _IndexScreenTaskNotCompletedState
     );
   }
 
-  Widget showCategoryIcon(String icon , {Color? color}) {
+  Widget showCategoryIcon(String icon, {Color? color}) {
     if (icon.startsWith('assets')) {
       return SvgPicture.asset(
         icon,
@@ -150,12 +155,12 @@ class _IndexScreenTaskNotCompletedState
       );
     } else {
       return Icon(
-        color: color ?? ColorsManger.whiteColor,
-        size: 21,
-        IconData(
-        int.parse(icon),
-        fontFamily: 'MaterialIcons',
-      ));
+          color: color ?? ColorsManger.whiteColor,
+          size: 21,
+          IconData(
+            int.parse(icon),
+            fontFamily: 'MaterialIcons',
+          ));
     }
   }
 }

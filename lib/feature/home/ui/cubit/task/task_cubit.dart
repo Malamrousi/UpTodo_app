@@ -75,11 +75,13 @@ class TaskCubit extends Cubit<TaskState> {
   }
 
   Future<void> updateTaskDone(
-      TimeOfDay endTime, bool isDone, TaskModel taskModel) async {
+      {required TimeOfDay endTime,
+      required bool isDone,
+     required  TaskModel taskModel}) async {
     emit(TaskLoading());
 
     final updateTaskDoneEither =
-        await taskRepoImpl.updateTaskDone(endTime, isDone, taskModel);
+        await taskRepoImpl.updateTaskDone( endTime, isDone, taskModel);
     updateTaskDoneEither.fold(
         (failure) => emit(TaskFailure(errorMessage: failure.errorMessage)),
         (task) {

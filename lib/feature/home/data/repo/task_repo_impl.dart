@@ -63,32 +63,36 @@ class TaskRepoImpl implements TaskRepo {
     }
   }
 
-  @override
-  Future<Either<FireStoreFailure, dynamic>> updateTaskDone(
-      TimeOfDay endTime, bool isDone, TaskModel taskModel) async {
-    try {
+ @override
+Future<Either<FireStoreFailure, dynamic>> updateTaskDone(
+    TimeOfDay endTime, bool isDone, TaskModel taskModel) async {
+  try {
+    taskModel.isDone = isDone;
+    
+    if (isDone) {
+      final formattedTime = TaskModel.timeOfDayToString(endTime);
+      taskModel.endTime = formattedTime;
+      
       await tasksCollection().doc(taskModel.uid).update({
         'isDone': isDone,
-        'endTime': endTime.toString(),
+        'endTime': formattedTime, 
       });
-      return right(taskModel);
-    } on FirebaseException catch (error) {
-      return left(FirestoreExceptionHandler.handleException(error: error));
-    } catch (e) {
-      return left(UnknownFailure());
+    } else {
+      taskModel.endTime = null;
+      await tasksCollection().doc(taskModel.uid).update({
+        'isDone': isDone,
+        'endTime': null,
+      });
     }
+    
+    return right(taskModel);
+  } on FirebaseException catch (error) {
+    return left(FirestoreExceptionHandler.handleException(error: error));
+  } catch (e) {
+    return left(UnknownFailure());
   }
+}
 
-  // @override
-  // Stream<Either<FireStoreFailure, List<TaskModel>>> getListenTask() {
-  //   return db
-  //       .collection(AppConstant.userCollection)
-  //       .doc(firebaseUser.uid)
-  //       .collection(AppConstant.taskCollection)
-  //       .snapshots()
-  //       .map((data) => right(
-  //           data.docs.map((doc) => TaskModel.fromJson(doc.data())).toList()));
-  // }
   
   @override
   Future<Either<FireStoreFailure, List<TaskModel>>> getTask() async{
@@ -108,13 +112,3 @@ class TaskRepoImpl implements TaskRepo {
     }
   }
 }
-//  Stream<Either<FireStoreFailure, List<CategoryModel>>> getCategoryStream() {
-//     return db
-//         .collection(AppConstant.userCollection)
-//         .doc(firebaseUser.uid)
-//         .collection(AppConstant.categoryCollection)
-//         .snapshots()
-//         .map((data) => right(data.docs
-//             .map((doc) => CategoryModel.fromJson(doc.data()))
-//             .toList()));
-//   }
