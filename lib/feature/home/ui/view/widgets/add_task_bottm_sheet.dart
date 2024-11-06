@@ -75,7 +75,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                 TaskBottomSheetSendButton(
                   onPressed: () {
                     String? formattedStartTime = startTime.toString() != '00:00:00.000'
-                        ? TaskModel.timeOfDayToString(startTime)
+                        ? TaskModel.startTimeOfDayToString(startTime)
                         : null;
                     TaskModel taskModel = TaskModel(
                       uid: DateTime.now().toString(),

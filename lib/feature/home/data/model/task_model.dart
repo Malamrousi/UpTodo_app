@@ -29,14 +29,19 @@ class TaskModel {
     required this.taskPriority,
   });
 
-    static String timeOfDayToString(TimeOfDay time) {
+    static String startTimeOfDayToString(TimeOfDay time) {
     final now = DateTime.now();
     final dt = DateTime(now.year, now.month, now.day, time.hour, time.minute);
     final format = DateFormat('h:mm a');
     return format.format(dt);
   }
   
-
+  static String endTimeOfDayToString(TimeOfDay time) {
+    final now = DateTime.now();
+    final dt = DateTime(now.year, now.month, now.day, time.hour, time.minute);
+    final format = DateFormat('dd/MM hh:mm a');
+    return format.format(dt);
+  }
 
   factory TaskModel.fromJson(json) {
     return TaskModel(

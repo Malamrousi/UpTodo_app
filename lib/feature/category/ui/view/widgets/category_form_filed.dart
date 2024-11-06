@@ -17,8 +17,8 @@ class CategoryFormFiled extends StatelessWidget {
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Please enter category name';
-          }else if(!AppRegex.hasMaxLength7(value)){
-            return 'category name must be less than 7 characters';
+          }else if(!AppRegex.hasMaxLength10(value)){
+            return 'category name must be less than 10 characters';
           }
           return null;
         },

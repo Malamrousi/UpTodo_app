@@ -33,7 +33,7 @@ class CustomCategoryItemIndex {
       color: const Color(0xff809CFF),
     ),
     CategoryItemModel(
-      name: 'University',
+      name: 'Social',
       icon: ImageAssets.svgsSocial,
       color: const Color(0xffFF80EB),
     ),

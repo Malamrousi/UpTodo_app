@@ -38,7 +38,7 @@ class AppRegex {
     return RegExp(r"^[a-zA-Z\s-]{2,50}$").hasMatch(name);
   }
 
-  static bool hasMaxLength7(String text) {
-    return RegExp(r'^.{1,7}$').hasMatch(text);
+  static bool hasMaxLength10(String text) {
+    return RegExp(r'^.{1,10}$').hasMatch(text);
   }
 }

@@ -12,6 +12,7 @@ class TaskRepoImpl implements TaskRepo {
   static final db = FirebaseFirestore.instance;
   static final User firebaseUser = FirebaseAuth.instance.currentUser!;
 
+ //tasksCollection
   static CollectionReference<TaskModel> tasksCollection() {
     return db
         .collection(AppConstant.userCollection)
@@ -23,6 +24,7 @@ class TaskRepoImpl implements TaskRepo {
         );
   }
 
+//add task
   @override
   Future<Either<FireStoreFailure, TaskModel>> addTask(
       TaskModel taskModel) async {
@@ -31,12 +33,12 @@ class TaskRepoImpl implements TaskRepo {
       await tasksCollection().doc(taskId).set(taskModel);
       return right(taskModel);
     } on FirebaseException catch (error) {
-      return left(FirestoreExceptionHandler.handleException(error: error));
+      return left(FireStoreExceptionHandler.handleException(error: error));
     } catch (e) {
       return left(UnknownFailure());
     }
   }
-
+//delete task
   @override
   Future<Either<FireStoreFailure, TaskModel>> deleteTask(
       TaskModel taskModel) async {
@@ -44,69 +46,77 @@ class TaskRepoImpl implements TaskRepo {
       await tasksCollection().doc(taskModel.uid).delete();
       return right(taskModel);
     } on FirebaseException catch (error) {
-      return left(FirestoreExceptionHandler.handleException(error: error));
+      return left(FireStoreExceptionHandler.handleException(error: error));
     } catch (e) {
       return left(UnknownFailure());
     }
   }
 
+
+//update task done and time
   @override
-  Future<Either<FireStoreFailure, TaskModel>> updateTask(
-      TaskModel taskModel) async {
+  Future<Either<FireStoreFailure, dynamic>> updateTaskDone(
+      {required TimeOfDay endTime,required bool isDone,required TaskModel taskModel}) async {
     try {
-      await tasksCollection().doc(taskModel.uid).update(taskModel.toJson());
+      taskModel.isDone = isDone;
+
+      if (isDone) {
+        final formattedTime = TaskModel.endTimeOfDayToString(endTime);
+        taskModel.endTime = formattedTime;
+
+        await tasksCollection().doc(taskModel.uid).update({
+          'isDone': isDone,
+          'endTime': formattedTime,
+        });
+      } else {
+        taskModel.endTime = null;
+        await tasksCollection().doc(taskModel.uid).update({
+          'isDone': isDone,
+          'endTime': null,
+        });
+      }
+
       return right(taskModel);
     } on FirebaseException catch (error) {
-      return left(FirestoreExceptionHandler.handleException(error: error));
+      return left(FireStoreExceptionHandler.handleException(error: error));
     } catch (e) {
       return left(UnknownFailure());
     }
   }
+//fetch not completed tasks
 
- @override
-Future<Either<FireStoreFailure, dynamic>> updateTaskDone(
-    TimeOfDay endTime, bool isDone, TaskModel taskModel) async {
-  try {
-    taskModel.isDone = isDone;
-    
-    if (isDone) {
-      final formattedTime = TaskModel.timeOfDayToString(endTime);
-      taskModel.endTime = formattedTime;
-      
-      await tasksCollection().doc(taskModel.uid).update({
-        'isDone': isDone,
-        'endTime': formattedTime, 
-      });
-    } else {
-      taskModel.endTime = null;
-      await tasksCollection().doc(taskModel.uid).update({
-        'isDone': isDone,
-        'endTime': null,
-      });
-    }
-    
-    return right(taskModel);
-  } on FirebaseException catch (error) {
-    return left(FirestoreExceptionHandler.handleException(error: error));
-  } catch (e) {
-    return left(UnknownFailure());
-  }
-}
-
-  
   @override
-  Future<Either<FireStoreFailure, List<TaskModel>>> getTask() async{
-   try {
-   final snapShot=  await db
-        .collection(AppConstant.userCollection)
-        .doc(firebaseUser.uid)
-        .collection(AppConstant.taskCollection)
-        .get();
-        final data=snapShot.docs.map((doc) => TaskModel.fromJson(doc.data())).toList();
+  Future<Either<FireStoreFailure, List<TaskModel>>>
+      getTaskNotCompleted() async {
+    try {
+      final snapShot = await tasksCollection()
+          .where('isDone', isEqualTo: false)
+          .get();
+      final List<TaskModel> data =
+          snapShot.docs.map((doc) => TaskModel.fromJson(doc.data())).toList();
+      return right(data);
+    } on FirebaseException catch (error) {
+      return left(FireStoreExceptionHandler.handleException(error: error));
+    } catch (e) {
+      return left(UnknownFailure());
+    }
+  }
+ //fetch completed tasks
+  @override
+  Future<Either<FireStoreFailure, List<TaskModel>>> getTaskCompleted() async {
+    try {
+      final snapShot = await db
+          .collection(AppConstant.userCollection)
+          .doc(firebaseUser.uid)
+          .collection(AppConstant.taskCollection)
+          .where('isDone', isEqualTo: true)
+          .get();
 
-   return right(data);
-   }on FirebaseException catch (error) {
-      return left(FirestoreExceptionHandler.handleException(error: error));
+      final List<TaskModel> data =
+          snapShot.docs.map((doc) => TaskModel.fromJson(doc.data())).toList();
+      return right(data);
+    } on FirebaseException catch (error) {
+      return left(FireStoreExceptionHandler.handleException(error: error));
     } catch (e) {
       return left(UnknownFailure());
     }

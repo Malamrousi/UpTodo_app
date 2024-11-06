@@ -31,7 +31,7 @@ class AddCategoryRepoImpl implements CategoryRepo {
       await categoriesCollection().doc().set(categoryModel);
       return right(categoryModel);
     } on FirebaseException catch (error) {
-      return left(FirestoreExceptionHandler.handleException(error: error));
+      return left(FireStoreExceptionHandler.handleException(error: error));
     } catch (e) {
       return left(UnknownFailure());
     }

@@ -7,12 +7,12 @@ import '../model/task_model.dart';
 abstract class TaskRepo {
   Future<Either<FireStoreFailure, TaskModel>> addTask(TaskModel taskModel);
 
-  Future<Either<FireStoreFailure, TaskModel>> updateTask(TaskModel taskModel);
-
   Future<Either<FireStoreFailure, TaskModel>> deleteTask(TaskModel taskModel);
+  Future<Either<FireStoreFailure, List<TaskModel>>> getTaskNotCompleted();
+  Future<Either<FireStoreFailure, List<TaskModel>>> getTaskCompleted();
 
   Future<Either<FireStoreFailure, dynamic>> updateTaskDone(
-      TimeOfDay endTime, bool isDone, TaskModel taskModel);
-
-  Future<Either<FireStoreFailure, List<TaskModel>>> getTask();
+      {required TimeOfDay endTime,
+      required bool isDone,
+      required TaskModel taskModel});
 }

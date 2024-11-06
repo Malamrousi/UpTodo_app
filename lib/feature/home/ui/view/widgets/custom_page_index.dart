@@ -11,7 +11,7 @@ class CustomPageIndex {
     BlocBuilder<TaskCubit, TaskState>(
       builder: (context, state) {
         if (state is TaskSuccess) {
-          if(state.tasks.isEmpty) {
+          if(state.notCompletedTasks.isEmpty && state.completedTasks.isEmpty){ 
             return const IndexScreenNoDataState();
           }
           else {

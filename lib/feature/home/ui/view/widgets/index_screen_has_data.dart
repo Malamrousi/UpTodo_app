@@ -1,6 +1,5 @@
 //packages
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 //core
 import 'package:uptodo/core/helper/spacing.dart';
 import 'package:uptodo/core/theming/colors_manger.dart';
@@ -44,18 +43,8 @@ class IndexScreenHasData extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            flex: 1,
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: 1,
-              itemBuilder: (context, index) {
-                return Padding(
-                    padding: EdgeInsets.only(top: 20.h),
-                    child: const IndexScreenTaskCompleted());
-              },
-            ),
-          )
+       
+     const  IndexScreenTaskCompleted(),
         ],
       ),
     );

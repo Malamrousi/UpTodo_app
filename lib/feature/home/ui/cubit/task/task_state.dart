@@ -8,9 +8,12 @@ final class TaskInitial extends TaskState {}
 final class TaskLoading extends TaskState {}
 
 final class TaskSuccess extends TaskState {
-  final List<TaskModel> tasks;
+  //For notCompletedTasks
+  final List<TaskModel> notCompletedTasks;
+  //for completedTasks
+  final List<TaskModel> completedTasks;
 
-  TaskSuccess({required this.tasks});
+  TaskSuccess({required this.notCompletedTasks, required this.completedTasks});
 }
 
 final class CategorySuccess extends TaskState {

@@ -9,89 +9,118 @@ part 'task_state.dart';
 
 class TaskCubit extends Cubit<TaskState> {
   TaskCubit(this.taskRepoImpl) : super(TaskInitial());
-
+  // task repo
   final TaskRepoImpl taskRepoImpl;
+// list for not completedTasks
+  List<TaskModel> completedTasksList = [];
+  // list for  completedTasks
 
-  List<TaskModel> taskList = [];
+  List<TaskModel> notCompletedTasksList = [];
+  // titleController
   final TextEditingController titleController = TextEditingController();
+  // descriptionController
   final TextEditingController descriptionController = TextEditingController();
+  // formKey
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+// add Task
   Future<void> addTask(TaskModel taskModel) async {
     emit(TaskLoading());
 
-    final addTaskEither = await taskRepoImpl.addTask(taskModel);
-    addTaskEither.fold(
-        (failure) => emit(TaskFailure(errorMessage: failure.errorMessage)),
-        (task) {
-      taskList.add(task);
-      emit(TaskSuccess(tasks: taskList));
-    });
-  }
-
-  Future<dynamic> getTask() async {
-    emit(TaskLoading());
-
     try {
-      final taskEither = await taskRepoImpl.getTask();
-      taskEither.fold((failure) {
-        emit(TaskFailure(errorMessage: failure.errorMessage));
-      }, (tasks) {
-        taskList = tasks;
-        emit(TaskSuccess(tasks: tasks));
+      final addTaskEither = await taskRepoImpl.addTask(taskModel);
+      addTaskEither.fold(
+          (failure) => emit(TaskFailure(errorMessage: failure.errorMessage)),
+          (task) {
+          
+        if (task.isDone ?? false) {
+          // add completed task
+          completedTasksList.add(task);
+        } else {
+          // add not completed task
+          notCompletedTasksList.add(task);
+        }
+        emit(TaskSuccess(
+            notCompletedTasks: notCompletedTasksList,
+            completedTasks: completedTasksList));
       });
-    } catch (e) {
-      print(e);
+    } catch (error) {
+      emit(TaskFailure(errorMessage: error.toString()));
     }
-  }
-
-  Future<void> updateTask(TaskModel taskModel) async {
-    emit(TaskLoading());
-
-    final updateTaskEither = await taskRepoImpl.updateTask(taskModel);
-    updateTaskEither.fold(
-        (failure) => emit(TaskFailure(errorMessage: failure.errorMessage)),
-        (task) {
-      int index =
-          taskList.indexWhere((element) => element.uid == taskModel.uid);
-
-      if (index != -1) {
-        taskList[index] = task;
-        emit(TaskSuccess(tasks: taskList));
-      }
-    });
   }
 
   Future<void> deleteTask(TaskModel taskModel) async {
     emit(TaskLoading());
 
-    final deleteTaskEither = await taskRepoImpl.deleteTask(taskModel);
-    deleteTaskEither.fold(
-        (failure) => emit(TaskFailure(errorMessage: failure.errorMessage)),
-        (task) {
-      taskList.removeWhere((element) => element.uid == taskModel.uid);
-      emit(TaskSuccess(tasks: taskList));
-    });
+    try {
+      final deleteTaskEither = await taskRepoImpl.deleteTask(taskModel);
+      deleteTaskEither.fold(
+          (failure) => emit(TaskFailure(errorMessage: failure.errorMessage)),
+          (task) {
+            
+        completedTasksList.removeWhere((task) => task.uid == taskModel.uid);
+        notCompletedTasksList.removeWhere((task) => task.uid == taskModel.uid);
+        emit(TaskSuccess(
+            notCompletedTasks: notCompletedTasksList,
+            completedTasks: completedTasksList));
+      });
+    } catch (error) {
+      emit(TaskFailure(errorMessage: error.toString()));
+    }
   }
 
   Future<void> updateTaskDone(
       {required TimeOfDay endTime,
       required bool isDone,
-     required  TaskModel taskModel}) async {
+      required TaskModel taskModel}) async {
     emit(TaskLoading());
+    try {
+      final result = await taskRepoImpl.updateTaskDone(
+          endTime: endTime, isDone: isDone, taskModel: taskModel);
+      result.fold((failure) {
+        emit(TaskFailure(errorMessage: failure.errorMessage));
+      }, (updateTask) {
+        if (isDone) {
+          notCompletedTasksList
+              .removeWhere((task) => task.uid == taskModel.uid);
+          completedTasksList.add(updateTask);
+        } else {
+          completedTasksList.removeWhere((task) => task.uid == taskModel.uid);
+          notCompletedTasksList.add(updateTask);
+        }
 
-    final updateTaskDoneEither =
-        await taskRepoImpl.updateTaskDone( endTime, isDone, taskModel);
-    updateTaskDoneEither.fold(
-        (failure) => emit(TaskFailure(errorMessage: failure.errorMessage)),
-        (task) {
-      int index =
-          taskList.indexWhere((element) => element.uid == taskModel.uid);
+        emit(TaskSuccess(
+            notCompletedTasks: notCompletedTasksList,
+            completedTasks: completedTasksList));
+      });
+    } catch (error) {
+      emit(TaskFailure(errorMessage: error.toString()));
+    }
+  }
 
-      if (index != -1) {
-        taskList[index] = task;
-        emit(TaskSuccess(tasks: taskList));
-      }
-    });
+  Future<void> getTasksByStatus() async {
+    emit(TaskLoading());
+    try {
+      final notCompletedTasks = await taskRepoImpl.getTaskNotCompleted();
+      notCompletedTasks.fold(
+        (failure) {
+          emit(TaskFailure(errorMessage: failure.errorMessage));
+        },
+        (tasks) => notCompletedTasksList = tasks,
+      );
+      
+      final completedTasks = await taskRepoImpl.getTaskCompleted();
+      completedTasks.fold(
+        (failure) {
+          emit(TaskFailure(errorMessage: failure.errorMessage));
+        },
+        (tasks) => completedTasksList = tasks,
+      );
+      emit(TaskSuccess(
+          notCompletedTasks: notCompletedTasksList,
+          completedTasks: completedTasksList));
+    } catch (error) {
+      emit(TaskFailure(errorMessage: error.toString()));
+    }
   }
 }
