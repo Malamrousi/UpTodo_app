@@ -8,7 +8,7 @@ import '../../../../../core/widget/app_text_form_filed.dart';
 //widgets
 import 'package:uptodo/feature/home/ui/view/widgets/custom_app_bar.dart';
 import 'index_screen_task_completed.dart';
-import 'index_screen_task_not_completed.dart';
+import 'index_screen_task_not_completed_state.dart';
 
 class IndexScreenHasData extends StatelessWidget {
   const IndexScreenHasData({super.key});
@@ -28,7 +28,7 @@ class IndexScreenHasData extends StatelessWidget {
             hintText: 'Search for your task...',
             inputTextType: '',
           ),
-        const IndexScreenTaskNotCompleted(),
+        const IndexScreenTaskNotCompletedState(),
           verticalSpacing(20),
           Container(
             width: 102,
