@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../core/assets/assets.dart';
@@ -36,107 +38,124 @@ class _IndexScreenTaskNotCompletedWidgetState
 
             return Padding(
               padding: EdgeInsets.only(top: 20.h),
-              child: Column(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: 80.h,
-                    color: ColorsManger.darkGray,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Checkbox(
-                          value: task.isDone ?? false,
-                          onChanged: (value) {
-                            context.read<TaskCubit>().updateTaskDone(
-                                  endTime: endTime,
-                                  isDone: value ?? false,
-                                  taskModel: task,
-                                );
-                          },
-                          activeColor: ColorsManger.primaryColor,
-                          checkColor: ColorsManger.whiteColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.r),
-                            side: const BorderSide(
-                              color: ColorsManger.whiteColor,
-                              width: 1.3,
+              child: Slidable(
+                startActionPane: ActionPane(
+                  motion: const ScrollMotion(),
+                  children: [
+                    SlidableAction(
+                      onPressed: (value) {
+                        context.read<TaskCubit>().deleteTask(task);
+                      },
+                      backgroundColor: const Color(0xFFFE4A49),
+                      foregroundColor: Colors.white,
+                      icon: Icons.delete,
+                      label: 'Delete',
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: 80.h,
+                      color: ColorsManger.darkGray,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Checkbox(
+                            value: task.isDone ?? false,
+                            onChanged: (value) {
+                              context.read<TaskCubit>().updateTaskDone(
+                                    endTime: endTime,
+                                    isDone: value ?? false,
+                                    taskModel: task,
+                                  );
+                            },
+                            activeColor: ColorsManger.primaryColor,
+                            checkColor: ColorsManger.whiteColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.r),
+                              side: const BorderSide(
+                                color: ColorsManger.whiteColor,
+                                width: 1.3,
+                              ),
                             ),
                           ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              task.title,
-                              style: AppStyles.font16WhiteRegular,
-                            ),
-                            verticalSpacing(4),
-                            Row(
-                              children: [
-                                Text(
-                                  overflow: TextOverflow.ellipsis,
-                                  '${task.date.day} /${task.date.month} At ${task.startTime}',
-                                  style: AppStyles.font14GrayColorRegular,
-                                ),
-                                horizontalSpacing(
-                                    MediaQuery.sizeOf(context).width * 0.03),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 8.w, vertical: 8.h),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(6.r),
-                                    color: Color(
-                                      int.parse(
-                                          taskCategory['color'].toString()),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                task.title,
+                                style: AppStyles.font16WhiteRegular,
+                              ),
+                              verticalSpacing(4),
+                              Row(
+                                children: [
+                                  Text(
+                                    overflow: TextOverflow.ellipsis,
+                                    '${task.date.day} /${task.date.month} At ${task.startTime}',
+                                    style: AppStyles.font14GrayColorRegular,
+                                  ),
+                                  horizontalSpacing(
+                                      MediaQuery.sizeOf(context).width * 0.03),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 8.w, vertical: 8.h),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(6.r),
+                                      color: Color(
+                                        int.parse(
+                                            taskCategory['color'].toString()),
+                                      ),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        showCategoryIcon(taskCategory['icon']),
+                                        horizontalSpacing(6),
+                                        Text(
+                                          overflow: TextOverflow.ellipsis,
+                                          taskCategory['name'] ?? 'personal',
+                                          style:
+                                              AppStyles.font12WhiteColorRegular,
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  child: Row(
-                                    children: [
-                                      showCategoryIcon(taskCategory['icon']),
-                                      horizontalSpacing(6),
-                                      Text(
-                                        overflow: TextOverflow.ellipsis,
-                                        taskCategory['name'] ?? 'personal',
-                                        style:
-                                            AppStyles.font12WhiteColorRegular,
-                                      ),
-                                    ],
+                                  horizontalSpacing(6),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 8.w, vertical: 8.h),
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(6.r),
+                                        border: Border.all(
+                                          color: ColorsManger.primaryColor,
+                                        )),
+                                    child: Row(
+                                      children: [
+                                        SvgPicture.asset(
+                                          ImageAssets.svgsFlag,
+                                          width: 14,
+                                          height: 14,
+                                        ),
+                                        Text(
+                                          '${task.taskPriority + 1} ',
+                                          style:
+                                              AppStyles.font12WhiteColorRegular,
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                horizontalSpacing(6),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 8.w, vertical: 8.h),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(6.r),
-                                      border: Border.all(
-                                        color: ColorsManger.primaryColor,
-                                      )),
-                                  child: Row(
-                                    children: [
-                                      SvgPicture.asset(
-                                        ImageAssets.svgsFlag,
-                                        width: 14,
-                                        height: 14,
-                                      ),
-                                      Text(
-                                        '${task.taskPriority + 1} ',
-                                        style:
-                                            AppStyles.font12WhiteColorRegular,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           }),
