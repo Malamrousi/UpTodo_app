@@ -1,33 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uptodo/core/helper/extension.dart';
-import 'package:uptodo/feature/category/ui/cubit/add_category/add_category_cubit.dart';
+import 'package:uptodo/feature/home/ui/cubit/task/task_cubit.dart';
 
 import '../../../../../core/theming/app_styles.dart';
 import '../../../../../core/theming/colors_manger.dart';
 
-class CategoryBlocListener extends StatelessWidget {
-  const CategoryBlocListener({super.key});
+class AddTaskBlocListener extends StatelessWidget {
+  const AddTaskBlocListener({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AddCategoryCubit, AddCategoryState>(
+    return BlocListener<TaskCubit, TaskState>(
       listenWhen: (previous, current) =>
-          current is AddCategoryLoading ||
-          current is AddCategorySuccess ||
-          current is AddCategoryFailure,
+          current is TaskFailure ||
+          current is TaskSuccess ||
+          current is TaskLoading,
       listener: (context, state) {
-        if (state is AddCategoryLoading) {
+        if (state is TaskLoading) {
           showDialog(
             context: context,
             builder: (context) => const Center(
               child: CircularProgressIndicator(),
             ),
           );
-        } else if (state is AddCategorySuccess) {
-          context.pop();
-          context.pop();
-        } else if (state is AddCategoryFailure) {
+        } else if (state is TaskFailure) {
           context.pop();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -38,10 +35,14 @@ class CategoryBlocListener extends StatelessWidget {
               ),
             ),
           );
+        } else if (state is TaskSuccess) {
+          context.pop();
+          context.read<TaskCubit>().titleController.clear();
+          context.read<TaskCubit>().descriptionController.clear();
+          context.pop();
         }
       },
       child: const SizedBox.shrink(),
     );
-    
   }
 }

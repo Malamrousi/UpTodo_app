@@ -22,7 +22,9 @@ class CustomCategoryButtons extends StatelessWidget {
           borderColor: Colors.transparent,
           bottomWidth: MediaQuery.sizeOf(context).width * .35,
           bottomHeight: 48,
-          onPressed: onPressed,
+          onPressed: () {
+            context.pop();
+          },
           buttonText: 'Cancel',
         ),
         horizontalSpacing(20),
@@ -30,9 +32,7 @@ class CustomCategoryButtons extends StatelessWidget {
           textStyle: AppStyles.font16WhiteRegular,
           bottomWidth: MediaQuery.sizeOf(context).width * .4,
           bottomHeight: 48,
-          onPressed: () {
-            context.pop();
-          },
+          onPressed: onPressed,
           buttonText: 'Create Category',
           backgroundColor: ColorsManger.primaryColor,
         ),

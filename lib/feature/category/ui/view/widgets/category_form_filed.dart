@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uptodo/core/helper/app_regx.dart';
 
 import '../../../../../core/widget/app_text_form_filed.dart';
-import '../../cubit/category/category_cubit.dart';
+import '../../cubit/add_category/add_category_cubit.dart';
 
 class CategoryFormFiled extends StatelessWidget {
   const CategoryFormFiled({super.key});
@@ -10,12 +11,14 @@ class CategoryFormFiled extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: context.read<CategoryCubit>().formKey,
+      key: context.read<AddCategoryCubit>().formKey,
       child: InputTextFormFiled(
-        controller: context.read<CategoryCubit>().categoryNameController,
+        controller: context.read<AddCategoryCubit>().categoryNameController,
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Please enter category name';
+          }else if(!AppRegex.hasMaxLength10(value)){
+            return 'category name must be less than 10 characters';
           }
           return null;
         },

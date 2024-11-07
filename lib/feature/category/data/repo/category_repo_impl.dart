@@ -7,9 +7,8 @@ import 'package:uptodo/feature/category/data/repo/category_repo.dart';
 
 import '../../../../core/constant/app_constant.dart';
 
-class CategoryRepoImpl implements CategoryRepo {
-  static const String userCollection = 'User';
-  static const String categoryCollection = 'Categories';
+class AddCategoryRepoImpl implements CategoryRepo {
+
 
   static final db = FirebaseFirestore.instance;
   static final User firebaseUser = FirebaseAuth.instance.currentUser!;
@@ -32,7 +31,7 @@ class CategoryRepoImpl implements CategoryRepo {
       await categoriesCollection().doc().set(categoryModel);
       return right(categoryModel);
     } on FirebaseException catch (error) {
-      return left(FirestoreExceptionHandler.handleException(error: error));
+      return left(FireStoreExceptionHandler.handleException(error: error));
     } catch (e) {
       return left(UnknownFailure());
     }

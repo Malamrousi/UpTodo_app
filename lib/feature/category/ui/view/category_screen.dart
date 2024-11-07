@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uptodo/core/helper/spacing.dart';
 import 'package:uptodo/feature/category/data/model/category_model.dart';
-import 'package:uptodo/feature/category/ui/cubit/category/category_cubit.dart';
+import 'package:uptodo/feature/category/ui/cubit/add_category/add_category_cubit.dart';
 import 'package:uptodo/feature/category/ui/view/widgets/category_bloc_listener.dart';
 import 'package:uptodo/feature/category/ui/view/widgets/custom_category_button.dart';
 
@@ -66,7 +66,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 verticalSpacing(MediaQuery.sizeOf(context).height * .4),
                 CustomCategoryButtons(
                   onPressed: () {
-                    addCategory(getCategoryModel());
+                    addCategory(addCategoryModel());
                   },
                 ),
                 const CategoryBlocListener(),
@@ -79,14 +79,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
   }
 
   void addCategory(CategoryModel categoryModel) {
-    if (context.read<CategoryCubit>().formKey.currentState!.validate()) {
-      context.read<CategoryCubit>().addCategory(categoryModel);
+    if (context.read<AddCategoryCubit>().formKey.currentState!.validate()) {
+      context.read<AddCategoryCubit>().addCategory(categoryModel);
     }
   }
 
-  CategoryModel getCategoryModel() {
+  CategoryModel addCategoryModel() {
     return CategoryModel(
-      name: context.read<CategoryCubit>().categoryNameController.text,
+      name: context.read<AddCategoryCubit>().categoryNameController.text,
       icon: categoryIcon!.codePoint.toString(),
       color: categoryColor!.value.toString(),
     );

@@ -58,7 +58,7 @@ class UnknownFailure extends FireStoreFailure {
   UnknownFailure() : super(errorMessage: "An unknown error occurred.");
 }
 
-class FirestoreExceptionHandler {
+class FireStoreExceptionHandler {
   static FireStoreFailure handleException({required FirebaseException error}) {
     switch (error.code) {
       case "permission-denied":

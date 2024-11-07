@@ -6,8 +6,8 @@ import 'package:uptodo/core/helper/spacing.dart';
 import 'package:uptodo/core/theming/app_styles.dart';
 import 'package:uptodo/feature/home/ui/view/widgets/custom_app_bar.dart';
 
-class HomeScreenNoDataState extends StatelessWidget {
-  const HomeScreenNoDataState({super.key});
+class IndexScreenNoDataState extends StatelessWidget {
+  const IndexScreenNoDataState({super.key});
 
   @override
   Widget build(BuildContext context) {
