@@ -19,7 +19,7 @@ class IndexScreenTaskNotCompletedWidget extends StatefulWidget {
 
 class _IndexScreenTaskNotCompletedWidgetState
     extends State<IndexScreenTaskNotCompletedWidget> {
-        TimeOfDay endTime = TimeOfDay.now();
+  TimeOfDay endTime = TimeOfDay.now();
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +143,7 @@ class _IndexScreenTaskNotCompletedWidgetState
     );
   }
 
-    Widget showCategoryIcon(String icon, {Color? color}) {
+  Widget showCategoryIcon(String icon, {Color? color}) {
     if (icon.startsWith('assets')) {
       return SvgPicture.asset(
         icon,

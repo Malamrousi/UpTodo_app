@@ -32,7 +32,6 @@ class TaskCubit extends Cubit<TaskState> {
       addTaskEither.fold(
           (failure) => emit(TaskFailure(errorMessage: failure.errorMessage)),
           (task) {
-          
         if (task.isDone ?? false) {
           // add completed task
           completedTasksList.add(task);
@@ -57,7 +56,6 @@ class TaskCubit extends Cubit<TaskState> {
       deleteTaskEither.fold(
           (failure) => emit(TaskFailure(errorMessage: failure.errorMessage)),
           (task) {
-            
         completedTasksList.removeWhere((task) => task.uid == taskModel.uid);
         notCompletedTasksList.removeWhere((task) => task.uid == taskModel.uid);
         emit(TaskSuccess(
@@ -100,16 +98,23 @@ class TaskCubit extends Cubit<TaskState> {
 
   Future<void> getTasksByStatus() async {
     emit(TaskLoading());
+    Future.delayed(const Duration(milliseconds: 300));
+
     try {
-      final notCompletedTasks = await taskRepoImpl.getTaskNotCompleted();
+      final taskResultState = await Future.wait([
+        taskRepoImpl.getTaskNotCompleted(),
+        taskRepoImpl.getTaskCompleted(),
+      ]);
+     final  notCompletedTasks=taskResultState[0];
+     final  completedTasks=taskResultState[1];
+
       notCompletedTasks.fold(
         (failure) {
           emit(TaskFailure(errorMessage: failure.errorMessage));
         },
         (tasks) => notCompletedTasksList = tasks,
       );
-      
-      final completedTasks = await taskRepoImpl.getTaskCompleted();
+
       completedTasks.fold(
         (failure) {
           emit(TaskFailure(errorMessage: failure.errorMessage));

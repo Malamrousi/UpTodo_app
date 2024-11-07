@@ -89,12 +89,15 @@ class TaskRepoImpl implements TaskRepo {
   Future<Either<FireStoreFailure, List<TaskModel>>>
       getTaskNotCompleted() async {
     try {
-      final snapShot = await tasksCollection()
+       final snapShot = await db
+          .collection(AppConstant.userCollection)
+          .doc(firebaseUser.uid)
+          .collection(AppConstant.taskCollection)
           .where('isDone', isEqualTo: false)
           .get();
-      final List<TaskModel> data =
+      final List<TaskModel> tasKData =
           snapShot.docs.map((doc) => TaskModel.fromJson(doc.data())).toList();
-      return right(data);
+      return right(tasKData);
     } on FirebaseException catch (error) {
       return left(FireStoreExceptionHandler.handleException(error: error));
     } catch (e) {

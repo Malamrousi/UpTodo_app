@@ -4,6 +4,7 @@ import 'package:uptodo/feature/home/ui/cubit/task/task_cubit.dart';
 import 'package:uptodo/feature/home/ui/view/widgets/index_screen_no_data_state.dart';
 
 import '../../../../../core/theming/app_styles.dart';
+import '../../../../../core/widget/loading_widget .dart';
 import 'index_screen_has_data.dart';
 
 class CustomPageIndex {
@@ -20,7 +21,7 @@ class CustomPageIndex {
         } else if(state is TaskFailure) {
          return Center(child: Text(state.errorMessage , style: AppStyles.font16WhiteRegular),);
         }else{
-          return const Center(child: CircularProgressIndicator());
+          return const LoadingWidget();
         }
       },
     ),

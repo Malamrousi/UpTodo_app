@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uptodo/feature/home/ui/cubit/task/task_cubit.dart';
 //core
 import '../../../../../core/theming/app_styles.dart';
+import '../../../../../core/widget/loading_widget .dart';
 import 'index_screen_task_not_completed_widget.dart';
 
 class IndexScreenTaskNotCompletedState extends StatelessWidget {
@@ -15,7 +16,7 @@ class IndexScreenTaskNotCompletedState extends StatelessWidget {
     return BlocBuilder<TaskCubit, TaskState>(
       builder: (context, state) {
         if (state is TaskLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: LoadingWidget());
         }
 
         if (state is TaskSuccess) {
