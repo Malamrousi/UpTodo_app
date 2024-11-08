@@ -4,9 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:uptodo/core/helper/extension.dart';
 
 import '../../../../../core/assets/assets.dart';
 import '../../../../../core/helper/spacing.dart';
+import '../../../../../core/routing/routes.dart';
 import '../../../../../core/theming/app_styles.dart';
 import '../../../../../core/theming/colors_manger.dart';
 import '../../cubit/task/task_cubit.dart';
@@ -44,12 +46,12 @@ class _IndexScreenTaskNotCompletedWidgetState
                   children: [
                     SlidableAction(
                       onPressed: (value) {
-                        context.read<TaskCubit>().deleteTask(task);
+                        context.pushNamed(Routes.taskScreen, arguments: task);
                       },
-                      backgroundColor: const Color(0xFFFE4A49),
+                      backgroundColor: Colors.green,
                       foregroundColor: Colors.white,
-                      icon: Icons.delete,
-                      label: 'Delete',
+                      icon: Icons.update,
+                      label: 'Update',
                     ),
                   ],
                 ),
