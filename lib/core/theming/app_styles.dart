@@ -62,4 +62,8 @@ class AppStyles {
       fontSize: 16.sp,
       fontWeight: FontWeightHelper.regular,
       color: ColorsManger.primaryColor);
+        static TextStyle font16RedColorRegular = TextStyle(
+      fontSize: 16.sp,
+      fontWeight: FontWeightHelper.regular,
+      color: Colors.red);
 }

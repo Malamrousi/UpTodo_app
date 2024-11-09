@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/helper/spacing.dart';
+import '../../../data/model/task_model.dart';
 import '../widgets/task_screen_app_bar.dart';
+import '../widgets/task_screen_delete_task.dart';
 import '../widgets/task_screen_task_category.dart';
+import '../widgets/task_screen_task_priority.dart';
 import '../widgets/task_screen_task_time.dart';
 import '../widgets/task_screen_tittle_and_des.dart';
 
 class TaskScreen extends StatefulWidget {
-  const TaskScreen({super.key});
+  const TaskScreen({
+    super.key,
+    required this.taskModel,
+  });
+
+  final TaskModel taskModel;
 
   @override
   State<TaskScreen> createState() => _TaskScreenState();
@@ -25,11 +33,25 @@ class _TaskScreenState extends State<TaskScreen> {
             children: [
               const TaskScreenAppBar(),
               verticalSpacing(30),
-              const TaskScreenTittleAndDes(),
+               TaskScreenTittleAndDes(
+                taskModel: widget.taskModel,
+              ),
               verticalSpacing(84),
-              const TaskScreenTaskTime(),
+               TaskScreenTaskTime(
+                taskModel: widget.taskModel,
+               ),
               verticalSpacing(30),
-              const TaskScreenTaskCategory(),
+               TaskScreenTaskCategory(
+                taskModel: widget.taskModel,
+              ),
+              verticalSpacing(30),
+               TaskScreenTaskPriority(
+                taskModel:widget.taskModel,
+              ),
+              verticalSpacing(30),
+              TaskScreenDeleteTask(
+                taskModel: widget.taskModel,
+              )
             ],
           ),
         ),

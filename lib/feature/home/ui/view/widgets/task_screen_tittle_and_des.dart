@@ -3,13 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uptodo/core/assets/assets.dart';
 import 'package:uptodo/core/theming/app_styles.dart';
+import 'package:uptodo/feature/home/data/model/task_model.dart';
 
 import '../../../../../core/helper/spacing.dart';
 import '../../../../../core/theming/colors_manger.dart';
 
 class TaskScreenTittleAndDes extends StatelessWidget {
-  const TaskScreenTittleAndDes({super.key});
-
+  const TaskScreenTittleAndDes({super.key, required this.taskModel});
+ final TaskModel  taskModel;
   @override
   Widget build(BuildContext context) {
     return Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
@@ -30,12 +31,12 @@ class TaskScreenTittleAndDes extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
          children:[
         Text(
-          'Do Math Homework',
+          taskModel.title,
           style: AppStyles.font20WhiteColorRegular,
         ),
         verticalSpacing(10),
         Text(
-          'Do chapter 2 to 5 for next week',
+          taskModel.description,
           style: AppStyles.font16GrayColorRegular,
         ),
       ],
