@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/helper/spacing.dart';
 import '../widgets/task_screen_app_bar.dart';
+import '../widgets/task_screen_task_category.dart';
 import '../widgets/task_screen_task_time.dart';
 import '../widgets/task_screen_tittle_and_des.dart';
 
@@ -18,15 +19,17 @@ class _TaskScreenState extends State<TaskScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding:const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const TaskScreenAppBar(),
               verticalSpacing(30),
-              const TaskScreenTittleAndDes() ,
-                  verticalSpacing(84),
-             const TaskScreenTaskTime(),
+              const TaskScreenTittleAndDes(),
+              verticalSpacing(84),
+              const TaskScreenTaskTime(),
+              verticalSpacing(30),
+              const TaskScreenTaskCategory(),
             ],
           ),
         ),
