@@ -7,14 +7,12 @@ import 'package:uptodo/core/theming/app_styles.dart';
 import '../../../../../core/helper/spacing.dart';
 import '../../../../../core/theming/colors_manger.dart';
 
-class UpdateTaskScreenTittleAndDes extends StatelessWidget {
-  const UpdateTaskScreenTittleAndDes({super.key});
+class TaskScreenTittleAndDes extends StatelessWidget {
+  const TaskScreenTittleAndDes({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
+    return Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
       Checkbox(
         value: false,
         onChanged: (value) {},
@@ -28,7 +26,9 @@ class UpdateTaskScreenTittleAndDes extends StatelessWidget {
           ),
         ),
       ),
-      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+         children:[
         Text(
           'Do Math Homework',
           style: AppStyles.font20WhiteColorRegular,
@@ -37,12 +37,15 @@ class UpdateTaskScreenTittleAndDes extends StatelessWidget {
         Text(
           'Do chapter 2 to 5 for next week',
           style: AppStyles.font16GrayColorRegular,
-        )
-      ]),
+        ),
+      ],
+      ),
       const Spacer(),
       IconButton(
-          onPressed: () {}, icon: SvgPicture.asset(ImageAssets.svgRewrite)),
-
-    ]);
+        onPressed: () {},
+        icon: SvgPicture.asset(ImageAssets.svgRewrite),
+      ),
+    ],
+    );
   }
 }
