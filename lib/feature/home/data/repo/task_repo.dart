@@ -15,4 +15,6 @@ abstract class TaskRepo {
       {required TimeOfDay endTime,
       required bool isDone,
       required TaskModel taskModel});
+
+    Future<Either<FireStoreFailure, TaskModel>> updateTask(TaskModel taskModel);  
 }

@@ -6,24 +6,24 @@ import 'package:flutter/material.dart';
 class TaskModel {
   final String uid;
 
-  final String title;
-  final String description;
+   String? title;
+   String? description;
 
    bool? isDone;
-  final Map<String, dynamic> category;
+   Map<String, dynamic>? category;
 
-  final DateTime date;
-  final String? startTime;
+   DateTime? date;
+   String? startTime;
    String? endTime;
 
-  final int taskPriority;
+   int? taskPriority;
   TaskModel({
   required  this.uid,
     required this.title,
     required this.description,
     this.isDone,
     required this.category,
-    required this.date,
+     this.date,
     this.startTime,
     this.endTime,
     required this.taskPriority,
@@ -64,7 +64,7 @@ class TaskModel {
       'description': description,
       'isDone': isDone,
       'category': category,
-      'date': Timestamp.fromDate(date),
+      'date': Timestamp.fromDate(date!),
       'startTime': startTime.toString(),
       'endTime': endTime.toString(),
       'taskPriority': taskPriority,

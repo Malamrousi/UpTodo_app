@@ -38,7 +38,11 @@ class _TaskScreenTaskPriorityState extends State<TaskScreenTaskPriority> {
                 builder: (context) {
                   return Center(
                       child: TaskBottomSheetShowPriorityDialog(
-                    taskPriority: (p0) => {},
+                    taskPriority: (priority) => {
+                      setState(() {
+                        widget.taskModel.taskPriority = priority ;
+                      })
+                    },
                   ));
                 });
           },

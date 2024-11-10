@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uptodo/core/helper/extension.dart';
+import 'package:uptodo/feature/home/ui/cubit/update_task/update_task_cubit.dart';
 
 import '../../../../../core/helper/spacing.dart';
+import '../../../../../core/routing/routes.dart';
 import '../../../data/model/task_model.dart';
 import '../widgets/task_screen_app_bar.dart';
 import '../widgets/task_screen_delete_task.dart';
@@ -55,7 +59,12 @@ class _TaskScreenState extends State<TaskScreen> {
                   taskModel: widget.taskModel,
                 ),
                 verticalSpacing(MediaQuery.sizeOf(context).height * 0.3),
-              const TaskScreenButton(),
+               TaskScreenButton(
+                onPressed: () {
+                  context.read<UpdateTaskCubit>().updateTask( widget.taskModel);
+                  context.pushNamedAndRemoveUntil( Routes.homeScreen);
+                },
+              ),
               ],
             ),
           ),

@@ -13,8 +13,8 @@ class TaskScreenTaskTime extends StatefulWidget {
 }
 
 class _TaskScreenTaskTimeState extends State<TaskScreenTaskTime> {
-  DateTime? selectedDate = DateTime.now();
-  TimeOfDay? selectedTime = TimeOfDay.now();
+  DateTime selectedDate = DateTime.now();
+  TimeOfDay selectedTime = TimeOfDay.now();
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -31,7 +31,16 @@ class _TaskScreenTaskTimeState extends State<TaskScreenTaskTime> {
         const Spacer(),
         GestureDetector(
           onTap: () {
-            _showTimePicker(context);
+            String? formattedStartTime =
+                selectedTime.toString() != '00:00:00.000'
+                    ? TaskModel.startTimeOfDayToString(selectedTime)
+                    : null;
+            _showTimePicker(context, (date, time) {
+              setState(() {
+                widget.taskModel.date = date;
+                widget.taskModel.startTime = formattedStartTime;
+              });
+            });
           },
           child: Container(
             width: 120,
@@ -41,7 +50,7 @@ class _TaskScreenTaskTimeState extends State<TaskScreenTaskTime> {
                 color: ColorsManger.darkGray),
             child: Center(
               child: Text(
-                '${widget.taskModel.date.day}/${widget.taskModel.date.month} At ${widget.taskModel.startTime!}',
+                '${widget.taskModel.date!.day}/${widget.taskModel.date!.month} At ${widget.taskModel.startTime!}',
                 style: AppStyles.font12WhiteColorRegular,
               ),
             ),
@@ -51,9 +60,10 @@ class _TaskScreenTaskTimeState extends State<TaskScreenTaskTime> {
     );
   }
 
-  Future<void> _showTimePicker(context) async {
+  Future<void> _showTimePicker(
+      context, Function(DateTime? date, TimeOfDay? time) timePicker) async {
     final DateTime? pickDate = await showDatePicker(
-      confirmText: 'Edit Date', 
+      confirmText: 'Edit Date',
       cancelText: 'Cancel',
       context: context,
       firstDate: DateTime.now(),
@@ -78,5 +88,7 @@ class _TaskScreenTaskTimeState extends State<TaskScreenTaskTime> {
         selectedTime = picTime;
       });
     }
+
+    timePicker(selectedDate, selectedTime);
   }
 }

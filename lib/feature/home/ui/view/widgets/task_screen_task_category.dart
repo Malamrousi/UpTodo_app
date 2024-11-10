@@ -37,7 +37,11 @@ class _TaskScreenTaskCategoryState extends State<TaskScreenTaskCategory> {
                 builder: (context) {
                   return Center(
                     child: TaskBottomSheetShowCategoryDialog(
-                        categorySelected: (data) {}),
+                        categorySelected: (data) {
+                      setState(() {
+                        widget.taskModel.category = data;
+                      });
+                    }),
                   );
                 });
           },
@@ -51,10 +55,11 @@ class _TaskScreenTaskCategoryState extends State<TaskScreenTaskCategory> {
                 child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              showCategoryIcon(widget.taskModel.category['icon']),
-                horizontalSpacing(4),
+                showCategoryIcon(widget.taskModel.category!['icon'],
+                    color: ColorsManger.whiteColor),
+                horizontalSpacing(10),
                 Text(
-                  widget.taskModel.category['name'],
+                  widget.taskModel.category!['name'],
                   style: AppStyles.font12WhiteColorRegular,
                 ),
               ],
@@ -64,12 +69,13 @@ class _TaskScreenTaskCategoryState extends State<TaskScreenTaskCategory> {
       ],
     );
   }
-    Widget showCategoryIcon(String icon, {Color? color}) {
+
+  Widget showCategoryIcon(String icon, {Color? color}) {
     if (icon.startsWith('assets')) {
       return SvgPicture.asset(
         icon,
-        width: 14,
-        height: 14,
+        width: 18,
+        height: 18,
       );
     } else {
       return Icon(

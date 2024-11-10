@@ -12,24 +12,27 @@ import '../../../data/model/task_model.dart';
 import '../../cubit/task/task_cubit.dart';
 
 class TaskScreenShowDialogTextAndDes extends StatefulWidget {
-  const TaskScreenShowDialogTextAndDes({super.key, required this.taskModel});
-    final TaskModel taskModel;
+  const TaskScreenShowDialogTextAndDes(
+      {super.key, required this.taskModel, required this.updateTask});
+  final void Function(String? title, String? description) updateTask;
+  final TaskModel taskModel;
   @override
-  State<TaskScreenShowDialogTextAndDes> createState() => _TaskScreenShowDialogTextAndDesState();
+  State<TaskScreenShowDialogTextAndDes> createState() =>
+      _TaskScreenShowDialogTextAndDesState();
 }
 
-class _TaskScreenShowDialogTextAndDesState extends State<TaskScreenShowDialogTextAndDes> {
-
- @override
+class _TaskScreenShowDialogTextAndDesState
+    extends State<TaskScreenShowDialogTextAndDes> {
+  @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
-    context.read<TaskCubit>().titleController.text = widget.taskModel.title;
-    context.read<TaskCubit>().descriptionController.text = widget.taskModel.description; 
+    context.read<TaskCubit>().titleController.text = widget.taskModel.title!;
+    context.read<TaskCubit>().descriptionController.text =
+        widget.taskModel.description!;
   }
- @override
 
+  @override
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -42,7 +45,7 @@ class _TaskScreenShowDialogTextAndDesState extends State<TaskScreenShowDialogTex
           child: Container(
             color: ColorsManger.darkGray,
             child: Padding(
-              padding: const EdgeInsets.only(top: 10 , right: 10 , left: 10 ),
+              padding: const EdgeInsets.only(top: 10, right: 10, left: 10),
               child: Column(
                 children: [
                   Text(
@@ -98,6 +101,13 @@ class _TaskScreenShowDialogTextAndDesState extends State<TaskScreenShowDialogTex
                         bottomWidth: MediaQuery.sizeOf(context).width * .4,
                         bottomHeight: 48,
                         onPressed: () {
+                          widget.updateTask(
+                            context.read<TaskCubit>().titleController.text,
+                            context
+                                .read<TaskCubit>()
+                                .descriptionController
+                                .text,
+                          );
                           context.pop();
                         },
                         buttonText: 'Edit',

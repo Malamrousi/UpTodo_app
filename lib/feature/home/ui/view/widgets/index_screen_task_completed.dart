@@ -63,7 +63,7 @@ class _IndexScreenTaskCompletedState extends State<IndexScreenTaskCompleted> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            task.title,
+                            task.title!,
                             style: AppStyles.font16WhiteRegular,
                           ),
                           verticalSpacing(4),
