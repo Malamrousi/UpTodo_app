@@ -19,12 +19,12 @@ class UpToDo extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-      child: MultiRepositoryProvider(
+      child: MultiBlocProvider(
         providers: [
-          RepositoryProvider(
+          BlocProvider(
             create: (context) => getIt.get<TaskCubit>()..getTasksByStatus(),
           ),
-          RepositoryProvider(
+          BlocProvider(
             create: (context) => getIt.get<GetCategoryCubit>(),
           ),
         ],

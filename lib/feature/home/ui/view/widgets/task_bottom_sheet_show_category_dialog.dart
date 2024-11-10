@@ -16,7 +16,7 @@ import 'category_item_widget.dart';
 
 class TaskBottomSheetShowCategoryDialog extends StatefulWidget {
   const TaskBottomSheetShowCategoryDialog(
-      {super.key,  required this.categorySelected});
+      {super.key, required this.categorySelected});
 
   final void Function(Map<String, dynamic> category) categorySelected;
 
@@ -75,7 +75,7 @@ class _TaskBottomSheetShowCategoryDialogState
                           ),
                           itemBuilder: (context, index) {
                             var item = allCategories[index];
-
+    
                             if (item is CategoryItemModel) {
                               return GestureDetector(
                                 onTap: () {
@@ -93,7 +93,7 @@ class _TaskBottomSheetShowCategoryDialogState
                                 ),
                               );
                             }
-
+    
                             if (item is CategoryModel) {
                               return GestureDetector(
                                 onTap: () {
@@ -105,7 +105,8 @@ class _TaskBottomSheetShowCategoryDialogState
                                   context.pop();
                                 },
                                 child: CategoryItemWidget(
-                                  color: Color(int.parse(item.color.toString())),
+                                  color:
+                                      Color(int.parse(item.color.toString())),
                                   icon: Icon(
                                     IconData(
                                       int.parse(item.icon),
@@ -120,7 +121,7 @@ class _TaskBottomSheetShowCategoryDialogState
                                 ),
                               );
                             }
-
+    
                             return const SizedBox.shrink();
                           },
                         ),

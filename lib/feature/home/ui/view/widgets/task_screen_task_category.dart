@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uptodo/feature/home/data/model/task_model.dart';
 
 import '../../../../../core/helper/spacing.dart';
 import '../../../../../core/theming/app_styles.dart';
 import '../../../../../core/theming/colors_manger.dart';
-import '../../cubit/get_category/get_category_cubit.dart';
 import 'task_bottom_sheet_show_category_dialog.dart';
 
 class TaskScreenTaskCategory extends StatefulWidget {
@@ -38,11 +36,8 @@ class _TaskScreenTaskCategoryState extends State<TaskScreenTaskCategory> {
                 context: context,
                 builder: (context) {
                   return Center(
-                    child: BlocProvider.value(
-                      value: RepositoryProvider.of<GetCategoryCubit>(context),
-                      child: TaskBottomSheetShowCategoryDialog(
-                          categorySelected: (data) {}),
-                    ),
+                    child: TaskBottomSheetShowCategoryDialog(
+                        categorySelected: (data) {}),
                   );
                 });
           },

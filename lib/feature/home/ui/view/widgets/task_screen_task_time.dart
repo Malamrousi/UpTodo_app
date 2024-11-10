@@ -53,7 +53,7 @@ class _TaskScreenTaskTimeState extends State<TaskScreenTaskTime> {
 
   Future<void> _showTimePicker(context) async {
     final DateTime? pickDate = await showDatePicker(
-      confirmText: 'OK',
+      confirmText: 'Edit Date', 
       cancelText: 'Cancel',
       context: context,
       firstDate: DateTime.now(),
@@ -69,7 +69,7 @@ class _TaskScreenTaskTimeState extends State<TaskScreenTaskTime> {
     final TimeOfDay? picTime = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
-      confirmText: 'OK',
+      confirmText: 'Edit Time',
       cancelText: 'Cancel',
     );
 
