@@ -50,6 +50,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
             child: Row(
               children: [
                 TaskBottomSheetShowTimePicker(
+                 
                   showTimePicker: (date, time) {
                     setState(() {
                       dateOfTask = date;
@@ -74,21 +75,23 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                 const Spacer(),
                 TaskBottomSheetSendButton(
                   onPressed: () {
-                    String? formattedStartTime = startTime.toString() != '00:00:00.000'
-                        ? TaskModel.startTimeOfDayToString(startTime)
-                        : null;
+                    String? formattedStartTime =
+                        startTime.toString() != '00:00:00.000'
+                            ? TaskModel.startTimeOfDayToString(startTime)
+                            : null;
                     TaskModel taskModel = TaskModel(
                       uid: DateTime.now().toString(),
                       title: context.read<TaskCubit>().titleController.text,
                       description:
                           context.read<TaskCubit>().descriptionController.text,
                       isDone: false,
-                      taskPriority: taskPriority??1,
-                      category: taskCategory??{
-                        'title': 'Personal',
-                        'color': ColorsManger.primaryColor.value.toString(),
-                        'icon': '0xeb93'              
-                      },
+                      taskPriority: taskPriority ?? 1,
+                      category: taskCategory ??
+                          {
+                            'title': 'Personal',
+                            'color': ColorsManger.primaryColor.value.toString(),
+                            'icon': '0xeb93'
+                          },
                       date: dateOfTask,
                       startTime: formattedStartTime!,
                     );

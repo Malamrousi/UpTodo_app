@@ -50,6 +50,7 @@ display a reasonable layout on different screen sizes!
 - **google_sign_in: ^6.2.1**: Flutter plugin for Google Sign-In, a secure authentication system for signing in with a Google account.
 - **logger: ^2.4.0**: A package for logging and debugging in Flutter applications.
 -**intl: ^0.17.0**: A package for internationalization and localization.
+-**flutter_slidable: ^3.1.1**: A Flutter implementation of slidable list item with directional slide actions that can be dismissed.
 
 ## Branching Strategy
 

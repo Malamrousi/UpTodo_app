@@ -81,5 +81,11 @@ class ImageAssets {
   /// Assets for svgsWork
   /// assets/svgs/work.svg
   static const String svgsWork = "assets/svgs/work.svg";
+
+  /// Assets for svgOut
+   static const String svgOut = "assets/svgs/out.svg";
+   static const String svgRewrite = "assets/svgs/rewrite.svg";
+
+
 }
 

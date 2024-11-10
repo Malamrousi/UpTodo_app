@@ -1,0 +1,66 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:uptodo/core/assets/assets.dart';
+import 'package:uptodo/core/theming/app_styles.dart';
+import 'package:uptodo/feature/home/data/model/task_model.dart';
+
+import '../../../../../core/helper/spacing.dart';
+import '../../../../../core/theming/colors_manger.dart';
+import 'task_screen_show_dialog_text_and_des.dart';
+
+class TaskScreenTittleAndDes extends StatelessWidget {
+  const TaskScreenTittleAndDes({super.key, required this.taskModel});
+  final TaskModel taskModel;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Checkbox(
+          value: false,
+          onChanged: (value) {},
+          activeColor: ColorsManger.primaryColor,
+          checkColor: ColorsManger.whiteColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.r),
+            side: const BorderSide(
+              color: ColorsManger.whiteColor,
+              width: 1.3,
+            ),
+          ),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              taskModel.title,
+              style: AppStyles.font20WhiteColorRegular,
+            ),
+            verticalSpacing(10),
+            Text(
+              taskModel.description,
+              style: AppStyles.font16GrayColorRegular,
+            ),
+          ],
+        ),
+        const Spacer(),
+        IconButton(
+          onPressed: () {
+            showDialog(
+
+                context: context,
+                builder: (context) {
+                  return  Center(child: TaskScreenShowDialogTextAndDes(
+                    taskModel:  taskModel,
+                  ));
+                }
+                
+                );
+          },
+          icon: SvgPicture.asset(ImageAssets.svgRewrite),
+        ),
+      ],
+    );
+  }
+}
