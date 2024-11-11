@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:uptodo/feature/task/data/update_task_repo_impl.dart';
 
 import '../../../../home/data/model/task_model.dart';

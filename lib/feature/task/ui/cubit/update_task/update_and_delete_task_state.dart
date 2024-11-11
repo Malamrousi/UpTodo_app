@@ -1,6 +1,5 @@
 part of 'update_and_delete_task_cubit.dart';
 
-@immutable
 sealed class UpdateAndDeleteTaskState {}
 
 final class UpdateAndDeleteTaskInitial extends UpdateAndDeleteTaskState {}

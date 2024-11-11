@@ -135,7 +135,6 @@ class LoginRepoImpl implements LoginRepo {
             .set(loginUserInfoModel.toJson());
       }
     } catch (e) {
-      print('Error getting/creating user: $e');
     }
   }
 
