@@ -124,4 +124,19 @@ class TaskRepoImpl implements TaskRepo {
       return left(UnknownFailure());
     }
   }
+  @override 
+   Future<Either<FireStoreFailure, TaskModel>> updateTask(TaskModel taskModel) async{
+     try {  
+       await db
+          .collection(AppConstant.userCollection)
+          .doc(firebaseUser.uid)
+          .collection(AppConstant.taskCollection).doc(taskModel.uid).
+          update(taskModel.toJson());
+       return right(taskModel);
+     } on FirebaseException catch (error) {
+      return left(FireStoreExceptionHandler.handleException(error: error));
+    } catch (e) {
+      return left(UnknownFailure());
+    }
+   }
 }

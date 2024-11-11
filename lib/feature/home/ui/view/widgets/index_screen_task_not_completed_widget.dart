@@ -88,7 +88,7 @@ class _IndexScreenTaskNotCompletedWidgetState
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                task.title,
+                                task.title!,
                                 style: AppStyles.font16WhiteRegular,
                               ),
                               verticalSpacing(4),
@@ -96,11 +96,11 @@ class _IndexScreenTaskNotCompletedWidgetState
                                 children: [
                                   Text(
                                     overflow: TextOverflow.ellipsis,
-                                    '${task.date.day} /${task.date.month} At ${task.startTime}',
+                                    '${task.date!.day} /${task.date!.month} At ${task.startTime}',
                                     style: AppStyles.font14GrayColorRegular,
                                   ),
                                   horizontalSpacing(
-                                      MediaQuery.sizeOf(context).width * 0.03),
+                                      MediaQuery.sizeOf(context).width * 0.08),
                                   Container(
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 8.w, vertical: 8.h),
@@ -108,7 +108,7 @@ class _IndexScreenTaskNotCompletedWidgetState
                                       borderRadius: BorderRadius.circular(6.r),
                                       color: Color(
                                         int.parse(
-                                            taskCategory['color'].toString()),
+                                            taskCategory!['color'].toString()),
                                       ),
                                     ),
                                     child: Row(
@@ -142,7 +142,7 @@ class _IndexScreenTaskNotCompletedWidgetState
                                           height: 14,
                                         ),
                                         Text(
-                                          '${task.taskPriority + 1} ',
+                                          '${task.taskPriority! + 1} ',
                                           style:
                                               AppStyles.font12WhiteColorRegular,
                                         ),

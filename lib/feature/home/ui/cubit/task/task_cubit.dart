@@ -128,4 +128,10 @@ class TaskCubit extends Cubit<TaskState> {
       emit(TaskFailure(errorMessage: error.toString()));
     }
   }
+    @override
+  Future<void> close() {
+    titleController.dispose();
+    descriptionController.dispose();
+    return super.close();
+  }
 }

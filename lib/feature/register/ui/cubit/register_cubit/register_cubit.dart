@@ -1,10 +1,8 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:uptodo/feature/register/data/repo/register_repo_impl.dart';
 
 import '../../../data/model/user_info_model.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {

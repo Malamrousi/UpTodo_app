@@ -1,6 +1,5 @@
 part of 'get_category_cubit.dart';
 
-@immutable
 sealed class GetCategoryState {}
 
 final class GetCategoryInitial extends GetCategoryState {} 
