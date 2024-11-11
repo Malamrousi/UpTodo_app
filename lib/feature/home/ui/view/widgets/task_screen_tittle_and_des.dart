@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uptodo/core/assets/assets.dart';
 import 'package:uptodo/core/theming/app_styles.dart';
 import 'package:uptodo/feature/home/data/model/task_model.dart';
 
 import '../../../../../core/helper/spacing.dart';
-import '../../../../../core/theming/colors_manger.dart';
 import 'task_screen_show_dialog_text_and_des.dart';
 
 class TaskScreenTittleAndDes extends StatefulWidget {
@@ -18,24 +16,14 @@ class TaskScreenTittleAndDes extends StatefulWidget {
 }
 
 class _TaskScreenTittleAndDesState extends State<TaskScreenTittleAndDes> {
+    TimeOfDay endTime = TimeOfDay.now();
+
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Checkbox(
-          value: false,
-          onChanged: (value) {},
-          activeColor: ColorsManger.primaryColor,
-          checkColor: ColorsManger.whiteColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.r),
-            side: const BorderSide(
-              color: ColorsManger.whiteColor,
-              width: 1.3,
-            ),
-          ),
-        ),
+       
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -59,10 +47,10 @@ class _TaskScreenTittleAndDesState extends State<TaskScreenTittleAndDes> {
                   return Center(
                       child: TaskScreenShowDialogTextAndDes(
                     updateTask: (title, description) {
-                   setState(() {
+                      setState(() {
                         widget.taskModel.title = title;
-                     widget. taskModel.description = description;
-                   });
+                        widget.taskModel.description = description;
+                      });
                     },
                     taskModel: widget.taskModel,
                   ));

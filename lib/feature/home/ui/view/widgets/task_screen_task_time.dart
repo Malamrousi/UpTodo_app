@@ -13,8 +13,8 @@ class TaskScreenTaskTime extends StatefulWidget {
 }
 
 class _TaskScreenTaskTimeState extends State<TaskScreenTaskTime> {
-  DateTime selectedDate = DateTime.now();
-  TimeOfDay selectedTime = TimeOfDay.now();
+  DateTime? selectedDate = DateTime.now();
+  TimeOfDay? selectedTime = TimeOfDay.now();
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -33,12 +33,13 @@ class _TaskScreenTaskTimeState extends State<TaskScreenTaskTime> {
           onTap: () {
             String? formattedStartTime =
                 selectedTime.toString() != '00:00:00.000'
-                    ? TaskModel.startTimeOfDayToString(selectedTime)
+                    ? TaskModel.startTimeOfDayToString(selectedTime!)
                     : null;
             _showTimePicker(context, (date, time) {
               setState(() {
-                widget.taskModel.date = date;
-                widget.taskModel.startTime = formattedStartTime;
+                widget.taskModel.date = date ?? widget.taskModel.date;
+                widget.taskModel.startTime =
+                    time.toString() != '00:00:00.000' ? formattedStartTime : null;
               });
             });
           },

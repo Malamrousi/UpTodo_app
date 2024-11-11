@@ -100,7 +100,7 @@ class _IndexScreenTaskNotCompletedWidgetState
                                     style: AppStyles.font14GrayColorRegular,
                                   ),
                                   horizontalSpacing(
-                                      MediaQuery.sizeOf(context).width * 0.03),
+                                      MediaQuery.sizeOf(context).width * 0.08),
                                   Container(
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 8.w, vertical: 8.h),

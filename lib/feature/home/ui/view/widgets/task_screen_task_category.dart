@@ -59,7 +59,7 @@ class _TaskScreenTaskCategoryState extends State<TaskScreenTaskCategory> {
                     color: ColorsManger.whiteColor),
                 horizontalSpacing(10),
                 Text(
-                  widget.taskModel.category!['name'],
+                  widget.taskModel.category?['name'] ??'personal',
                   style: AppStyles.font12WhiteColorRegular,
                 ),
               ],

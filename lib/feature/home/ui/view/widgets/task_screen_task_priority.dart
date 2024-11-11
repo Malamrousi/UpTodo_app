@@ -40,7 +40,7 @@ class _TaskScreenTaskPriorityState extends State<TaskScreenTaskPriority> {
                       child: TaskBottomSheetShowPriorityDialog(
                     taskPriority: (priority) => {
                       setState(() {
-                        widget.taskModel.taskPriority = priority ;
+                        widget.taskModel.taskPriority = priority  ;
                       })
                     },
                   ));

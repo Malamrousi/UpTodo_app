@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uptodo/core/helper/extension.dart';
 import 'package:uptodo/feature/home/ui/cubit/update_task/update_task_cubit.dart';
 
 import '../../../../../core/helper/spacing.dart';
-import '../../../../../core/routing/routes.dart';
 import '../../../data/model/task_model.dart';
 import '../widgets/task_screen_app_bar.dart';
+import '../widgets/task_screen_bloc_listener.dart';
 import '../widgets/task_screen_delete_task.dart';
 import '../widgets/task_screen_edit_task_button.dart';
 import '../widgets/task_screen_task_category.dart';
@@ -39,32 +38,34 @@ class _TaskScreenState extends State<TaskScreen> {
               children: [
                 const TaskScreenAppBar(),
                 verticalSpacing(30),
-                 TaskScreenTittleAndDes(
+                TaskScreenTittleAndDes(
                   taskModel: widget.taskModel,
                 ),
                 verticalSpacing(84),
-                 TaskScreenTaskTime(
-                  taskModel: widget.taskModel,
-                 ),
-                verticalSpacing(30),
-                 TaskScreenTaskCategory(
+                TaskScreenTaskTime(
                   taskModel: widget.taskModel,
                 ),
                 verticalSpacing(30),
-                 TaskScreenTaskPriority(
-                  taskModel:widget.taskModel,
+                TaskScreenTaskCategory(
+                  taskModel: widget.taskModel,
+                ),
+                verticalSpacing(30),
+                TaskScreenTaskPriority(
+                  taskModel: widget.taskModel,
                 ),
                 verticalSpacing(30),
                 TaskScreenDeleteTask(
                   taskModel: widget.taskModel,
                 ),
                 verticalSpacing(MediaQuery.sizeOf(context).height * 0.3),
-               TaskScreenButton(
-                onPressed: () {
-                  context.read<UpdateTaskCubit>().updateTask( widget.taskModel);
-                  context.pushNamedAndRemoveUntil( Routes.homeScreen);
-                },
-              ),
+                const TaskScreenBlocListener(),
+                TaskScreenButton(
+                  onPressed: () {
+                    context
+                        .read<UpdateTaskCubit>()
+                        .updateTask(widget.taskModel);
+                  },
+                ),
               ],
             ),
           ),
