@@ -8,8 +8,8 @@ import '../../../../../core/theming/app_styles.dart';
 import '../../../../../core/theming/colors_manger.dart';
 import '../../../../../core/widget/app_text_button.dart';
 import '../../../../../core/widget/app_text_form_filed.dart';
-import '../../../data/model/task_model.dart';
-import '../../cubit/task/task_cubit.dart';
+import '../../../../home/data/model/task_model.dart';
+import '../../../../home/ui/cubit/task/task_cubit.dart';
 
 class TaskScreenShowDialogTextAndDes extends StatefulWidget {
   const TaskScreenShowDialogTextAndDes(

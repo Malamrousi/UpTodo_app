@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uptodo/core/helper/extension.dart';
-import 'package:uptodo/feature/home/ui/cubit/update_task/update_task_cubit.dart';
+import 'package:uptodo/feature/task/ui/cubit/update_task/update_and_delete_task_cubit.dart';
 
 import '../../../../../core/routing/routes.dart';
 import '../../../../../core/theming/app_styles.dart';
@@ -12,16 +12,16 @@ class TaskScreenBlocListener extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<UpdateTaskCubit, UpdateTaskState>(
+    return BlocListener<UpdateAndDeleteTaskCubit, UpdateAndDeleteTaskState>(
       listenWhen: (previous, current) =>
-          current is UpdateTaskSuccess ||
-          current is UpdateTaskFailure ||
-          current is UpdateTaskLoading,
+          current is UpdateAndDeleteTaskSuccess ||
+          current is UpdateAndDeleteTaskFailure ||
+          current is UpdateAndDeleteTaskLoading,
       listener: (context, state) {
-        if (state is UpdateTaskSuccess) {
+        if (state is UpdateAndDeleteTaskSuccess) {
           context.pop();
           context.pushNamedAndRemoveUntil(Routes.homeScreen);
-        } else if (state is UpdateTaskFailure) {
+        } else if (state is UpdateAndDeleteTaskFailure) {
           context.pop();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

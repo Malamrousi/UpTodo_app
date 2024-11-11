@@ -5,7 +5,7 @@ import 'package:uptodo/feature/home/data/model/task_model.dart';
 import '../../../../../core/helper/spacing.dart';
 import '../../../../../core/theming/app_styles.dart';
 import '../../../../../core/theming/colors_manger.dart';
-import 'task_bottom_sheet_show_category_dialog.dart';
+import '../../../../home/ui/view/widgets/task_bottom_sheet_show_category_dialog.dart';
 
 class TaskScreenTaskCategory extends StatefulWidget {
   const TaskScreenTaskCategory({super.key, required this.taskModel});
