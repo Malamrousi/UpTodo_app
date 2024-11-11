@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/theming/colors_manger.dart';
-import '../../../../task/ui/view/widgets/task_bottom_sheet_show_priority_dialog.dart';
+import 'task_bottom_sheet_show_priority_dialog.dart';
 
 class TaskBottomSheetPriorityButton extends StatelessWidget {
   const TaskBottomSheetPriorityButton({super.key ,required this.taskPriority});

@@ -6,7 +6,7 @@ import '../../../../../core/assets/assets.dart';
 import '../../../../../core/helper/spacing.dart';
 import '../../../../../core/theming/app_styles.dart';
 import '../../../../../core/theming/colors_manger.dart';
-import 'task_bottom_sheet_show_priority_dialog.dart';
+import '../../../../home/ui/view/widgets/task_bottom_sheet_show_priority_dialog.dart';
 
 class TaskScreenTaskPriority extends StatefulWidget {
   const TaskScreenTaskPriority({super.key, required this.taskModel});

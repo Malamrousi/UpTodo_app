@@ -54,4 +54,5 @@ void setUpGetIt() {
       () => UpdateAndDeleteTaskCubit(getIt.get<UpdateTaskRepoImpl>()));
   //update Time Cubit
   getIt.registerFactory<UpdateTimeCubit>(() => UpdateTimeCubit());
+  //update Tittle and des
 }

@@ -43,17 +43,21 @@ class _TaskScreenTittleAndDesState extends State<TaskScreenTittleAndDes> {
           onPressed: () {
             showDialog(
                 context: context,
-                builder: (context) {
-                  return Center(
-                      child: TaskScreenShowDialogTextAndDes(
-                    updateTask: (title, description) {
-                      setState(() {
-                        widget.taskModel.title = title;
-                        widget.taskModel.description = description;
-                      });
-                    },
-                    taskModel: widget.taskModel,
-                  ));
+                builder: (dialogContext) {
+                  return Dialog(
+                    backgroundColor: Colors.transparent,
+                    insetPadding: EdgeInsets.zero,
+                    child: Center(
+                        child: TaskScreenShowDialogTextAndDes(
+                      updateTask: (title, description) {
+                        setState(() {
+                          widget.taskModel.title = title;
+                          widget.taskModel.description = description;
+                        });
+                      },
+                      taskModel: widget.taskModel,
+                    )),
+                  );
                 });
           },
           icon: SvgPicture.asset(ImageAssets.svgRewrite),
