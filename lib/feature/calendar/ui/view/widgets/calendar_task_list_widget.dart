@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uptodo/core/helper/extension.dart';
 
@@ -11,50 +10,59 @@ import '../../../../../core/helper/spacing.dart';
 import '../../../../../core/routing/routes.dart';
 import '../../../../../core/theming/app_styles.dart';
 import '../../../../../core/theming/colors_manger.dart';
-import '../../cubit/task/task_cubit.dart';
+import '../../../../home/ui/cubit/task/task_cubit.dart';
+import '../../cubit/calender/calender_cubit.dart';
 
-class IndexScreenTaskNotCompletedWidget extends StatefulWidget {
-  const IndexScreenTaskNotCompletedWidget({super.key});
+class CalendarTaskListWidget extends StatefulWidget {
+  const CalendarTaskListWidget({super.key, this.date});
+  final DateTime? date;
 
   @override
-  State<IndexScreenTaskNotCompletedWidget> createState() =>
-      _IndexScreenTaskNotCompletedWidgetState();
+  State<CalendarTaskListWidget> createState() => _CalendarTaskListWidgetState();
 }
 
-class _IndexScreenTaskNotCompletedWidgetState
-    extends State<IndexScreenTaskNotCompletedWidget> {
+class _CalendarTaskListWidgetState extends State<CalendarTaskListWidget> {
   TimeOfDay endTime = TimeOfDay.now();
+
+ 
+ void initState() {
+    super.initState();
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 1,
       child: ListView.builder(
           physics: const BouncingScrollPhysics(),
-          itemCount: context.read<TaskCubit>().notCompletedTasksList.length,
+          itemCount: context.read<CalenderCubit>().taskListDataByDate.length,
           itemBuilder: (context, index) {
-            var task = context.read<TaskCubit>().notCompletedTasksList[index];
+            var task = context.read<CalenderCubit>().taskListDataByDate[index];
 
-            final taskCategory =
-                context.read<TaskCubit>().notCompletedTasksList[index].category;
+            final taskCategory = context
+                .read<CalenderCubit>()
+                .taskListDataByDate[index]
+                .category;
 
-            return Padding(
-              padding: EdgeInsets.only(top: 15.h),
-              child: Slidable(
-                startActionPane: ActionPane(
-                  motion: const ScrollMotion(),
-                  children: [
-                    SlidableAction(
-                      onPressed: (value) {
-                        context.pushNamed(Routes.taskScreen, arguments: task);
-                      },
-                      backgroundColor: Colors.green,
-                      foregroundColor: Colors.white,
-                      icon: Icons.update,
-                      label: 'Update',
-                    ),
-                  ],
-                ),
+            return Slidable(
+              startActionPane: ActionPane(
+                motion: const ScrollMotion(),
+                children: [
+                  SlidableAction(
+                    onPressed: (value) {
+                      context.pushNamed(Routes.taskScreen, arguments: task);
+                    },
+                    backgroundColor: Colors.green,
+                    foregroundColor: Colors.white,
+                    icon: Icons.update,
+                    label: 'Update',
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: Column(
                   children: [
                     Container(
@@ -66,12 +74,18 @@ class _IndexScreenTaskNotCompletedWidgetState
                         children: [
                           Checkbox(
                             value: task.isDone ?? false,
-                            onChanged: (value) {
-                              context.read<TaskCubit>().updateTaskDone(
+                            onChanged: (value) async {
+                              final currentContext = context;
+                              if (!mounted) return;
+                              await currentContext
+                                  .read<TaskCubit>()
+                                  .updateTaskDone(
                                     endTime: endTime,
                                     isDone: value ?? false,
                                     taskModel: task,
                                   );
+                                if (!mounted) return;
+                                currentContext.read<CalenderCubit>().reFetchTask();
                             },
                             activeColor: ColorsManger.primaryColor,
                             checkColor: ColorsManger.whiteColor,

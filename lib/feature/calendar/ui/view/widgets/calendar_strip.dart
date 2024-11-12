@@ -6,11 +6,12 @@ import 'calendar_date_time_list.dart';
 
 class CalendarStrip extends StatefulWidget {
   const CalendarStrip(
-      {super.key, required this.selectedDate, required this.onDateSelected});
-
+      {super.key, required this.selectedDate, required this.onDateSelected, });
   final DateTime selectedDate;
 
   final Function(DateTime) onDateSelected;
+
+  // final VoidCallback onActionButtonPressed;
 
   @override
   State<CalendarStrip> createState() => _CalendarStripState();
@@ -63,6 +64,7 @@ class _CalendarStripState extends State<CalendarStrip> {
           selectedDate: widget.selectedDate,
          ),
           CalendarDateTimeList(
+            // onTap:widget. onActionButtonPressed ,
             scrollController: _scrollController,
             dates: _dates,
             selectedDate: widget.selectedDate,

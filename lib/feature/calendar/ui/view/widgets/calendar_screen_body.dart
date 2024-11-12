@@ -3,6 +3,7 @@ import 'package:uptodo/core/theming/app_styles.dart';
 
 import '../../../../../core/helper/spacing.dart';
 import 'calendar_strip.dart';
+import 'calendar_task_list_state.dart';
 
 class CalendarScreenBody extends StatefulWidget {
   const CalendarScreenBody({super.key});
@@ -24,7 +25,7 @@ class _CalendarScreenBodyState extends State<CalendarScreenBody> {
             'Calendar',
             style: AppStyles.font20WhiteColorRegular,
           )),
-                  verticalSpacing(16),
+          verticalSpacing(16),
           CalendarStrip(
             selectedDate: selectedDate,
             onDateSelected: (date) {
@@ -32,7 +33,11 @@ class _CalendarScreenBodyState extends State<CalendarScreenBody> {
                 selectedDate = date;
               });
             },
-          )
+          ),
+          verticalSpacing(20),
+          CalendarTaskList(
+            date: selectedDate,
+          ),
         ],
       ),
     );
