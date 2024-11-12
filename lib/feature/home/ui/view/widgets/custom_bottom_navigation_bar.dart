@@ -29,9 +29,10 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100.h,
+      height: 80.h,
       child: Center(
         child: BottomAppBar(
+          padding: EdgeInsets.zero,
           color: ColorsManger.darkGray,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,24 +42,27 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                 onTap: () => widget.onItemTapped!(index),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.w),
-                  child: Column(
-                    children: [
-                      Icon(
-                        item.icon,
-                        color: widget.currentIndex == index
-                            ? ColorsManger.primaryColor
-                            : ColorsManger.whiteColor,
-                        size: 28.sp,
-                      ),
-                      Text(
-                        item.label,
-                        style: TextStyle(
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          item.icon,
                           color: widget.currentIndex == index
-                              ? ColorsManger.whiteColor
-                              : ColorsManger.grayColor,
+                              ? ColorsManger.primaryColor
+                              : ColorsManger.whiteColor,
+                          size: 28.sp,
                         ),
-                      )
-                    ],
+                        Text(
+                          item.label,
+                          style: TextStyle(
+                            color: widget.currentIndex == index
+                                ? ColorsManger.whiteColor
+                                : ColorsManger.grayColor,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               );

@@ -5,6 +5,7 @@ import 'package:uptodo/feature/home/ui/view/widgets/index_screen_no_data_state.d
 
 import '../../../../../core/theming/app_styles.dart';
 import '../../../../../core/widget/loading_widget .dart';
+import '../../../../calendar/ui/view/calendar_screen.dart';
 import 'index_screen_has_data.dart';
 
 class CustomPageIndex {
@@ -25,11 +26,8 @@ class CustomPageIndex {
         }
       },
     ),
-    const Center(
-        child: Text(
-      'Calendar Page',
-      style: TextStyle(color: Colors.white, fontSize: 30),
-    )),
+    // CalendarScreen
+    const CalendarScreen(),
     const Center(
         child: Text(
       'Focus Page',
