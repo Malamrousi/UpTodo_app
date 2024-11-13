@@ -5,8 +5,9 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:uptodo/core/constant/app_constant.dart';
 import 'package:uptodo/core/failures/auth_failure.dart';
-import 'package:uptodo/feature/login/data/model/login_user_info_model.dart';
 import 'package:uptodo/feature/user/data/repo/user_rep.dart';
+
+import '../model/user_model.dart';
 
 class UserRepoImpl implements UserRep {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -32,8 +33,8 @@ class UserRepoImpl implements UserRep {
   }
 
   @override
-  Future<Either<AuthFailure, LoginUserInfoModel>> getCurrentUser(
-      LoginUserInfoModel loginUserInfoModel) async {
+  Future<Either<AuthFailure, UserModel>> getCurrentUser(
+      UserModel userModel) async {
     try {
       final user = await db
           .collection(AppConstant.userCollection)
@@ -41,8 +42,8 @@ class UserRepoImpl implements UserRep {
           .get();
 
       final data = user.data();
-      loginUserInfoModel = LoginUserInfoModel.fromJson(data!);
-      return right(loginUserInfoModel);
+      userModel = UserModel.fromJson(data!);
+      return right(userModel);
     } on FirebaseAuthException catch (error) {
       return left(AuthExceptionHandler.handleException(error: error));
     } catch (e) {

@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
-
-// ScreenUtil
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-// Assets
 import 'package:uptodo/core/assets/assets.dart';
-// Spacing
 import 'package:uptodo/core/helper/spacing.dart';
-// AppStyles
+import 'package:uptodo/feature/user/data/model/user_model.dart';
+import 'package:uptodo/feature/user/ui/cubit/cubit/user_cubit.dart';
 import '../../../../../core/theming/app_styles.dart';
 
-class UserImageAndName extends StatelessWidget {
-  const UserImageAndName({super.key});
+class UserImageAndName extends StatefulWidget {
+  const UserImageAndName({super.key, required this.userModel});
+
+  final UserModel userModel;
+
+  @override
+  State<UserImageAndName> createState() => _UserImageAndNameState();
+}
+
+class _UserImageAndNameState extends State<UserImageAndName> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<UserCubit>().getCurrentUser(widget.userModel);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +48,24 @@ class UserImageAndName extends StatelessWidget {
           ),
         ),
         verticalSpacing(10),
-        Text(
-          'Martha Hays',
-          style: AppStyles.font20WhiteColorRegular,
+        BlocBuilder<UserCubit, UserState>(
+          builder: (context, state) {
+            return switch (state) {
+              UserLoading() => const CircularProgressIndicator(),
+              UserSuccess(userModel: final user) => Text(
+                  user.displayName ?? '🕵️‍♂️',
+                  style: AppStyles.font20WhiteColorRegular,
+                ),
+              UserFailure(errorMessage: final message) => Text(
+                  'Error: $message',
+                  style: AppStyles.font20WhiteColorRegular.copyWith(color: Colors.red),
+                ),
+              _ => Text(
+                  'Loading...',
+                  style: AppStyles.font20WhiteColorRegular,
+                ),
+            };
+          },
         ),
       ],
     );

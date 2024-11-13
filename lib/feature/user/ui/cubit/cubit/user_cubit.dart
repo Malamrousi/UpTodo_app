@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../login/data/model/login_user_info_model.dart';
+import '../../../data/model/user_model.dart';
 import '../../../data/repo/user_repo_impl.dart';
 
 part 'user_state.dart';
@@ -10,12 +10,12 @@ class UserCubit extends Cubit<UserState> {
 
   final UserRepoImpl userRepoImpl;
 
-  void getCurrentUser(LoginUserInfoModel loginUserInfoModel) async {
-    final user = await userRepoImpl.getCurrentUser(loginUserInfoModel);
+  void getCurrentUser(UserModel userModel) async {
+    final user = await userRepoImpl.getCurrentUser(userModel);
     user.fold((failure) {
       emit(UserFailure(errorMessage: failure.errorMessage));
     }, (user) {
-      emit(UserSuccess(loginUserInfoModel: user));
+      emit(UserSuccess(userModel: user));
     });
   }
 

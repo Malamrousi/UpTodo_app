@@ -5,8 +5,8 @@ sealed class UserState {}
 final class UserInitial extends UserState {}
 final class UserLoading extends UserState {}
 final class UserSuccess extends UserState {
-  final LoginUserInfoModel loginUserInfoModel;
-  UserSuccess({required this.loginUserInfoModel});
+  final UserModel userModel;
+  UserSuccess({required this.userModel});
 
 }
 final class PasswordChangeSuccess extends UserState {}

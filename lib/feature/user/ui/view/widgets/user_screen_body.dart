@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Spacing
 import 'package:uptodo/core/helper/spacing.dart';
 //NumberFoCompletedAndNotCompleted widget
+import '../../../data/model/user_model.dart';
 import '../../cubit/cubit/user_cubit.dart';
 import 'number_fo_completed_and_not_completed.dart';
 //UserImageAndName widget
@@ -18,6 +19,7 @@ import 'user_log_out_bloc_listener.dart';
 class UserScreenBody extends StatelessWidget {
   const UserScreenBody({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -28,7 +30,9 @@ class UserScreenBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          const UserImageAndName(),
+           UserImageAndName(
+            userModel: UserModel(), 
+          ),
           verticalSpacing(20),
           const NumberFoCompletedAndNotCompleted(),
           verticalSpacing(32),
