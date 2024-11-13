@@ -51,6 +51,7 @@ display a reasonable layout on different screen sizes!
 - **logger: ^2.4.0**: A package for logging and debugging in Flutter applications.
 -**intl: ^0.17.0**: A package for internationalization and localization.
 -**flutter_slidable: ^3.1.1**: A Flutter implementation of slidable list item with directional slide actions that can be dismissed.
+-**circular_countdown_timer: ^0.2.4**:Make an animated circular countdown using Circular Countdown Timer.
 
 ## Branching Strategy
 
