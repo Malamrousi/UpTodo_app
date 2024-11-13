@@ -29,6 +29,9 @@ class ImageAssets {
   /// Assets for imagesUser
   /// assets/images/user.png
   static const String imagesUser = "assets/images/user.png";
+  static const String imagesUserImageFirst = "assets/images/user_image_first.png";
+
+   
 
   /// Assets for svgsDesign
   /// assets/svgs/design.svg

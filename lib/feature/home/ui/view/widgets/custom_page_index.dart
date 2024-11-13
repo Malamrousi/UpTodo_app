@@ -7,6 +7,7 @@ import '../../../../../core/theming/app_styles.dart';
 import '../../../../../core/widget/loading_widget .dart';
 import '../../../../calendar/ui/view/calendar_screen.dart';
 import '../../../../foucs/ui/view/focus_mode_screen.dart';
+import '../../../../user/ui/view/user_screen.dart';
 import 'index_screen_has_data.dart';
 
 class CustomPageIndex {
@@ -14,15 +15,17 @@ class CustomPageIndex {
     BlocBuilder<TaskCubit, TaskState>(
       builder: (context, state) {
         if (state is TaskSuccess) {
-          if(state.notCompletedTasks.isEmpty && state.completedTasks.isEmpty){ 
+          if (state.notCompletedTasks.isEmpty && state.completedTasks.isEmpty) {
             return const IndexScreenNoDataState();
-          }
-          else {
+          } else {
             return const IndexScreenHasData();
           }
-        } else if(state is TaskFailure) {
-         return Center(child: Text(state.errorMessage , style: AppStyles.font16WhiteRegular),);
-        }else{
+        } else if (state is TaskFailure) {
+          return Center(
+            child:
+                Text(state.errorMessage, style: AppStyles.font16WhiteRegular),
+          );
+        } else {
           return const LoadingWidget();
         }
       },
@@ -31,10 +34,6 @@ class CustomPageIndex {
     const CalendarScreen(),
     // Focus Screen
     const FocusModeScreen(),
-    const Center(
-        child: Text(
-      'Profile Page',
-      style: TextStyle(color: Colors.white, fontSize: 30),
-    )),
+    const UserScreen(),
   ];
 }
