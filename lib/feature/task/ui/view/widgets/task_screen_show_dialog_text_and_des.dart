@@ -38,8 +38,8 @@ class _TaskScreenShowDialogTextAndDesState
     return Material(
       color: Colors.transparent,
       child: SizedBox(
-        width: double.infinity,
-        height: MediaQuery.sizeOf(context).height * 0.42.h,
+      
+        height: MediaQuery.sizeOf(context).height * 0.43.h,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Container(
@@ -82,7 +82,7 @@ class _TaskScreenShowDialogTextAndDesState
                       fillColor: Colors.transparent,
                       hintStyle: AppStyles.font16WhiteOpacity44Regular,
                       enabledBorder: InputBorder.none),
-                  verticalSpacing(10),
+                  verticalSpacing(2),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [

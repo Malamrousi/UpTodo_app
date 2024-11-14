@@ -37,13 +37,16 @@ class _TaskScreenTaskPriorityState extends State<TaskScreenTaskPriority> {
                 context: context,
                 builder: (context) {
                   return Center(
-                      child: TaskBottomSheetShowPriorityDialog(
-                    taskPriority: (priority) => {
-                      setState(() {
-                        widget.taskModel.taskPriority = priority  ;
-                      })
-                    },
-                  ));
+                    child: TaskBottomSheetShowPriorityDialog(
+                      taskPriority: (priority) => {
+                        setState(
+                          () {
+                            widget.taskModel.taskPriority = priority;
+                          },
+                        )
+                      },
+                    ),
+                  );
                 });
           },
           child: Container(
@@ -59,7 +62,7 @@ class _TaskScreenTaskPriorityState extends State<TaskScreenTaskPriority> {
                 SvgPicture.asset(ImageAssets.svgsFlag),
                 horizontalSpacing(4),
                 Text(
-                '${ widget.taskModel.taskPriority}',
+                  '${widget.taskModel.taskPriority! + 1}',
                   style: AppStyles.font12WhiteColorRegular,
                 ),
               ],

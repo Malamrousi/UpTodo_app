@@ -6,7 +6,7 @@ import 'package:uptodo/feature/user/ui/view/widgets/custom_snack_bar_info.dart';
 //NumberFoCompletedAndNotCompleted widget
 import '../../../../../core/theming/app_styles.dart';
 //UserImageAndName widget
-import 'change_password_widget.dart';
+import 'change_acount_name_widget.dart';
 import 'custom_text_and_icon.dart';
 
 class UserAppSettingAndUpToDo extends StatefulWidget {
@@ -41,7 +41,7 @@ class _UserAppSettingAndUpToDoState extends State<UserAppSettingAndUpToDo> {
           style: AppStyles.font14GrayColorRegular,
         ),
         verticalSpacing(32),
-        ChangePasswordWidget(
+        ChangeAccountName(
           userModel: widget.userModel,
         ),
         verticalSpacing(20),

@@ -39,7 +39,7 @@ class _UpdateNameDialogState extends State<UpdateNameDialog> {
     return BlocListener<UserCubit, UserState>(
       listener: (context, state) {
         if (state is NameUpdateSuccess) {
-          Navigator.pop(context);
+          context.pop();
         } else if (state is UserFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.errorMessage)),

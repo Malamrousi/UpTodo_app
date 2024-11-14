@@ -1,3 +1,4 @@
+
 import 'package:dartz/dartz.dart';
 import 'package:uptodo/core/failures/auth_failure.dart';
 
@@ -9,5 +10,4 @@ abstract class UserRep {
   Future<Either<AuthFailure, void>> changePassword(dynamic password);
   Future<Either<AuthFailure, void>> updateUserName(
       UserModel userModel, String name);
-      Stream<UserModel> getUserStream();
 }

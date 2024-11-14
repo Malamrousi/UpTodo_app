@@ -4,8 +4,8 @@ import 'package:uptodo/feature/user/data/model/user_model.dart';
 import 'custom_text_and_icon.dart';
 import 'update_name_show_dialog.dart';
 
-class ChangePasswordWidget extends StatelessWidget {
-  const ChangePasswordWidget({super.key, required this.userModel});
+class ChangeAccountName extends StatelessWidget {
+  const ChangeAccountName({super.key, required this.userModel});
 
   final UserModel userModel;
 

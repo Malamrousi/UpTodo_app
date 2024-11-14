@@ -1,6 +1,8 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:uptodo/core/constant/app_constant.dart';
@@ -12,6 +14,7 @@ import '../model/user_model.dart';
 class UserRepoImpl implements UserRep {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore db = FirebaseFirestore.instance;
+  final FirebaseStorage storage = FirebaseStorage.instance;
 
   @override
   Future<Either<AuthFailure, void>> changePassword(dynamic password) async {
@@ -75,12 +78,6 @@ class UserRepoImpl implements UserRep {
     }
   }
 
-  @override
-  Stream<UserModel> getUserStream() {
-    return db
-        .collection(AppConstant.userCollection)
-        .doc(firebaseAuth.currentUser!.uid)
-        .snapshots()
-        .map((data) => UserModel.fromJson(data.data()!));
-  }
+
+
 }

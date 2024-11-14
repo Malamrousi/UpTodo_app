@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../data/model/user_model.dart';
 import '../../../data/repo/user_repo_impl.dart';
@@ -11,6 +13,7 @@ class UserCubit extends Cubit<UserState> {
 
   UserModel? currentUser;
   final UserRepoImpl userRepoImpl;
+  final ImagePicker picker = ImagePicker();
 
   TextEditingController nameController = TextEditingController();
 
@@ -32,7 +35,6 @@ class UserCubit extends Cubit<UserState> {
       emit(UserFailure(errorMessage: failure.errorMessage));
     }, (_) {
       emit(PasswordChangeSuccess());
-     
     });
   }
 
@@ -45,7 +47,7 @@ class UserCubit extends Cubit<UserState> {
       },
       (_) {
         emit(NameUpdateSuccess());
-         getCurrentUser(userModel);
+        getCurrentUser(userModel);
       },
     );
   }

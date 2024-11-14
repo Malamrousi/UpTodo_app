@@ -12,7 +12,7 @@ import '../../../../../core/widget/app_text_button.dart';
 class TaskBottomSheetShowPriorityDialog extends StatefulWidget {
   const TaskBottomSheetShowPriorityDialog(
       {super.key, required this.taskPriority});
-  final void Function(int ) taskPriority;
+  final void Function(int) taskPriority;
 
   @override
   State<TaskBottomSheetShowPriorityDialog> createState() =>
@@ -96,7 +96,7 @@ class _TaskBottomSheetShowPriorityDialogState
                       AppTextButton(
                         textStyle: AppStyles.font16WPrimaryColorRegular,
                         borderColor: Colors.transparent,
-                        bottomWidth: MediaQuery.sizeOf(context).width * .33,
+                        bottomWidth: MediaQuery.sizeOf(context).width * .32,
                         bottomHeight: 48,
                         onPressed: () {
                           context.pop();
@@ -106,7 +106,7 @@ class _TaskBottomSheetShowPriorityDialogState
                       horizontalSpacing(20),
                       AppTextButton(
                         textStyle: AppStyles.font16WhiteRegular,
-                        bottomWidth: MediaQuery.sizeOf(context).width * .33,
+                        bottomWidth: MediaQuery.sizeOf(context).width * .37,
                         bottomHeight: 48,
                         onPressed: () {
                           widget.taskPriority(currentIndex);
