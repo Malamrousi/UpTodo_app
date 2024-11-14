@@ -12,16 +12,12 @@ import 'core/observering/simple_bloc_observer.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-
-  );
-
-
+  await Firebase.initializeApp();
 
   await ScreenUtil.ensureScreenSize();
   setUpGetIt();
 
   Bloc.observer = SimpleBlocObserver();
-  
+
   runApp(const UpToDo());
 }

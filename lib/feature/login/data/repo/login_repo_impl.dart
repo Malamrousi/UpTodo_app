@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:uptodo/core/constant/app_constant.dart';
 import 'package:uptodo/core/failures/auth_failure.dart';
 import 'package:uptodo/feature/login/data/model/login_user_info_model.dart';
 import 'package:uptodo/feature/login/data/repo/login_repo.dart';
@@ -27,7 +28,7 @@ class LoginRepoImpl implements LoginRepo {
       }
 
       final userDoc =
-          await db.collection('users').doc(userCredential.user!.uid).get();
+          await db.collection(AppConstant.userCollection).doc(userCredential.user!.uid).get();
 
       if (!userDoc.exists) {
         final newUser = LoginUserInfoModel(
@@ -37,7 +38,7 @@ class LoginRepoImpl implements LoginRepo {
         );
 
         await db
-            .collection('users')
+            .collection(AppConstant.userCollection)
             .doc(userCredential.user!.uid)
             .set(newUser.toJson());
 
@@ -126,11 +127,11 @@ class LoginRepoImpl implements LoginRepo {
   Future<void> getUser(
       LoginUserInfoModel loginUserInfoModel, User fireBaseUser) async {
     try {
-      final userDoc = await db.collection('users').doc(fireBaseUser.uid).get();
+      final userDoc = await db.collection(AppConstant.userCollection).doc(fireBaseUser.uid).get();
 
       if (!userDoc.exists) {
         await db
-            .collection('users')
+            .collection(AppConstant.userCollection)
             .doc(fireBaseUser.uid)
             .set(loginUserInfoModel.toJson());
       }

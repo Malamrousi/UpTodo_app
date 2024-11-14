@@ -3,6 +3,8 @@ import 'package:uptodo/core/helper/spacing.dart';
 import 'package:uptodo/core/theming/app_styles.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:uptodo/core/theming/colors_manger.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class FocusModeScreenBody extends StatefulWidget {
   const FocusModeScreenBody({super.key});
@@ -111,21 +113,10 @@ class _FocusModeScreenBodyState extends State<FocusModeScreenBody> {
   }
 
   void _showSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        
-        width: double.infinity,
-        content: Text(
-          message,
-          style: AppStyles.font16WhiteRegular,
-        ),
-        backgroundColor: ColorsManger.darkGray,
-        duration: const Duration(seconds: 2),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        
+    showTopSnackBar(
+      Overlay.of(context),
+      const CustomSnackBar.success(
+        message: "Focus mode started successfully",
       ),
     );
   }

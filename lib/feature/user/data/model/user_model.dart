@@ -1,12 +1,12 @@
-class UserInfoModel {
-  final String? displayName;
+class UserModel {
+  String? displayName;
   final String? email;
   final String? uid;
 
-  UserInfoModel({this.displayName, this.email, this.uid ,  }); 
+  UserModel({this.displayName, this.email, this.uid});
 
-  factory UserInfoModel.fromJson(Map<String, dynamic> json) {
-    return UserInfoModel(
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
       displayName: json['name'],
       email: json['email'],
       uid: json['uid'],
@@ -16,6 +16,6 @@ class UserInfoModel {
   Map<String, dynamic> toJson() => {
         'name': displayName,
         'email': email,
-        'uid': uid, 
+        'uid': uid,
       };
 }

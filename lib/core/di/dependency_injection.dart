@@ -9,12 +9,14 @@ import 'package:uptodo/feature/task/ui/cubit/update_time/update_time_cubit.dart'
 import 'package:uptodo/feature/login/data/repo/login_repo_impl.dart';
 import 'package:uptodo/feature/register/data/repo/register_repo_impl.dart';
 import 'package:uptodo/feature/register/ui/cubit/register_cubit/register_cubit.dart';
+import 'package:uptodo/feature/user/ui/cubit/cubit/user_cubit.dart';
 
 import '../../feature/calendar/ui/cubit/calender/calender_cubit.dart';
 import '../../feature/home/ui/cubit/get_category/get_category_cubit.dart';
 import '../../feature/task/data/update_task_repo_impl.dart';
 import '../../feature/task/ui/cubit/update_task/update_and_delete_task_cubit.dart';
 import '../../feature/login/ui/cubit/login_cubit/login_cubit.dart';
+import '../../feature/user/data/repo/user_repo_impl.dart';
 
 final getIt = GetIt.instance;
 
@@ -34,7 +36,10 @@ void setUpGetIt() {
   getIt.registerLazySingleton<UpdateTaskRepoImpl>(() => UpdateTaskRepoImpl());
 
   //CalendarRepoImpl
-   getIt.registerLazySingleton<CalenderRepoImpl>(() => CalenderRepoImpl()); 
+  getIt.registerLazySingleton<CalenderRepoImpl>(() => CalenderRepoImpl());
+
+  //userRepoImpl
+  getIt.registerLazySingleton<UserRepoImpl>(() => UserRepoImpl());
 
   //taskCubit
   getIt.registerFactory<TaskCubit>(() => TaskCubit(getIt.get<TaskRepoImpl>()));
@@ -60,5 +65,9 @@ void setUpGetIt() {
   //update Time Cubit
   getIt.registerFactory<UpdateTimeCubit>(() => UpdateTimeCubit());
   //CalendarCubit
-  getIt.registerFactory<CalenderCubit>(() => CalenderCubit(getIt.get<CalenderRepoImpl>()));
+  getIt.registerFactory<CalenderCubit>(
+      () => CalenderCubit(getIt.get<CalenderRepoImpl>()));
+
+  //userCubit
+  getIt.registerFactory<UserCubit>(() => UserCubit(getIt.get<UserRepoImpl>()));
 }
