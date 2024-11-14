@@ -1,8 +1,8 @@
 //MATERIAL
 import 'package:flutter/material.dart';
-// Spacing
 import 'package:uptodo/core/helper/spacing.dart';
 import 'package:uptodo/feature/user/data/model/user_model.dart';
+import 'package:uptodo/feature/user/ui/view/widgets/custom_snack_bar_info.dart';
 //NumberFoCompletedAndNotCompleted widget
 import '../../../../../core/theming/app_styles.dart';
 //UserImageAndName widget
@@ -29,9 +29,11 @@ class _UserAppSettingAndUpToDoState extends State<UserAppSettingAndUpToDo> {
           style: AppStyles.font14GrayColorRegular,
         ),
         verticalSpacing(20),
-        const CustomTextAndIcon(
-          icon: Icons.settings_outlined,
-          title: 'App Settings',
+        const CustomSnackBarInfo(
+          child: CustomTextAndIcon(
+            icon: Icons.settings_outlined,
+            title: 'App Settings',
+          ),
         ),
         verticalSpacing(32),
         Text(
@@ -39,16 +41,22 @@ class _UserAppSettingAndUpToDoState extends State<UserAppSettingAndUpToDo> {
           style: AppStyles.font14GrayColorRegular,
         ),
         verticalSpacing(32),
-      ChangePasswordWidget(userModel: widget.userModel,),
-        verticalSpacing(20),
-        const CustomTextAndIcon(
-          icon: Icons.key_outlined,
-          title: 'Change account password',
+        ChangePasswordWidget(
+          userModel: widget.userModel,
         ),
         verticalSpacing(20),
-        const CustomTextAndIcon(
-          icon: Icons.camera_alt_outlined,
-          title: 'Change account Image',
+        const CustomSnackBarInfo(
+          child: CustomTextAndIcon(
+            icon: Icons.key_outlined,
+            title: 'Change account password',
+          ),
+        ),
+        verticalSpacing(20),
+        const CustomSnackBarInfo(
+          child: CustomTextAndIcon(
+            icon: Icons.camera_alt_outlined,
+            title: 'Change account Image',
+          ),
         ),
         verticalSpacing(32),
         Text(
@@ -56,9 +64,11 @@ class _UserAppSettingAndUpToDoState extends State<UserAppSettingAndUpToDo> {
           style: AppStyles.font14GrayColorRegular,
         ),
         verticalSpacing(32),
-        const CustomTextAndIcon(
-          icon: Icons.workspaces_outlined,
-          title: 'About US',
+        const CustomSnackBarInfo(
+          child: CustomTextAndIcon(
+            icon: Icons.workspaces_outlined,
+            title: 'About US',
+          ),
         ),
         verticalSpacing(20),
         const CustomTextAndIcon(
@@ -66,14 +76,18 @@ class _UserAppSettingAndUpToDoState extends State<UserAppSettingAndUpToDo> {
           title: 'FAQ',
         ),
         verticalSpacing(20),
-        const CustomTextAndIcon(
-          icon: Icons.bolt_outlined,
-          title: 'Help & Feedback',
+        const CustomSnackBarInfo(
+          child: CustomTextAndIcon(
+            icon: Icons.bolt_outlined,
+            title: 'Help & Feedback',
+          ),
         ),
         verticalSpacing(20),
-        const CustomTextAndIcon(
-          icon: Icons.thumb_up_outlined,
-          title: 'Support US',
+        const CustomSnackBarInfo(
+          child: CustomTextAndIcon(
+            icon: Icons.thumb_up_outlined,
+            title: 'Support US',
+          ),
         ),
       ],
     );
