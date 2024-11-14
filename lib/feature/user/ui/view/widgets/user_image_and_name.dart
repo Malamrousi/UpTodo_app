@@ -50,21 +50,19 @@ class _UserImageAndNameState extends State<UserImageAndName> {
         verticalSpacing(10),
         BlocBuilder<UserCubit, UserState>(
           builder: (context, state) {
-            return switch (state) {
-              UserLoading() => const CircularProgressIndicator(),
-              UserSuccess(userModel: final user) => Text(
-                  user.displayName ?? '🕵️‍♂️',
-                  style: AppStyles.font20WhiteColorRegular,
-                ),
-              UserFailure(errorMessage: final message) => Text(
-                  'Error: $message',
-                  style: AppStyles.font20WhiteColorRegular.copyWith(color: Colors.red),
-                ),
-              _ => Text(
-                  'Loading...',
-                  style: AppStyles.font20WhiteColorRegular,
-                ),
-            };
+            if (state is UserSuccess) {
+              return Text(
+                state.userModel.displayName ?? 'Name',
+                style: AppStyles.font20WhiteColorRegular,
+              );
+            } else if (state is UserFailure) {
+              return Text(
+                state.errorMessage,
+                style: AppStyles.font14WhiteColorRegular,
+              );
+            }else{
+              return const Center(child: CircularProgressIndicator());
+            }
           },
         ),
       ],

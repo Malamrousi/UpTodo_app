@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/model/user_model.dart';
@@ -8,15 +9,21 @@ part 'user_state.dart';
 class UserCubit extends Cubit<UserState> {
   UserCubit(this.userRepoImpl) : super(UserInitial());
 
+  UserModel? currentUser;
   final UserRepoImpl userRepoImpl;
 
+  TextEditingController nameController = TextEditingController();
+
   void getCurrentUser(UserModel userModel) async {
-    final user = await userRepoImpl.getCurrentUser(userModel);
-    user.fold((failure) {
-      emit(UserFailure(errorMessage: failure.errorMessage));
-    }, (user) {
-      emit(UserSuccess(userModel: user));
-    });
+    emit(UserLoading());
+    final result = await userRepoImpl.getCurrentUser(userModel);
+    result.fold(
+      (failure) => emit(UserFailure(errorMessage: failure.errorMessage)),
+      (user) {
+        currentUser = user;
+        emit(UserSuccess(userModel: user));
+      },
+    );
   }
 
   void changePassword(dynamic password) async {
@@ -25,7 +32,22 @@ class UserCubit extends Cubit<UserState> {
       emit(UserFailure(errorMessage: failure.errorMessage));
     }, (_) {
       emit(PasswordChangeSuccess());
+     
     });
+  }
+
+  Future<void> updateUserName(UserModel userModel, String name) async {
+    emit(UserLoading());
+    final result = await userRepoImpl.updateUserName(userModel, name);
+    result.fold(
+      (failure) {
+        emit(UserFailure(errorMessage: failure.errorMessage));
+      },
+      (_) {
+        emit(NameUpdateSuccess());
+         getCurrentUser(userModel);
+      },
+    );
   }
 
   void logOut() async {

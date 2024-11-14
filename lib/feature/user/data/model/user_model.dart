@@ -1,5 +1,5 @@
 class UserModel {
-  final String? displayName;
+   String? displayName;
   final String? email;
   final String? uid;
 

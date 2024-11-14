@@ -16,20 +16,12 @@ class UserLogOutBlocListener extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<UserCubit, UserState>(
-      
-    listenWhen: (previous, current) =>
+      listenWhen: (previous, current) =>
           current is UserLogOutSuccess ||
           current is UserFailure ||
           current is UserLoading,
       listener: (context, state) {
-        if (state is UserLoading) {
-          showDialog(
-            context: context,
-            builder: (context) => const Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        } else if (state is UserLogOutSuccess) {
+        if (state is UserLogOutSuccess) {
           context.pop();
           context.pushNamedAndRemoveUntil(Routes.startScreen);
         } else if (state is UserFailure) {

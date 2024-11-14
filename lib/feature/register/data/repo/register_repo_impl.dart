@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uptodo/feature/register/data/model/user_info_model.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 //repo
+import '../../../../core/constant/app_constant.dart';
 import '../../../../core/failures/auth_failure.dart';
 import 'registere_repo.dart';
 
@@ -111,6 +112,6 @@ class RegisterRepoImpl implements RegisterRepo {
 
   @override
   void createUser(UserInfoModel userInfoModel,User fireBaseUser) async {
-    db.collection('User').doc(fireBaseUser.uid).set(userInfoModel.toJson());
+    db.collection(AppConstant.userCollection).doc(fireBaseUser.uid).set(userInfoModel.toJson());
   }
 }

@@ -16,36 +16,47 @@ import 'user_log_out.dart';
 //UserLogOut Bloc Listener
 import 'user_log_out_bloc_listener.dart';
 
-class UserScreenBody extends StatelessWidget {
+class UserScreenBody extends StatefulWidget {
   const UserScreenBody({super.key});
 
 
   @override
+  State<UserScreenBody> createState() => _UserScreenBodyState();
+}
+
+class _UserScreenBodyState extends State<UserScreenBody> {
+
+  
+
+  final UserModel userModel =UserModel();
+
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
         child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-           UserImageAndName(
-            userModel: UserModel(), 
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              UserImageAndName(
+                userModel:userModel,
+              ),
+              verticalSpacing(20),
+              const NumberFoCompletedAndNotCompleted(),
+              verticalSpacing(32),
+               UserAppSettingAndUpToDo(
+                userModel:userModel,
+              ),
+              verticalSpacing(20),
+              UserLogOut(
+                onTap: () {
+                  context.read<UserCubit>().logOut();
+                },
+              ),
+              const UserLogOutBlocListener()
+            ],
           ),
-          verticalSpacing(20),
-          const NumberFoCompletedAndNotCompleted(),
-          verticalSpacing(32),
-          const UserAppSettingAndUpToDo(),
-          verticalSpacing(20),
-           UserLogOut(
-            onTap: (){
-             context.read<UserCubit>().logOut();
-            },
-          ),
-          const UserLogOutBlocListener()
-        ],
-      ),
-    ));
+        ));
   }
 }

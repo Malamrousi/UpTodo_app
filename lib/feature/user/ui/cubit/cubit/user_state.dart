@@ -9,6 +9,7 @@ final class UserSuccess extends UserState {
   UserSuccess({required this.userModel});
 
 }
+final class NameUpdateSuccess extends UserState {}
 final class PasswordChangeSuccess extends UserState {}
 final class UserLogOutSuccess extends UserState {}
 

@@ -57,4 +57,30 @@ class UserRepoImpl implements UserRep {
     await GoogleSignIn().signOut();
     await FacebookAuth.instance.logOut();
   }
+
+  @override
+  Future<Either<AuthFailure, void>> updateUserName(
+      UserModel userModel, String name) async {
+    try {
+      final user = await db
+          .collection(AppConstant.userCollection)
+          .doc(firebaseAuth.currentUser!.uid)
+          .update({'name': name});
+
+      return right(user);
+    } on FirebaseAuthException catch (error) {
+      return left(AuthExceptionHandler.handleException(error: error));
+    } catch (e) {
+      return Left(UnknownFailure());
+    }
+  }
+
+  @override
+  Stream<UserModel> getUserStream() {
+    return db
+        .collection(AppConstant.userCollection)
+        .doc(firebaseAuth.currentUser!.uid)
+        .snapshots()
+        .map((data) => UserModel.fromJson(data.data()!));
+  }
 }
