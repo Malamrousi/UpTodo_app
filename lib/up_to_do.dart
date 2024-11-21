@@ -6,9 +6,9 @@ import 'package:uptodo/core/di/dependency_injection.dart';
 import 'package:uptodo/core/routing/app_routes.dart';
 import 'package:uptodo/core/routing/routes.dart';
 import 'package:uptodo/core/theming/colors_manger.dart';
-import 'package:uptodo/feature/home/ui/cubit/get_category/get_category_cubit.dart';
-import 'package:uptodo/feature/home/ui/cubit/task/task_cubit.dart';
-import 'package:uptodo/feature/user/ui/cubit/cubit/user_cubit.dart';
+import 'package:uptodo/feature/home/presentation/cubit/get_category/get_category_cubit.dart';
+import 'package:uptodo/feature/home/presentation/cubit/task/task_cubit.dart';
+import 'package:uptodo/feature/user/presentation/cubit/cubit/user_cubit.dart';
 
 class UpToDo extends StatelessWidget {
   const UpToDo({super.key});

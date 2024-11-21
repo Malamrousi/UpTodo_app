@@ -1,21 +1,21 @@
 import 'package:get_it/get_it.dart';
 import 'package:uptodo/feature/calendar/data/repo/calender_repo_impl.dart';
 import 'package:uptodo/feature/category/data/repo/category_repo_impl.dart';
-import 'package:uptodo/feature/category/ui/cubit/add_category/add_category_cubit.dart';
+import 'package:uptodo/feature/category/presentation/cubit/add_category/add_category_cubit.dart';
 import 'package:uptodo/feature/home/data/repo/get_category_repo_impl.dart';
 import 'package:uptodo/feature/home/data/repo/task_repo_impl.dart';
-import 'package:uptodo/feature/home/ui/cubit/task/task_cubit.dart';
-import 'package:uptodo/feature/task/ui/cubit/update_time/update_time_cubit.dart';
+import 'package:uptodo/feature/home/presentation/cubit/task/task_cubit.dart';
+import 'package:uptodo/feature/task/presentation/cubit/update_time/update_time_cubit.dart';
 import 'package:uptodo/feature/login/data/repo/login_repo_impl.dart';
 import 'package:uptodo/feature/register/data/repo/register_repo_impl.dart';
-import 'package:uptodo/feature/register/ui/cubit/register_cubit/register_cubit.dart';
-import 'package:uptodo/feature/user/ui/cubit/cubit/user_cubit.dart';
+import 'package:uptodo/feature/register/presentation/cubit/register_cubit/register_cubit.dart';
+import 'package:uptodo/feature/user/presentation/cubit/cubit/user_cubit.dart';
 
-import '../../feature/calendar/ui/cubit/calender/calender_cubit.dart';
-import '../../feature/home/ui/cubit/get_category/get_category_cubit.dart';
+import '../../feature/calendar/presentation/cubit/calender/calender_cubit.dart';
+import '../../feature/home/presentation/cubit/get_category/get_category_cubit.dart';
 import '../../feature/task/data/update_task_repo_impl.dart';
-import '../../feature/task/ui/cubit/update_task/update_and_delete_task_cubit.dart';
-import '../../feature/login/ui/cubit/login_cubit/login_cubit.dart';
+import '../../feature/task/presentation/cubit/update_task/update_and_delete_task_cubit.dart';
+import '../../feature/login/presentation/cubit/login_cubit/login_cubit.dart';
 import '../../feature/user/data/repo/user_repo_impl.dart';
 
 final getIt = GetIt.instance;

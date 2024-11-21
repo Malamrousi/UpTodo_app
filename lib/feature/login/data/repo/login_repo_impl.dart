@@ -12,50 +12,58 @@ class LoginRepoImpl implements LoginRepo {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
-  @override
-  Future<Either<AuthFailure, LoginUserInfoModel>> loginWithEmailAndPassword(
-      {required String email, required String password}) async {
-    try {
-      // 1. تسجيل الدخول باستخدام Firebase Auth
-      final UserCredential userCredential =
-          await firebaseAuth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
+@override
+Future<Either<AuthFailure, LoginUserInfoModel>> loginWithEmailAndPassword(
+    {required String email, required String password}) async {
+  try {
+    print("Attempting login with email: $email");
+    
+    final UserCredential userCredential =
+        await firebaseAuth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    if (userCredential.user == null) {
+      print("User credential is null");
+      return Left(UnknownFailure());
+    }
+
+    print("User logged in successfully with UID: ${userCredential.user!.uid}");
+    
+    final userDoc =
+        await db.collection(AppConstant.userCollection).doc(userCredential.user!.uid).get();
+
+    if (!userDoc.exists) {
+      print("Creating new user document");
+      final newUser = LoginUserInfoModel(
+        email: userCredential.user?.email,
+        uid: userCredential.user!.uid,
+        displayName: userCredential.user?.displayName ?? 'No Name',
       );
 
-      if (userCredential.user == null) {
-        return Left(UnknownFailure());
-      }
+      await db
+          .collection(AppConstant.userCollection)
+          .doc(userCredential.user!.uid)
+          .set(newUser.toJson());
 
-      final userDoc =
-          await db.collection(AppConstant.userCollection).doc(userCredential.user!.uid).get();
-
-      if (!userDoc.exists) {
-        final newUser = LoginUserInfoModel(
-          email: userCredential.user?.email ?? 'No Email',
-          uid: userCredential.user!.uid,
-          displayName: userCredential.user?.displayName ?? 'No Name',
-        );
-
-        await db
-            .collection(AppConstant.userCollection)
-            .doc(userCredential.user!.uid)
-            .set(newUser.toJson());
-
-        return right(newUser);
-      }
-
-      final userData =
-          LoginUserInfoModel.fromJson(userDoc.data() as Map<String, dynamic>);
-      return right(userData);
-    } on FirebaseAuthException catch (error) {
-      print('FirebaseAuthException: ${error.message}');
-      return left(AuthExceptionHandler.handleException(error: error));
-    } catch (error) {
-      print('Unknown error: $error');
-      return left(UnknownFailure());
+      return right(newUser);
     }
+
+    print("User document found in Firestore");
+    final userData =
+        LoginUserInfoModel.fromJson(userDoc.data() as Map<String, dynamic>);
+    return right(userData);
+    
+  } on FirebaseAuthException catch (error) {
+    print('FirebaseAuthException code: ${error.code}');
+    print('FirebaseAuthException message: ${error.message}');
+    return left(AuthExceptionHandler.handleException(error: error));
+  } catch (error) {
+    print('Unknown error: $error');
+    return left(UnknownFailure());
   }
+}
 
   @override
   Future<Either<AuthFailure, LoginUserInfoModel>> loginWithFacebook() async {
@@ -123,22 +131,24 @@ class LoginRepoImpl implements LoginRepo {
     }
   }
 
-  @override
-  Future<void> getUser(
-      LoginUserInfoModel loginUserInfoModel, User fireBaseUser) async {
-    try {
-      final userDoc = await db.collection(AppConstant.userCollection).doc(fireBaseUser.uid).get();
+@override
+Future<void> getUser(LoginUserInfoModel loginUserInfoModel, User fireBaseUser) async {
+  try {
+    final userDoc = await db.collection(AppConstant.userCollection).doc(fireBaseUser.uid).get();
 
-      if (!userDoc.exists) {
-        await db
-            .collection(AppConstant.userCollection)
-            .doc(fireBaseUser.uid)
-            .set(loginUserInfoModel.toJson());
-      }
-    } catch (e) {
+    if (!userDoc.exists) {
+      print("Creating new user document");
+      await db
+          .collection(AppConstant.userCollection)
+          .doc(fireBaseUser.uid)
+          .set(loginUserInfoModel.toJson());
+    } else {
+      print("User document already exists");
     }
+  } catch (e) {
+    print("Error in getUser: $e");
   }
-
+}
   @override
   void signOut() async {
     await firebaseAuth.signOut();
